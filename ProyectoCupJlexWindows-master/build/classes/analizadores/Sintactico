@@ -6,6 +6,7 @@
 
 package analizadores; 
 import arbol.Instruccion;
+import arbol.Asignacion;
 import arbol.Simbolo.*;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
@@ -85,9 +86,9 @@ instruccion ::=
     //System.out.println("El valor de la expresión es: "+a);
     RESULT  =  new Imprimir (a);
     :}
- | IDENTIFICADOR IGUAL expresion PTCOMA 
+ | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
     {:
-    RESULT = new 
+    RESULT = new Asignacion(a,b);
     :}
     ;
 
@@ -100,6 +101,6 @@ expresion  ::=
  |  ENTERO:a                               {:RESULT=new Operacion(a,new Tipo(INT),Operacion.Tipo_operacion.NUMERO);:}
  |  DECIMAL:a                              {:RESULT=new Operacion(a,new Tipo(DOUBLE),Operacion.Tipo_operacion.NUMERO);:}
  |  CADENA:a                               {:RESULT=new Operacion(a,new Tipo(STRING),Operacion.Tipo_operacion.NUMERO);:} 
- |  IDENTIFICADOR                          {::}
+ |  IDENTIFICADOR:a                        {:RESULT=new Operacion(a,Operacion.Tipo_operacion.IDENTIFICADOR);:}
  |  PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;

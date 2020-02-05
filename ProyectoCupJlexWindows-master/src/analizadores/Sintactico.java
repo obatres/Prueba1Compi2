@@ -6,12 +6,13 @@
 package analizadores;
 
 import arbol.Instruccion;
+import arbol.Asignacion;
 import arbol.Simbolo.*;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 import arbol.Operacion;
 import arbol.Imprimir;
-import arbol.Tipo.tipo.*;
+import static arbol.Tipo.tipo.*;
 import arbol.Tipo;
 import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
@@ -271,7 +272,15 @@ class CUP$Sintactico$actions {
           case 5: // instruccion ::= IDENTIFICADOR IGUAL expresion PTCOMA 
             {
               Instruccion RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		Operacion b = (Operacion)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		
+    RESULT = new Asignacion(a,b);
+    
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -388,7 +397,11 @@ class CUP$Sintactico$actions {
           case 14: // expresion ::= IDENTIFICADOR 
             {
               Operacion RESULT =null;
-		
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=new Operacion(a,Operacion.Tipo_operacion.IDENTIFICADOR);
+                System.out.println(a);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("expresion",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

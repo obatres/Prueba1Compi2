@@ -12,7 +12,6 @@ import javax.swing.text.TabableView;
  * @author obatres_
  */
 public abstract class Expresion extends Nodo {
-    public abstract Object ejecutar(TablaDeSimbolos ts);
-    
+    public abstract Object ejecutar(TablaDeSimbolos ts);   
     public abstract Tipo GetTipo(TablaDeSimbolos ts);
 }

@@ -16,7 +16,8 @@ public class Operacion extends Expresion{
         NUMERO,
         RESTA,
         MULTIPLICACION,
-        DIVISION
+        DIVISION,
+        IDENTIFICADOR
     }
    
     private final Tipo_operacion tipo_operacion;
@@ -67,6 +68,8 @@ public class Operacion extends Expresion{
             }else if(operadorDer.GetTipo(ts).isString()){
                 //return (String)opderadorIzq.ejecutar(ts)-(String)operadorDer.ejecutar(ts);
             }
+        }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
+            return ts.getValor(valor.toString());
         }
         return null;
     }
