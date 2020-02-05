@@ -1,0 +1,6 @@
+Evaluar["saasd"+"65465465"];
+
+Evaluar["1"-"1"];
+/*Evaluar[1+1];
+//Evaluar[1+6];
+//Evaluar[1+7];*/
