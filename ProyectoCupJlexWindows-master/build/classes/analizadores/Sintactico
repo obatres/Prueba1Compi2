@@ -44,7 +44,7 @@ parser code
 
 terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER;
 terminal String MAS,MENOS,POR,DIVIDIDO;
-terminal Object ENTERO;
+terminal ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
 terminal String UMENOS;

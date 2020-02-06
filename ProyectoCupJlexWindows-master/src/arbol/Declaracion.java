@@ -9,22 +9,21 @@ package arbol;
  *
  * @author obatres_
  */
-public class Asignacion extends Instruccion{
+public class Declaracion extends Instruccion{
 
     private final String id;
-    
-    private final Operacion valor;
 
-    public Asignacion(String id, Operacion valor) {
-        this.id = id;
-        this.valor = valor;
+    Simbolo.Tipo tipo;
+
+    public Declaracion(String a, Simbolo.Tipo t) {
+        id = a;
+        tipo = t;
     }
-   
-    
+       
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-        ts.setValor(id, valor.ejecutar(ts));
-        return null;
+       ts.add(new Simbolo(id,tipo));
+       return null;
     }
     
 }

@@ -54,7 +54,7 @@ public class Operacion extends Expresion{
            if (operadorDer.GetTipo(ts).isInt()){
                 System.out.println(opderadorIzq.valor);
                 System.out.println(operadorDer.valor);
-                return (Double)opderadorIzq.ejecutar(ts)+(Double)operadorDer.ejecutar(ts);
+                return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));
             }else if(operadorDer.GetTipo(ts).isString()){
                 return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
             }else{

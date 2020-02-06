@@ -45,7 +45,7 @@ public class Simbolo {
         this.tipo=tipo;
         this.id=id;
     }
-    private static enum Tipo {
+    public static enum Tipo {
         NUMERO
     }
     
