@@ -10,7 +10,7 @@ public class sym {
   /* terminals */
   public static final int MENOS = 8;
   public static final int CADENA = 13;
-  public static final int IGUAL = 17;
+  public static final int IGUAL = 18;
   public static final int DECIMAL = 12;
   public static final int DIVIDIDO = 10;
   public static final int REVALUAR = 15;
@@ -18,14 +18,17 @@ public class sym {
   public static final int PARDER = 4;
   public static final int UMENOS = 14;
   public static final int POR = 9;
+  public static final int ENTEROT = 19;
   public static final int EOF = 0;
+  public static final int CADENAT = 20;
   public static final int error = 1;
-  public static final int IDENTIFICADOR = 16;
+  public static final int IDENTIFICADOR = 17;
   public static final int CORIZQ = 5;
   public static final int ENTERO = 11;
   public static final int CORDER = 6;
   public static final int MAS = 7;
   public static final int PTCOMA = 2;
+  public static final int RDECLARA = 16;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -43,8 +46,11 @@ public class sym {
   "CADENA",
   "UMENOS",
   "REVALUAR",
+  "RDECLARA",
   "IDENTIFICADOR",
-  "IGUAL"
+  "IGUAL",
+  "ENTEROT",
+  "CADENAT"
   };
 }
 

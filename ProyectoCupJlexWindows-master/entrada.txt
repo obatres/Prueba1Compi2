@@ -1,6 +1,7 @@
-Evaluar["saasd"+"65465465"];
+Evaluar[3+2];
 
-Evaluar["1"-"1"];
-/*Evaluar[1+1];
-//Evaluar[1+6];
-//Evaluar[1+7];*/
+Entero ab;
+
+ab=546;
+
+Evaluar[ab+3];

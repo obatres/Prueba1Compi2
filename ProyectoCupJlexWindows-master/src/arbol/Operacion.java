@@ -16,23 +16,24 @@ public class Operacion extends Expresion{
         NUMERO,
         RESTA,
         MULTIPLICACION,
-        DIVISION
+        DIVISION,
+        IDENTIFICADOR
     }
    
     private final Tipo_operacion tipo_operacion;
     
-    private Operacion opderadorIzq;
-    private Operacion operadorDer;
+    private Expresion opderadorIzq;
+    private Expresion operadorDer;
     public  Tipo tipo;
     private Object valor;
 
-    public Operacion(Tipo_operacion tipo, Operacion opderadorIzq, Operacion operadorDer) {
+    public Operacion(Tipo_operacion tipo, Expresion opderadorIzq, Expresion operadorDer) {
         this.tipo_operacion = tipo;
         this.opderadorIzq = opderadorIzq;
         this.operadorDer = operadorDer;
     }
     
-    public Operacion(Tipo_operacion tipo, Operacion opderadorIzq) {
+    public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
         this.tipo_operacion = tipo;
         this.opderadorIzq = opderadorIzq;
     }   
@@ -51,9 +52,8 @@ public class Operacion extends Expresion{
     public Object ejecutar(TablaDeSimbolos ts){
         if(tipo_operacion==Tipo_operacion.SUMA){
            if (operadorDer.GetTipo(ts).isInt()){
-                System.out.println(opderadorIzq.valor);
-                System.out.println(operadorDer.valor);
-                return (Double)opderadorIzq.ejecutar(ts)+(Double)operadorDer.ejecutar(ts);
+              
+                return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));
             }else if(operadorDer.GetTipo(ts).isString()){
                 return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
             }else{
@@ -65,8 +65,11 @@ public class Operacion extends Expresion{
             if(operadorDer.GetTipo(ts).isInt()){
                 return (Double)opderadorIzq.ejecutar(ts)-(Double)operadorDer.ejecutar(ts);
             }else if(operadorDer.GetTipo(ts).isString()){
-                //return (String)opderadorIzq.ejecutar(ts)-(String)operadorDer.ejecutar(ts);
+
             }
+        }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
+
+            return ts.getValor(valor.toString());
         }
         return null;
     }

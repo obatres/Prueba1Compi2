@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package arbol;
-
+import arbol.Tipo;
 /**
  *
  * @author obatres_
@@ -12,11 +12,13 @@ package arbol;
 public class Simbolo {
 
     /**
-     * @return the tipo
+     * @return the t
      */
-    public Tipo getTipo() {
-        return tipo;
+    public Tipo getT() {
+        return t;
     }
+
+    
 
     /**
      * @return the id
@@ -38,15 +40,23 @@ public class Simbolo {
     public void setValor(Object valor) {
         this.valor = valor;
     }
-    private final Tipo tipo;
+    //private final TipoSimbolo tipo;
     private final String id;
+    private final Tipo t;
     private Object valor;
-    public Simbolo(String id, Tipo tipo){
-        this.tipo=tipo;
+
+    /**
+     *
+     * @param id
+     * @param tipo
+     */
+    public Simbolo(String id, Tipo t){
+        this.t=t;
         this.id=id;
     }
-    private static enum Tipo {
-        NUMERO
+    public static enum TipoSimbolo {
+        NUMERO,
+        CADENA
     }
     
 }

@@ -28,8 +28,18 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
             }
         }
         System.out.println("La variable "+id+" no existe en este ámbito.");
-        return "Desconocido";
+        return "Valor Desconocido";
     }  
+    
+    Object getTipo(String id){
+        for (Simbolo s : this) {
+            if(s.getId().equals(id)){
+                return s.getT();
+            }
+        }
+        System.out.println("El valor de la variable"+id+"no existe en este ambito");
+        return "Tipo Desconocido";
+    }
     
     /**
      * Método que asigna un valor a una variable específica, si no la encuentra 

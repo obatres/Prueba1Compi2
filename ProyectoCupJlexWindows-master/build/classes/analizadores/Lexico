@@ -30,7 +30,10 @@ COMENTMULTILINEA ="/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
 ID=[A-Za-z]+["_"0-9A-Za-z]*
 %%
 
-"Evaluar" {return new Symbol(sym.REVALUAR,yyline,yychar, yytext());} 
+"Evaluar" {return new Symbol(sym.REVALUAR,yyline,yychar, yytext());}
+"Declara" {return new Symbol(sym.RDECLARA,yyline,yychar, yytext());}
+"Entero"  {return new Symbol(sym.ENTEROT,yyline,yychar, yytext());}
+"Cadena"  {return new Symbol(sym.CADENAT,yyline,yychar, yytext());}
 
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
 "(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 

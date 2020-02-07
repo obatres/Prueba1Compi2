@@ -6,7 +6,9 @@
 
 package proyectocupjlexwindows;
 
+import arbol.Expresion;
 import arbol.Instruccion;
+import arbol.Nodo;
 import arbol.TablaDeSimbolos;
 import java.io.FileInputStream;
 import java.util.LinkedList;
@@ -30,7 +32,7 @@ public class ProyectoCupJlexWindows {
      */
     private static void interpretar(String path) {
         analizadores.Sintactico pars;
-        LinkedList<Instruccion> AST_arbolSintaxisAbstracta = null;
+        LinkedList<Nodo> AST_arbolSintaxisAbstracta = null;
         try {
             pars=new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(path)));
             pars.parse();      
@@ -46,7 +48,7 @@ public class ProyectoCupJlexWindows {
      * Recibe una lista de instrucciones y la ejecuta
      * @param ast lista de instrucciones
      */
-    private static void ejecutarAST(LinkedList<Instruccion> ast) {
+    private static void ejecutarAST(LinkedList<Nodo> ast) {
         if(ast==null){
             System.out.println("No es posible ejecutar las instrucciones porque\r\n"
                     + "el árbol no fue cargado de forma adecuada por la existencia\r\n"
@@ -57,12 +59,23 @@ public class ProyectoCupJlexWindows {
         TablaDeSimbolos ts=new TablaDeSimbolos();
         //Se ejecuta cada instruccion en el ast, es decir, cada instruccion de 
         //la lista principal de instrucciones.
-        for(Instruccion ins:ast){
+        for(Nodo ins:ast){
             //Si existe un error léxico o sintáctico en cierta instrucción esta
             //será inválida y se cargará como null, por lo tanto no deberá ejecutarse
             //es por esto que se hace esta validación.
             if(ins!=null)
-                ins.ejecutar(ts);
+                if(ins instanceof Expresion)
+                {
+                    ((Expresion)ins).ejecutar(ts);
+                }else if(ins instanceof Instruccion)
+                {
+                    ((Instruccion)ins).ejecutar(ts);
+                }else{
+                    
+                }
+                    //reportar error
+                
+            
         }
     }
     
