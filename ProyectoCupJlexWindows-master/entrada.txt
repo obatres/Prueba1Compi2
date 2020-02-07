@@ -1,7 +1,11 @@
 Evaluar[3+2];
+Evaluar["SAD"+56];
+Evaluar[443+2];
+Evaluar[654+2.03];
+Evaluar[654-32.2];
 
 Entero ab;
 
-ab=546;
+ab=10;
 
-Evaluar[ab+3];
+Evaluar[ab+ab];

@@ -45,7 +45,7 @@ public class id extends Expresion{
 
     @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Tipo) ts.getTipo(iden);
     }
     
 }

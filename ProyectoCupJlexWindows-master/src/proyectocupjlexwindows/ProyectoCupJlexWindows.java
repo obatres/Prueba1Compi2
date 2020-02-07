@@ -1,8 +1,4 @@
-/*
- * Ejemplo desarrollado por Erick Navarro
- * Blog: e-navarro.blogspot.com
- * Julio - 2018
- */
+
 
 package proyectocupjlexwindows;
 
@@ -13,10 +9,7 @@ import arbol.TablaDeSimbolos;
 import java.io.FileInputStream;
 import java.util.LinkedList;
 
-/**
- * Clase principal de la aplicación
- * @author Erick
- */
+
 public class ProyectoCupJlexWindows {
 
     /**
@@ -64,16 +57,18 @@ public class ProyectoCupJlexWindows {
             //será inválida y se cargará como null, por lo tanto no deberá ejecutarse
             //es por esto que se hace esta validación.
             if(ins!=null)
-                if(ins instanceof Expresion)
-                {
-                    ((Expresion)ins).ejecutar(ts);
+                if(ins instanceof Expresion)//Para todas las instacias de la clase Expresion se ejecuta el metodo "ejecutar()" 
+                {                           //que recibe como parametro la tabla de simbolos de la misma instancia dentro del arbol
+                    ((Expresion)ins).ejecutar(ts); //y devuelve valores de operaciones aritmeticas y logicas
                 }else if(ins instanceof Instruccion)
-                {
-                    ((Instruccion)ins).ejecutar(ts);
-                }else{
+                {                           //Para todas las instancias de la clase Instruccion se ejecuta el metodo "ejecutar()"
+                    ((Instruccion)ins).ejecutar(ts);//que recibe como parametro la tabla de simbolos de la misma instancia dentro del arbol
+                }else{                              //y devuelve la ejecucion de instrucciones como condicionales o ciclos
                     
+                    
+                    System.out.println("Error al ejecutar un nivel en el arbol AST");  //reportar error
                 }
-                    //reportar error
+                  
                 
             
         }

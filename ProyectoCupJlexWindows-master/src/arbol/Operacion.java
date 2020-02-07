@@ -50,26 +50,46 @@ public class Operacion extends Expresion{
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts){
-        if(tipo_operacion==Tipo_operacion.SUMA){
-           if (operadorDer.GetTipo(ts).isInt()){
-              
-                return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));
-            }else if(operadorDer.GetTipo(ts).isString()){
-                return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
-            }else{
-                return null;
-            }
-        }else if (tipo_operacion==Tipo_operacion.NUMERO){
-            return this.valor;        
-        }else if(tipo_operacion==Tipo_operacion.RESTA){
-            if(operadorDer.GetTipo(ts).isInt()){
-                return (Double)opderadorIzq.ejecutar(ts)-(Double)operadorDer.ejecutar(ts);
-            }else if(operadorDer.GetTipo(ts).isString()){
 
+/*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
+        if(tipo_operacion==Tipo_operacion.SUMA){
+            /*--------------------------SUMA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
+            
+           if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
+               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
+                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));                  
+               }
+            /*--------------------------SUMA DE CADENAS-------------------------------------------------------------------------------*/  
+            
+            }else if(operadorDer.GetTipo(ts).isString()||opderadorIzq.GetTipo(ts).isString()){ //EJEMPLO "ASD"+54 o 65465+"ASa"
+                return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
+            /*--------------------------SUMA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
+            
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){                
+                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));                    
+                }              
+            }else{
+                return null;//VALOR NO OPERABLE
+            }
+/*------------------------------------------------------RESTA----------------------------------------------------------------------------*/           
+        }else if(tipo_operacion==Tipo_operacion.RESTA){
+            /*--------------------------RESTA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
+            
+           if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
+               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
+                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))-Double.parseDouble((String) operadorDer.ejecutar(ts));                  
+               }
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
+                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))-Double.parseDouble((String) operadorDer.ejecutar(ts));                  
+               }               
             }
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
 
             return ts.getValor(valor.toString());
+        }else if(tipo_operacion==Tipo_operacion.NUMERO){
+              return this.valor;  
         }
         return null;
     }
