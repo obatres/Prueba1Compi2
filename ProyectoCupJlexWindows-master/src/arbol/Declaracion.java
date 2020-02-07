@@ -13,9 +13,9 @@ public class Declaracion extends Instruccion{
 
     private final String id;
 
-    Simbolo.Tipo tipo;
+    Tipo tipo;
 
-    public Declaracion(String a, Simbolo.Tipo t) {
+    public Declaracion(String a, Tipo t) {
         id = a;
         tipo = t;
     }

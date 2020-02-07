@@ -13,9 +13,9 @@ public class Asignacion extends Instruccion{
 
     private final String id;
     
-    private final Operacion valor;
+    private final Expresion valor;
 
-    public Asignacion(String id, Operacion valor) {
+    public Asignacion(String id, Expresion valor) {
         this.id = id;
         this.valor = valor;
     }
