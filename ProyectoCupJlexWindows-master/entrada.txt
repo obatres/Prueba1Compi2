@@ -1,11 +1,6 @@
-Evaluar[3+2];
-Evaluar["SAD"+56];
-Evaluar[443+2];
-Evaluar[654+2.03];
-Evaluar[654-32.2];
-
-Entero ab;
-
-ab=10;
-
-Evaluar[ab+ab];
+Evaluar[5+5+5+65+"as"];
+Evaluar[2.5+"dsf"+5+5+0.2];
+Evaluar["hola"+"mundo"+"que"+"tal"];
+Evaluar[654/564/654.5];
+Evaluar[2.2*5*5.6*2651];
+Evaluar[2.3-545-545-6.2];

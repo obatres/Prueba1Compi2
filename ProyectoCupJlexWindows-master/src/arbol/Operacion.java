@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package arbol;
-import arbol.Tipo.tipo;
+import arbol.Tipo.tipo.*;
 /**
  *
  * @author obatres_
@@ -33,10 +33,10 @@ public class Operacion extends Expresion{
         this.operadorDer = operadorDer;
     }
     
-    public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
+    /*public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
         this.tipo_operacion = tipo;
         this.opderadorIzq = opderadorIzq;
-    }   
+    }*/   
     
     public Operacion (String a, Tipo_operacion tipo){
         this.valor = a;
@@ -48,45 +48,72 @@ public class Operacion extends Expresion{
         this.tipo_operacion= to;
     }
     
+
+    
     @Override
     public Object ejecutar(TablaDeSimbolos ts){
 
 /*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
         if(tipo_operacion==Tipo_operacion.SUMA){
             /*--------------------------SUMA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
-            
-           if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
-               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
-                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));                  
-               }
-            /*--------------------------SUMA DE CADENAS-------------------------------------------------------------------------------*/  
-            
-            }else if(operadorDer.GetTipo(ts).isString()||opderadorIzq.GetTipo(ts).isString()){ //EJEMPLO "ASD"+54 o 65465+"ASa"
-                return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
-            /*--------------------------SUMA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
-            
+            if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){               
+                   return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+               }else if(operadorDer.GetTipo(ts).isString()){
+                   return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+               }              
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){                
-                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));                    
-                }              
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }else if(operadorDer.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                }                  
+            }else if(opderadorIzq.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+            }else if(opderadorIzq.GetTipo(ts).isBoolean()){
+                if(operadorDer.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());    
+                }
             }else{
-                return null;//VALOR NO OPERABLE
-            }
-/*------------------------------------------------------RESTA----------------------------------------------------------------------------*/           
+                //TODO reportar error de tipo
+            }                      
         }else if(tipo_operacion==Tipo_operacion.RESTA){
-            /*--------------------------RESTA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
-            
-           if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
-               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
-                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))-Double.parseDouble((String) operadorDer.ejecutar(ts));                  
-               }
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
-               if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ //EJEMPLO DE OPERADOR DERECHO 1.1321,0,544564
-                    return Double.parseDouble((String) opderadorIzq.ejecutar(ts))-Double.parseDouble((String) operadorDer.ejecutar(ts));                  
-               }               
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
             }
+        }else if(tipo_operacion==Tipo_operacion.MULTIPLICACION){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }  
+        }else if(tipo_operacion==Tipo_operacion.DIVISION){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }             
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
-
             return ts.getValor(valor.toString());
         }else if(tipo_operacion==Tipo_operacion.NUMERO){
               return this.valor;  
@@ -94,9 +121,34 @@ public class Operacion extends Expresion{
         return null;
     }
     
+    
         @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (opderadorIzq.GetTipo(ts).isInt()){
+            if(operadorDer.GetTipo(ts).isInt()){
+                return new Tipo(Tipo.tipo.INT);  
+            }else if(operadorDer.GetTipo(ts).isDouble()){
+                return new Tipo(Tipo.tipo.DOUBLE);
+            }else if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }else{
+                //TODO reportar error de tipo
+            }
+        }else if(opderadorIzq.GetTipo(ts).isDouble()){
+            if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                return new Tipo(Tipo.tipo.DOUBLE);
+            }else if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }
+        }else if(opderadorIzq.GetTipo(ts).isString()){
+            return new Tipo(Tipo.tipo.STRING);
+        }else if(opderadorIzq.GetTipo(ts).isBoolean()){
+            if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }
+        }else{
+            return this.tipo;
+        }
         return this.tipo;
     }
         
