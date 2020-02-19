@@ -47,7 +47,7 @@ parser code
     }
 :} 
 
-terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA;
+terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String ENTERO;
 terminal String DECIMAL;
@@ -68,6 +68,7 @@ non terminal Tipo tipovar;
 precedence left MAS,MENOS;
 precedence left POR,DIVIDIDO;
 precedence left POTENCIA;
+precedence left MODULO;
 precedence right UMENOS; 
 
 start with ini; 
@@ -123,6 +124,7 @@ expresion  ::=
  |  expresion:a POR        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MULTIPLICACION,(Expresion)a,(Expresion)b);:}
  |  expresion:a DIVIDIDO   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.DIVISION,(Expresion)a,(Expresion)b);:}
  |  expresion:a POTENCIA   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.POTENCIA,(Expresion)a,(Expresion)b);:}
+ |  expresion:a MODULO     expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MODULO,(Expresion)a,(Expresion)b);:}
  |  ENTERO:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.INT));:}
  |  DECIMAL:a                              {:RESULT=new Single(a,new Tipo(Tipo.tipo.DOUBLE));:}
  |  CADENA:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:} 

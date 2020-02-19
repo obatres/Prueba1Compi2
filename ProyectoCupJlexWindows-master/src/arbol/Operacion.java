@@ -18,6 +18,7 @@ public class Operacion extends Expresion{
         MULTIPLICACION,
         DIVISION,
         POTENCIA,
+        MODULO,
         IDENTIFICADOR
     }
    
@@ -126,7 +127,19 @@ public class Operacion extends Expresion{
                 }
             }else{
                 //TODO reportar error de tipo
-            }              
+            } 
+        }else if(tipo_operacion==Tipo_operacion.MODULO){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }             
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
             return ts.getValor(valor.toString());
         }else if(tipo_operacion==Tipo_operacion.NUMERO){

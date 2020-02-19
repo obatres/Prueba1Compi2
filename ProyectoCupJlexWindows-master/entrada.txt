@@ -7,3 +7,5 @@ Evaluar[2.3-545-545-6.2];
 Evaluar[2^3.5];
 Evaluar[6^2];
 Evaluar[1.2^5.4];
+Evaluar[2%%3.5];
+Evaluar[2.3%%8];
