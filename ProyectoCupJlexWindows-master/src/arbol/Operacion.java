@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package arbol;
-import arbol.Tipo.tipo;
+import arbol.Tipo.tipo.*;
 /**
  *
  * @author obatres_
@@ -17,6 +17,9 @@ public class Operacion extends Expresion{
         RESTA,
         MULTIPLICACION,
         DIVISION,
+        POTENCIA,
+        MODULO,
+        UMENOS,
         IDENTIFICADOR
     }
    
@@ -36,7 +39,7 @@ public class Operacion extends Expresion{
     public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
         this.tipo_operacion = tipo;
         this.opderadorIzq = opderadorIzq;
-    }   
+    } 
     
     public Operacion (String a, Tipo_operacion tipo){
         this.valor = a;
@@ -48,35 +51,136 @@ public class Operacion extends Expresion{
         this.tipo_operacion= to;
     }
     
+
+    
     @Override
     public Object ejecutar(TablaDeSimbolos ts){
-        if(tipo_operacion==Tipo_operacion.SUMA){
-           if (operadorDer.GetTipo(ts).isInt()){
-              
-                return Double.parseDouble((String) opderadorIzq.ejecutar(ts))+Double.parseDouble((String) operadorDer.ejecutar(ts));
-            }else if(operadorDer.GetTipo(ts).isString()){
-                return (String)opderadorIzq.ejecutar(ts)+(String)operadorDer.ejecutar(ts);
-            }else{
-                return null;
-            }
-        }else if (tipo_operacion==Tipo_operacion.NUMERO){
-            return this.valor;        
-        }else if(tipo_operacion==Tipo_operacion.RESTA){
-            if(operadorDer.GetTipo(ts).isInt()){
-                return (Double)opderadorIzq.ejecutar(ts)-(Double)operadorDer.ejecutar(ts);
-            }else if(operadorDer.GetTipo(ts).isString()){
 
+/*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
+        if(tipo_operacion==Tipo_operacion.SUMA){
+            /*--------------------------SUMA DE ENTEROS Y DECIMALES--------------------------------------------------------------------*/
+            if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){               
+                   return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+               }else if(operadorDer.GetTipo(ts).isString()){
+                   return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+               }              
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }else if(operadorDer.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                }                  
+            }else if(opderadorIzq.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+            }else if(opderadorIzq.GetTipo(ts).isBoolean()){
+                if(operadorDer.GetTipo(ts).isString()){
+                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());    
+                }
+            }else{
+                //TODO reportar error de tipo
+            }                      
+        }else if(tipo_operacion==Tipo_operacion.RESTA){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }
+        }else if(tipo_operacion==Tipo_operacion.MULTIPLICACION){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }  
+        }else if(tipo_operacion==Tipo_operacion.DIVISION){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            }  
+        }else if(tipo_operacion==Tipo_operacion.POTENCIA){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                    //return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                }
+            }else{
+                //TODO reportar error de tipo
+            } 
+        }else if(tipo_operacion==Tipo_operacion.MODULO){
+            if(opderadorIzq.GetTipo(ts).isInt()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }     
+            }else if(opderadorIzq.GetTipo(ts).isDouble()){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                }
+            }else{
+                //TODO reportar error de tipo
+            } 
+        }else if(tipo_operacion==Tipo_operacion.UMENOS){
+            if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
+                return -Double.parseDouble(opderadorIzq.ejecutar(ts).toString());
             }
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
-
             return ts.getValor(valor.toString());
+        }else if(tipo_operacion==Tipo_operacion.NUMERO){
+              return this.valor;  
         }
         return null;
     }
     
+    
         @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (opderadorIzq.GetTipo(ts).isInt()){
+            if(operadorDer.GetTipo(ts).isInt()){
+                return new Tipo(Tipo.tipo.INT);  
+            }else if(operadorDer.GetTipo(ts).isDouble()){
+                return new Tipo(Tipo.tipo.DOUBLE);
+            }else if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }else{
+                //TODO reportar error de tipo
+            }
+        }else if(opderadorIzq.GetTipo(ts).isDouble()){
+            if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                return new Tipo(Tipo.tipo.DOUBLE);
+            }else if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }
+        }else if(opderadorIzq.GetTipo(ts).isString()){
+            return new Tipo(Tipo.tipo.STRING);
+        }else if(opderadorIzq.GetTipo(ts).isBoolean()){
+            if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }
+        }else{
+            return this.tipo;
+        }
         return this.tipo;
     }
         

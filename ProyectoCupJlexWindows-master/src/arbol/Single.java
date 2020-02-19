@@ -14,7 +14,7 @@ public class Single extends Expresion{
     /**
      * @return the Valor
      */
-    public String getValor() {
+    public Object getValor() {
         return Valor;
     }
 
@@ -39,10 +39,10 @@ public class Single extends Expresion{
         this.tipo = tipo;
     }
 
-    private String Valor;
+    private Object Valor;
     private Tipo tipo;
 
-    public Single(String Valor, Tipo tipo) {
+    public Single(Object Valor, Tipo tipo) {
         this.Valor = Valor;
         this.tipo = tipo;
     }
