@@ -118,7 +118,7 @@ tipovar::=
     ;
 
 expresion  ::= 
-    MENOS expresion:a                      {://RESULT=a*-1;:}%prec UMENOS     
+    MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     
  |  expresion:a MAS        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.SUMA,(Expresion)a,(Expresion)b);:}
  |  expresion:a MENOS      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.RESTA,(Expresion)a,(Expresion)b);:}
  |  expresion:a POR        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MULTIPLICACION,(Expresion)a,(Expresion)b);:}

@@ -19,6 +19,7 @@ public class Operacion extends Expresion{
         DIVISION,
         POTENCIA,
         MODULO,
+        UMENOS,
         IDENTIFICADOR
     }
    
@@ -35,10 +36,10 @@ public class Operacion extends Expresion{
         this.operadorDer = operadorDer;
     }
     
-    /*public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
+    public Operacion(Tipo_operacion tipo, Expresion opderadorIzq) {
         this.tipo_operacion = tipo;
         this.opderadorIzq = opderadorIzq;
-    }*/   
+    } 
     
     public Operacion (String a, Tipo_operacion tipo){
         this.valor = a;
@@ -139,7 +140,11 @@ public class Operacion extends Expresion{
                 }
             }else{
                 //TODO reportar error de tipo
-            }             
+            } 
+        }else if(tipo_operacion==Tipo_operacion.UMENOS){
+            if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
+                return -Double.parseDouble(opderadorIzq.ejecutar(ts).toString());
+            }
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
             return ts.getValor(valor.toString());
         }else if(tipo_operacion==Tipo_operacion.NUMERO){
