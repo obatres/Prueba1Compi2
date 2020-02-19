@@ -46,6 +46,7 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "*" {return new Symbol(sym.POR,yyline,yychar, yytext());} 
 "/" {return new Symbol(sym.DIVIDIDO,yyline,yychar, yytext());} 
 "=" {return new Symbol(sym.IGUAL,yyline,yychar, yytext());}
+"^" {return new Symbol(sym.POTENCIA,yyline,yychar, yytext());}
 
 
 \n {yychar=1;}
