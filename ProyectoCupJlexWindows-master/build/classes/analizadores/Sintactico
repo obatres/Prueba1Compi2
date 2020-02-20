@@ -50,6 +50,7 @@ parser code
 terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
+terminal String AND,OR;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -63,6 +64,7 @@ non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
 non terminal Nodo instruccion;
 non terminal Nodo expresion;
+non terminal Nodo expresioncomp;
 non terminal Nodo expresionlogica;
 non terminal Tipo tipovar;
 
@@ -106,7 +108,7 @@ instruccion ::=
     {:
         RESULT = new Asignacion(a,(Expresion)b);
     :}
- | expresionlogica:a
+ | expresioncomp:a
     {:
     RESULT  =  new Imprimir ((Expresion)a);    
     :}
@@ -138,9 +140,15 @@ expresion  ::=
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;
 
-expresionlogica::=
+expresioncomp::=
         expresion:a IGUALD          expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.IGUALIGUAL,(Expresion)a,(Expresion)b);:}
     |   expresion:a MAYOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYOR,(Expresion)a,(Expresion)b);:}
     |   expresion:a MENOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENOR,(Expresion)a,(Expresion)b);:}
     |   expresion:a MAYORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYORIGUAL,(Expresion)a,(Expresion)b);:}
-    |   expresion:a MENORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENORIGUAL,(Expresion)a,(Expresion)b);:};
+    |   expresion:a MENORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENORIGUAL,(Expresion)a,(Expresion)b);:}
+;
+
+expresionlogica::=
+        expresioncomp:a AND          expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.AND,(Expresion)a,(Expresion)b);:}
+    |   expresioncomp:a OR           expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.OR,(Expresion)a,(Expresion)b);:}
+;   

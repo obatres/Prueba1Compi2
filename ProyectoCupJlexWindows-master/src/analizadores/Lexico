@@ -55,6 +55,8 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 ">="  {return new Symbol(sym.MAYORIGUAL,yyline,yychar, yytext());}
 "<="  {return new Symbol(sym.MENORIGUAL,yyline,yychar, yytext());}
 
+"And"  {return new Symbol(sym.AND,yyline,yychar, yytext());}
+"Or"   {return new Symbol(sym.OR,yyline,yychar, yytext());}
 \n {yychar=1;}
 
 

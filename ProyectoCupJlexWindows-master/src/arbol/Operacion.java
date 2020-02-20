@@ -25,6 +25,8 @@ public class Operacion extends Expresion{
         MENOR,
         MAYORIGUAL,
         MENORIGUAL,
+        AND,
+        OR,
         IDENTIFICADOR
     }
    
@@ -234,6 +236,12 @@ public class Operacion extends Expresion{
             return new Tipo(Tipo.tipo.STRING);
         }else if(opderadorIzq.GetTipo(ts).isBoolean()){
             if(operadorDer.GetTipo(ts).isString()){
+                return new Tipo(Tipo.tipo.STRING);
+            }
+        }else if(opderadorIzq.GetTipo(ts).isBoolean()){
+            if(operadorDer.GetTipo(ts).isBoolean()){
+                return new Tipo(Tipo.tipo.BOOLEAN);
+            }else if(operadorDer.GetTipo(ts).isString()){
                 return new Tipo(Tipo.tipo.STRING);
             }
         }else{
