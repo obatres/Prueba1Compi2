@@ -49,6 +49,11 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "^" {return new Symbol(sym.POTENCIA,yyline,yychar, yytext());}
 "%%" {return new Symbol(sym.MODULO,yyline,yychar, yytext());}
 
+"==" {return new Symbol(sym.IGUALD,yyline,yychar, yytext());}
+">"  {return new Symbol(sym.MAYOR,yyline,yychar, yytext());}
+"<"  {return new Symbol(sym.MENOR,yyline,yychar, yytext());}
+">="  {return new Symbol(sym.MAYORIGUAL,yyline,yychar, yytext());}
+"<="  {return new Symbol(sym.MENORIGUAL,yyline,yychar, yytext());}
 
 \n {yychar=1;}
 

@@ -49,6 +49,7 @@ parser code
 
 terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
+terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -62,6 +63,7 @@ non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
 non terminal Nodo instruccion;
 non terminal Nodo expresion;
+non terminal Nodo expresionlogica;
 non terminal Tipo tipovar;
 
 
@@ -104,6 +106,10 @@ instruccion ::=
     {:
         RESULT = new Asignacion(a,(Expresion)b);
     :}
+ | expresionlogica:a
+    {:
+    RESULT  =  new Imprimir ((Expresion)a);    
+    :}
     ;
 
 tipovar::=
@@ -118,16 +124,23 @@ tipovar::=
     ;
 
 expresion  ::= 
-    MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     
- |  expresion:a MAS        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.SUMA,(Expresion)a,(Expresion)b);:}
- |  expresion:a MENOS      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.RESTA,(Expresion)a,(Expresion)b);:}
- |  expresion:a POR        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MULTIPLICACION,(Expresion)a,(Expresion)b);:}
- |  expresion:a DIVIDIDO   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.DIVISION,(Expresion)a,(Expresion)b);:}
- |  expresion:a POTENCIA   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.POTENCIA,(Expresion)a,(Expresion)b);:}
- |  expresion:a MODULO     expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MODULO,(Expresion)a,(Expresion)b);:}
- |  ENTERO:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.INT));:}
- |  DECIMAL:a                              {:RESULT=new Single(a,new Tipo(Tipo.tipo.DOUBLE));:}
- |  CADENA:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:} 
- |  IDENTIFICADOR:a                        {:RESULT=new id(a);:}
- |  PARIZQ expresion:a PARDER              {:RESULT=a;:}
+        MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     
+    |   expresion:a MAS        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.SUMA,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MENOS      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.RESTA,(Expresion)a,(Expresion)b);:}
+    |   expresion:a POR        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MULTIPLICACION,(Expresion)a,(Expresion)b);:}
+    |   expresion:a DIVIDIDO   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.DIVISION,(Expresion)a,(Expresion)b);:}
+    |   expresion:a POTENCIA   expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.POTENCIA,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MODULO     expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MODULO,(Expresion)a,(Expresion)b);:}
+    |   ENTERO:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.INT));:}
+    |   DECIMAL:a                              {:RESULT=new Single(a,new Tipo(Tipo.tipo.DOUBLE));:}
+    |   CADENA:a                               {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:} 
+    |   IDENTIFICADOR:a                        {:RESULT=new id(a);:}
+    |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;
+
+expresionlogica::=
+        expresion:a IGUALD          expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.IGUALIGUAL,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MAYOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYOR,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MENOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENOR,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MAYORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYORIGUAL,(Expresion)a,(Expresion)b);:}
+    |   expresion:a MENORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENORIGUAL,(Expresion)a,(Expresion)b);:};
