@@ -50,7 +50,7 @@ parser code
 terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
-terminal String AND,OR;
+terminal String AND,OR,NOT;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -110,7 +110,11 @@ instruccion ::=
     :}
  | expresioncomp:a
     {:
-    RESULT  =  new Imprimir ((Expresion)a);    
+    RESULT  =  new Imprimir ((Expresion)a);
+    :}
+ | expresionlogica:a
+    {:
+    RESULT  =  new Imprimir ((Expresion)a);
     :}
     ;
 
@@ -151,4 +155,5 @@ expresioncomp::=
 expresionlogica::=
         expresioncomp:a AND          expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.AND,(Expresion)a,(Expresion)b);:}
     |   expresioncomp:a OR           expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.OR,(Expresion)a,(Expresion)b);:}
+    |                   NOT          expresioncomp:a     {:RESULT=new Operacion(Operacion.Tipo_operacion.NOT,(Expresion)a);:}
 ;   

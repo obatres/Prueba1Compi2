@@ -27,6 +27,7 @@ public class Operacion extends Expresion{
         MENORIGUAL,
         AND,
         OR,
+        NOT,
         IDENTIFICADOR
     }
    
@@ -202,7 +203,27 @@ public class Operacion extends Expresion{
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                return (opderadorIzq.ejecutar(ts).toString().length())<=(operadorDer.ejecutar(ts).toString().length());  
-            }          
+            }  
+/*-------------------------------------------------------------AND----------------------------------------------------------------------------*/             
+        }else if(tipo_operacion==Tipo_operacion.AND){
+            try {
+                return opderadorIzq.ejecutar(ts).equals(operadorDer.ejecutar(ts));               
+            } catch (Exception e) {
+                //TODO Reportar error de tipos
+            }
+/*-------------------------------------------------------------OR----------------------------------------------------------------------------*/             
+        }else if(tipo_operacion==Tipo_operacion.OR){
+            try {
+                return (boolean)opderadorIzq.ejecutar(ts)||(boolean)operadorDer.ejecutar(ts);
+            } catch (Exception e) {
+                //TODO Reportar error de tipos
+            }
+/*-------------------------------------------------------------NOT----------------------------------------------------------------------------*/               
+        }else if(tipo_operacion == Tipo_operacion.NOT){
+            try {
+                return !(boolean) opderadorIzq.ejecutar(ts);
+            } catch (Exception e) {
+            }
 /*------------------------------------------------------IDENTIFICADOR / VARIABLE----------------------------------------------------------------------------*/           
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
             return ts.getValor(valor.toString());
