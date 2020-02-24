@@ -21,6 +21,7 @@ public class Operacion extends Expresion{
         MODULO,
         UMENOS,
         IGUALIGUAL,
+        DESIGUAL,
         MAYOR,
         MENOR,
         MAYORIGUAL,
