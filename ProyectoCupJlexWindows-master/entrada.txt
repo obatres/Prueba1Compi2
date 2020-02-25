@@ -12,6 +12,8 @@ Evaluar[2.3%%8];
 Evaluar[-54];
 Evaluar[-5.35];
 Evaluar[-(65465+10)];
+8==7
+8!=7
 "hola">"hola"
 "holas">="hola"
 "hola"<"hola"
@@ -28,3 +30,7 @@ Evaluar[-(65465+10)];
 5<=5
 8<=6
 5.2<=8
+8>10 And 4>5
+8>10 Or 4>1
+Not 8==5
+Declara 500<3 ? 4:5

@@ -50,11 +50,18 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "%%" {return new Symbol(sym.MODULO,yyline,yychar, yytext());}
 
 "==" {return new Symbol(sym.IGUALD,yyline,yychar, yytext());}
+"!=" {return new Symbol(sym.DESIGUAL,yyline,yychar, yytext());}
 ">"  {return new Symbol(sym.MAYOR,yyline,yychar, yytext());}
 "<"  {return new Symbol(sym.MENOR,yyline,yychar, yytext());}
 ">="  {return new Symbol(sym.MAYORIGUAL,yyline,yychar, yytext());}
 "<="  {return new Symbol(sym.MENORIGUAL,yyline,yychar, yytext());}
 
+"And"    {return new Symbol(sym.AND,yyline,yychar, yytext());}
+"Or"     {return new Symbol(sym.OR,yyline,yychar, yytext());}
+"Not"    {return new Symbol(sym.NOT,yyline,yychar, yytext());}
+
+"?"     {return new Symbol(sym.INTERROGACION,yyline,yychar, yytext());}
+":"     {return new Symbol(sym.DOSP,yyline,yychar, yytext());}
 \n {yychar=1;}
 
 

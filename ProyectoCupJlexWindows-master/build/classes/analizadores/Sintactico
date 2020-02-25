@@ -49,7 +49,9 @@ parser code
 
 terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
-terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
+terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL, DESIGUAL;
+terminal String AND,OR,NOT;
+terminal String INTERROGACION, DOSP;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -63,15 +65,17 @@ non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
 non terminal Nodo instruccion;
 non terminal Nodo expresion;
-non terminal Nodo expresionlogica;
+non terminal Nodo expresioncomp;
 non terminal Tipo tipovar;
 
 
 precedence left MAS,MENOS;
-precedence left POR,DIVIDIDO;
+precedence left POR,DIVIDIDO, MODULO;
 precedence left POTENCIA;
-precedence left MODULO;
-precedence right UMENOS; 
+precedence left AND, OR;
+precedence left IGUALD, DESIGUAL;
+precedence left MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
+precedence right UMENOS, NOT; 
 
 start with ini; 
 
@@ -93,24 +97,28 @@ instrucciones ::=
     :}; 
 
 instruccion ::= 
-   REVALUAR CORIZQ expresion:a CORDER PTCOMA
-    {:
-    //System.out.println("El valor de la expresión es: "+a);
-    RESULT  =  new Imprimir ((Expresion)a);
-    :}
- | tipovar:b IDENTIFICADOR:a PTCOMA
-    {:
-        RESULT = new Declaracion (a, b);       
-    :}
- | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
-    {:
-        RESULT = new Asignacion(a,(Expresion)b);
-    :}
- | expresionlogica:a
-    {:
-    RESULT  =  new Imprimir ((Expresion)a);    
-    :}
-    ;
+    REVALUAR CORIZQ expresion:a CORDER PTCOMA
+        {:
+            //System.out.println("El valor de la expresión es: "+a);
+            RESULT  =  new Imprimir ((Expresion)a);
+        :}
+    | tipovar:b IDENTIFICADOR:a PTCOMA
+        {:
+            RESULT = new Declaracion (a, b);       
+        :}
+    | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
+        {:
+            RESULT = new Asignacion(a,(Expresion)b);
+        :}
+    | expresioncomp:a
+        {:
+            RESULT  =  new Imprimir ((Expresion)a);
+        :}
+    | RDECLARA expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
+        {:
+            RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
+        :}
+;   
 
 tipovar::=
      ENTEROT
@@ -138,9 +146,17 @@ expresion  ::=
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;
 
-expresionlogica::=
+
+expresioncomp::=
         expresion:a IGUALD          expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.IGUALIGUAL,(Expresion)a,(Expresion)b);:}
+    |   expresion:a DESIGUAL        expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.DESIGUAL,(Expresion)a,(Expresion)b);:}
     |   expresion:a MAYOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYOR,(Expresion)a,(Expresion)b);:}
     |   expresion:a MENOR           expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENOR,(Expresion)a,(Expresion)b);:}
     |   expresion:a MAYORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MAYORIGUAL,(Expresion)a,(Expresion)b);:}
-    |   expresion:a MENORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENORIGUAL,(Expresion)a,(Expresion)b);:};
+    |   expresion:a MENORIGUAL      expresion:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.MENORIGUAL,(Expresion)a,(Expresion)b);:}
+    |   expresioncomp:a AND         expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.AND,(Expresion)a,(Expresion)b);:}
+    |   expresioncomp:a OR          expresioncomp:b     {:RESULT=new Operacion(Operacion.Tipo_operacion.OR,(Expresion)a,(Expresion)b);:}
+    |                   NOT         expresioncomp:a     {:RESULT=new Operacion(Operacion.Tipo_operacion.NOT,(Expresion)a);:}
+;
+
+  
