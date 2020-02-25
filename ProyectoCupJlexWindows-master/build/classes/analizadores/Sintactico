@@ -51,6 +51,7 @@ terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER, POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL, DESIGUAL;
 terminal String AND,OR,NOT;
+terminal String INTERROGACION, DOSP;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -96,24 +97,28 @@ instrucciones ::=
     :}; 
 
 instruccion ::= 
-   REVALUAR CORIZQ expresion:a CORDER PTCOMA
-    {:
-    //System.out.println("El valor de la expresión es: "+a);
-    RESULT  =  new Imprimir ((Expresion)a);
-    :}
- | tipovar:b IDENTIFICADOR:a PTCOMA
-    {:
-        RESULT = new Declaracion (a, b);       
-    :}
- | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
-    {:
-        RESULT = new Asignacion(a,(Expresion)b);
-    :}
- | expresioncomp:a
-    {:
-    RESULT  =  new Imprimir ((Expresion)a);
-    :}
-;
+    REVALUAR CORIZQ expresion:a CORDER PTCOMA
+        {:
+            //System.out.println("El valor de la expresión es: "+a);
+            RESULT  =  new Imprimir ((Expresion)a);
+        :}
+    | tipovar:b IDENTIFICADOR:a PTCOMA
+        {:
+            RESULT = new Declaracion (a, b);       
+        :}
+    | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
+        {:
+            RESULT = new Asignacion(a,(Expresion)b);
+        :}
+    | expresioncomp:a
+        {:
+            RESULT  =  new Imprimir ((Expresion)a);
+        :}
+    | RDECLARA expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
+        {:
+            RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
+        :}
+;   
 
 tipovar::=
      ENTEROT
