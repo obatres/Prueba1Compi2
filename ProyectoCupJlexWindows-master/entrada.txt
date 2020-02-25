@@ -34,3 +34,13 @@ Evaluar[-(65465+10)];
 8>10 Or 4>1
 Not 8==5
 Declara 500<3 ? 4:5
+if(true){
+	Evaluar["Si salio el if"];
+	Evaluar[5+5+5+65+"as"];
+	Evaluar[2.5+"dsf"+5+5+0.2];
+	Evaluar["hola"+"mundo"+"que"+"tal"];
+	"hola">"hola"
+"holas">="hola"
+"hola"<"hola"
+"holas"<="hol"+"a"
+}

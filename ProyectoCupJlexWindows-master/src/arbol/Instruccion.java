@@ -12,6 +12,4 @@ package arbol;
 public abstract class Instruccion extends Nodo{
     
     public abstract Object ejecutar(TablaDeSimbolos ts);
-    
-    
 }
