@@ -8,40 +8,46 @@ package analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int AND = 19;
-  public static final int MENOS = 10;
-  public static final int INTERROGACION = 22;
-  public static final int MENOR = 15;
-  public static final int CADENA = 26;
-  public static final int IGUAL = 31;
-  public static final int OR = 20;
-  public static final int MENORIGUAL = 17;
-  public static final int DECIMAL = 25;
-  public static final int DIVIDIDO = 12;
-  public static final int DESIGUAL = 18;
-  public static final int REVALUAR = 28;
-  public static final int NOT = 21;
-  public static final int PARIZQ = 3;
-  public static final int POTENCIA = 7;
-  public static final int PARDER = 4;
-  public static final int UMENOS = 27;
-  public static final int MODULO = 8;
-  public static final int DOSP = 23;
-  public static final int POR = 11;
-  public static final int ENTEROT = 32;
-  public static final int MAYOR = 14;
-  public static final int EOF = 0;
-  public static final int IGUALD = 13;
-  public static final int CADENAT = 33;
-  public static final int MAYORIGUAL = 16;
-  public static final int error = 1;
-  public static final int IDENTIFICADOR = 30;
-  public static final int CORIZQ = 5;
-  public static final int ENTERO = 24;
+  public static final int INTERROGACION = 24;
+  public static final int RDECLARA = 35;
+  public static final int POR = 13;
+  public static final int IGUALD = 15;
+  public static final int ENTERO = 30;
+  public static final int LLAVEDER = 8;
+  public static final int CADENAT = 39;
+  public static final int IDENTIFICADOR = 36;
+  public static final int NOT = 23;
+  public static final int MENORIGUAL = 19;
+  public static final int AND = 21;
+  public static final int IGUAL = 37;
   public static final int CORDER = 6;
-  public static final int MAS = 9;
-  public static final int RDECLARA = 29;
+  public static final int DIVIDIDO = 14;
+  public static final int OR = 22;
+  public static final int IF = 26;
+  public static final int UMENOS = 33;
+  public static final int REVALUAR = 34;
+  public static final int MAYORIGUAL = 18;
+  public static final int EOF = 0;
+  public static final int PARIZQ = 3;
+  public static final int DECIMAL = 31;
+  public static final int TRUE = 27;
+  public static final int error = 1;
+  public static final int CADENA = 32;
+  public static final int MODULO = 10;
+  public static final int MENOS = 12;
+  public static final int MENOR = 17;
+  public static final int ENTEROT = 38;
+  public static final int DESIGUAL = 20;
+  public static final int MAYOR = 16;
+  public static final int POTENCIA = 9;
+  public static final int ELSE = 29;
+  public static final int LLAVEIZQ = 7;
+  public static final int DOSP = 25;
   public static final int PTCOMA = 2;
+  public static final int FALSE = 28;
+  public static final int PARDER = 4;
+  public static final int CORIZQ = 5;
+  public static final int MAS = 11;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -50,6 +56,8 @@ public class sym {
   "PARDER",
   "CORIZQ",
   "CORDER",
+  "LLAVEIZQ",
+  "LLAVEDER",
   "POTENCIA",
   "MODULO",
   "MAS",
@@ -67,6 +75,10 @@ public class sym {
   "NOT",
   "INTERROGACION",
   "DOSP",
+  "IF",
+  "TRUE",
+  "FALSE",
+  "ELSE",
   "ENTERO",
   "DECIMAL",
   "CADENA",

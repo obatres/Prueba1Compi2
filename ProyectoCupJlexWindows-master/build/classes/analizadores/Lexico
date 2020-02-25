@@ -34,12 +34,18 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "Declara" {return new Symbol(sym.RDECLARA,yyline,yychar, yytext());}
 "Entero"  {return new Symbol(sym.ENTEROT,yyline,yychar, yytext());}
 "Cadena"  {return new Symbol(sym.CADENAT,yyline,yychar, yytext());}
+"if"      {return new Symbol(sym.IF,yyline,yychar, yytext());}
+"else"    {return new Symbol(sym.ELSE,yyline,yychar, yytext());}
+"true"    {return new Symbol(sym.TRUE,yyline,yychar, yytext());}
+"false"   {return new Symbol(sym.FALSE,yyline,yychar, yytext());}
 
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
 "(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
 ")" {return new Symbol(sym.PARDER,yyline,yychar, yytext());} 
 "[" {return new Symbol(sym.CORIZQ,yyline,yychar, yytext());} 
 "]" {return new Symbol(sym.CORDER,yyline,yychar, yytext());} 
+"{" {return new Symbol(sym.LLAVEIZQ,yyline,yychar, yytext());} 
+"}" {return new Symbol(sym.LLAVEDER,yyline,yychar, yytext());} 
 
 "+" {return new Symbol(sym.MAS,yyline,yychar, yytext());} 
 "-" {return new Symbol(sym.MENOS,yyline,yychar, yytext());} 
