@@ -16,6 +16,8 @@ import arbol.Operacion;
 import arbol.Imprimir;
 import arbol.If;
 import arbol.IfElse;
+import arbol.NodoCase;
+import arbol.SwitchCase;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
 import arbol.Declaracion;
@@ -668,7 +670,18 @@ class CUP$Sintactico$actions {
           case 12: // instruccion ::= SWITCH PARIZQ expresion PARDER LLAVEIZQ listacase LLAVEDER 
             {
               Nodo RESULT =null;
-
+		int sleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).right;
+		String s = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		LinkedList<NodoCase> b = (LinkedList<NodoCase>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		
+            RESULT= new SwitchCase(b,(Expresion)a);
+        
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -676,8 +689,17 @@ class CUP$Sintactico$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 13: // listacase ::= listacase CASES 
             {
-              Nodo RESULT =null;
-
+              LinkedList<NodoCase> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		LinkedList<NodoCase> a = (LinkedList<NodoCase>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		NodoCase b = (NodoCase)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		  
+                    RESULT=a;
+                    RESULT.add(b);
+                
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listacase",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -685,8 +707,14 @@ class CUP$Sintactico$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // listacase ::= CASES 
             {
-              Nodo RESULT =null;
-
+              LinkedList<NodoCase> RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		NodoCase a = (NodoCase)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		
+                    RESULT=new LinkedList<>();
+                    RESULT.add(a);
+                
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("listacase",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -694,8 +722,16 @@ class CUP$Sintactico$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 15: // CASES ::= CASE expresion DOSP instrucciones BREAK PTCOMA 
             {
-              Nodo RESULT =null;
-
+              NodoCase RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		LinkedList<Nodo> b = (LinkedList<Nodo>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		
+                RESULT= new NodoCase((Expresion)a,b);
+            
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("CASES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -703,8 +739,16 @@ class CUP$Sintactico$actions {
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 16: // CASES ::= CASE expresion DOSP instrucciones 
             {
-              Nodo RESULT =null;
-
+              NodoCase RESULT =null;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		LinkedList<Nodo> b = (LinkedList<Nodo>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		
+                RESULT= new NodoCase((Expresion)a,b);
+            
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("CASES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

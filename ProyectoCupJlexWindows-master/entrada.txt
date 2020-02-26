@@ -52,21 +52,23 @@ if(5<2){
 if(54654+1-10-100*2>1){
 	Evaluar["evalua primer if"];
 	if("asd">"a"){
-		Evaluar["Evalua if anidado"];
+		Evaluar["antesdeswi"];
 	}
 }else if(5561321>2){
 	Evaluar["evalua segundo if"];
 }
-
-Switch(4){
-	case 5:
-		Evaluar[4];
-	break;
-	case 2:
-		Evaluar["sdas"];
-	case 3:
-		Evaluar[2];
-	break;
-	case 1:
-		Evaluar["sad"];	
-}
+		Switch(4){
+			case 5:
+				Evaluar[4];
+			break;
+			case 2:
+				Evaluar["sdas"];
+			case 4:
+				if("Hola">"h" and 8 >1){
+					Evaluar["Salio el case"];
+				}
+				Evaluar[2];
+			break;
+			case 1:
+				Evaluar["sad"];	
+		}

@@ -16,6 +16,8 @@ import arbol.Operacion;
 import arbol.Imprimir;
 import arbol.If;
 import arbol.IfElse;
+import arbol.NodoCase;
+import arbol.SwitchCase;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
 import arbol.Declaracion;
@@ -71,8 +73,8 @@ non terminal LinkedList<Nodo> instrucciones;
 non terminal Nodo instruccion;
 non terminal Nodo expresion;
 non terminal Nodo expresioncomp;
-non terminal Nodo listacase,
-non terminal Nodo CASES;
+non terminal LinkedList<NodoCase> listacase;
+non terminal NodoCase CASES;
 non terminal Tipo tipovar;
 
 
@@ -111,43 +113,78 @@ instruccion ::=
             //System.out.println("El valor de la expresión es: "+a);
             RESULT  =  new Imprimir ((Expresion)a);
         :}
+
+
     | tipovar:b IDENTIFICADOR:a PTCOMA
         {:
             RESULT = new Declaracion (a, b);       
         :}
+
+
     | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
         {:
             RESULT = new Asignacion(a,(Expresion)b);
         :}
+
+
     | expresioncomp:a
         {:
             RESULT  =  new Imprimir ((Expresion)a);
         :}
+
+
     | RDECLARA expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
         {:
             RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
         :}
+
+
     | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER  
         {:
             RESULT= new If((Operacion)a,b);
         :}
+
+
     | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER ELSE LLAVEIZQ instrucciones:c LLAVEDER
         {:
             RESULT= new If((Operacion)a,b,c);
         :}
+
+
     | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER ELSE IF PARIZQ expresioncomp:d PARDER LLAVEIZQ instrucciones:c LLAVEDER
         {:
             RESULT= new IfElse((Operacion)a,(Operacion)d,b,c);
         :}
-    | SWITCH PARIZQ expresion PARDER LLAVEIZQ listacase LLAVEDER    
+
+
+    | SWITCH:s PARIZQ expresion:a PARDER LLAVEIZQ listacase:b LLAVEDER    
+        {:
+            RESULT= new SwitchCase(b,(Expresion)a);
+        :}
 ;   
 
 
-listacase::= listacase CASES
-            |CASES;
+listacase::= listacase:a CASES:b
+                {:  
+                    RESULT=a;
+                    RESULT.add(b);
+                :}
+            |CASES:a
+                {:
+                    RESULT=new LinkedList<>();
+                    RESULT.add(a);
+                :}
+;
             
-CASES::= CASE expresion DOSP instrucciones BREAK PTCOMA
-        |CASE expresion DOSP instrucciones ;
+CASES::= CASE expresion:a DOSP instrucciones:b BREAK PTCOMA
+            {:
+                RESULT= new NodoCase((Expresion)a,b);
+            :}
+        |CASE expresion:a DOSP instrucciones:b 
+            {:
+                RESULT= new NodoCase((Expresion)a,b);
+            :}
+;
 
 
 
