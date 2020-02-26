@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import arbol.Operacion;
 import arbol.Imprimir;
 import arbol.If;
+import arbol.IfElse;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
 import arbol.Declaracion;
@@ -52,6 +53,7 @@ terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVEIZQ, LLAVEDER;
 terminal String POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL, DESIGUAL;
+terminal String SWITCH, CASE, BREAK;
 terminal String AND,OR,NOT;
 terminal String INTERROGACION, DOSP;
 terminal String IF, TRUE, FALSE,ELSE; 
@@ -69,7 +71,11 @@ non terminal LinkedList<Nodo> instrucciones;
 non terminal Nodo instruccion;
 non terminal Nodo expresion;
 non terminal Nodo expresioncomp;
+non terminal Nodo listacase,
+non terminal Nodo CASES;
 non terminal Tipo tipovar;
+
+
 
 
 precedence left MAS,MENOS;
@@ -129,7 +135,22 @@ instruccion ::=
         {:
             RESULT= new If((Operacion)a,b,c);
         :}
+    | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER ELSE IF PARIZQ expresioncomp:d PARDER LLAVEIZQ instrucciones:c LLAVEDER
+        {:
+            RESULT= new IfElse((Operacion)a,(Operacion)d,b,c);
+        :}
+    | SWITCH PARIZQ expresion PARDER LLAVEIZQ listacase LLAVEDER    
 ;   
+
+
+listacase::= listacase CASES
+            |CASES;
+            
+CASES::= CASE expresion DOSP instrucciones BREAK PTCOMA
+        |CASE expresion DOSP instrucciones ;
+
+
+
 
 tipovar::=
      ENTEROT

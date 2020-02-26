@@ -34,7 +34,7 @@ Evaluar[-(65465+10)];
 8>10 Or 4>1
 Not 8==5
 Declara 500<3 ? 4:5
-if(true){
+if(8>5){
 	Evaluar["Si salio el if"];
 	Evaluar[5+5+5+65+"as"];
 	Evaluar[2.5+"dsf"+5+5+0.2];
@@ -43,4 +43,30 @@ if(true){
 "holas">="hola"
 "hola"<"hola"
 "holas"<="hol"+"a"
+}
+if(5<2){
+	Evaluar["no deberia de ser asi"];
+}else{
+	Evaluar["funciona el Else"];
+}
+if(54654+1-10-100*2>1){
+	Evaluar["evalua primer if"];
+	if("asd">"a"){
+		Evaluar["Evalua if anidado"];
+	}
+}else if(5561321>2){
+	Evaluar["evalua segundo if"];
+}
+
+Switch(4){
+	case 5:
+		Evaluar[4];
+	break;
+	case 2:
+		Evaluar["sdas"];
+	case 3:
+		Evaluar[2];
+	break;
+	case 1:
+		Evaluar["sad"];	
 }

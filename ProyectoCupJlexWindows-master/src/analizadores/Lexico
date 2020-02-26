@@ -36,6 +36,9 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "Cadena"  {return new Symbol(sym.CADENAT,yyline,yychar, yytext());}
 "if"      {return new Symbol(sym.IF,yyline,yychar, yytext());}
 "else"    {return new Symbol(sym.ELSE,yyline,yychar, yytext());}
+"switch"  {return new Symbol(sym.SWITCH,yyline,yychar, yytext());} 
+"case"    {return new Symbol(sym.CASE,yyline,yychar, yytext());}
+"break"   {return new Symbol(sym.BREAK,yyline,yychar, yytext());}
 "true"    {return new Symbol(sym.TRUE,yyline,yychar, yytext());}
 "false"   {return new Symbol(sym.FALSE,yyline,yychar, yytext());}
 
