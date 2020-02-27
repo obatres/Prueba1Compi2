@@ -176,7 +176,7 @@ listacase::= listacase:a CASES:b
                 :}
 ;
             
-CASES::= CASE expresion:a DOSP instrucciones:b BREAK PTCOMA
+CASES::= CASE expresion:a DOSP instrucciones:b BREAK PTCOMA instrucciones
             {:
                 RESULT= new NodoCase((Expresion)a,b);
             :}

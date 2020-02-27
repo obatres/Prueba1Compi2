@@ -61,6 +61,7 @@ if(54654+1-10-100*2>1){
 			case 5:
 				Evaluar[4];
 			break;
+			Evaluar["aqui no"];
 			case 2:
 				Evaluar["sdas"];
 			case 4:
@@ -68,7 +69,11 @@ if(54654+1-10-100*2>1){
 					Evaluar["Salio el case"];
 				}
 				Evaluar[2];
+				Evaluar["aqui si debe imprimir"];
 			break;
+			Evaluar["no debe imprimir nada"];
+			Evaluar["aqui tampoco"];
+
 			case 1:
 				Evaluar["sad"];	
 		}

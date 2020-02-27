@@ -54,7 +54,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\000\002\004\006\000\002\004\003\000\002\004\010\000" +
     "\002\004\011\000\002\004\015\000\002\004\021\000\002" +
     "\004\011\000\002\007\004\000\002\007\003\000\002\010" +
-    "\010\000\002\010\006\000\002\011\003\000\002\011\003" +
+    "\011\000\002\010\006\000\002\011\003\000\002\011\003" +
     "\000\002\005\004\000\002\005\005\000\002\005\005\000" +
     "\002\005\005\000\002\005\005\000\002\005\005\000\002" +
     "\005\005\000\002\005\003\000\002\005\003\000\002\005" +
@@ -70,7 +70,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\146\000\040\005\014\016\005\027\017\034\013\037" +
+    "\000\147\000\040\005\014\016\005\027\017\034\013\037" +
     "\021\040\020\041\024\043\026\044\010\045\006\047\012" +
     "\050\030\051\025\053\022\054\023\001\002\000\042\002" +
     "\000\005\014\016\005\027\017\034\013\037\021\040\020" +
@@ -93,12 +93,12 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\032\uffe6\033\uffe6\034\uffe6\035\uffe6\036\uffe6\037\uffe6\040" +
     "\uffe6\041\uffe6\043\uffe6\044\uffe6\045\uffe6\047\uffe6\050\uffe6" +
     "\051\uffe6\053\uffe6\054\uffe6\001\002\000\032\013\042\014" +
-    "\043\015\041\016\046\017\047\020\045\021\141\022\140" +
-    "\023\135\024\137\025\134\026\136\001\002\000\004\007" +
-    "\130\001\002\000\024\005\014\016\005\034\013\040\020" +
+    "\043\015\041\016\046\017\047\020\045\021\142\022\141" +
+    "\023\136\024\140\025\135\026\137\001\002\000\004\007" +
+    "\131\001\002\000\024\005\014\016\005\034\013\040\020" +
     "\041\024\043\026\044\010\045\006\051\032\001\002\000" +
     "\022\005\014\016\005\040\020\041\024\043\026\044\010" +
-    "\045\006\051\032\001\002\000\004\002\124\001\002\000" +
+    "\045\006\051\032\001\002\000\004\002\125\001\002\000" +
     "\050\002\ufffe\005\ufffe\012\ufffe\016\ufffe\027\ufffe\030\ufffe" +
     "\031\ufffe\034\ufffe\037\ufffe\040\ufffe\041\ufffe\043\ufffe\044" +
     "\ufffe\045\ufffe\047\ufffe\050\ufffe\051\ufffe\053\ufffe\054\ufffe" +
@@ -248,7 +248,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\010\045\006\051\032\001\002\000\020\006\110\013\042" +
     "\014\043\015\041\016\046\017\047\020\045\001\002\000" +
     "\004\011\111\001\002\000\004\030\114\001\002\000\006" +
-    "\012\122\030\114\001\002\000\006\012\ufff3\030\ufff3\001" +
+    "\012\123\030\114\001\002\000\006\012\ufff3\030\ufff3\001" +
     "\002\000\022\005\014\016\005\040\020\041\024\043\026" +
     "\044\010\045\006\051\032\001\002\000\020\013\042\014" +
     "\043\015\041\016\046\017\047\020\045\036\116\001\002" +
@@ -258,72 +258,77 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\ufff1\016\005\027\017\030\ufff1\031\120\034\013\037\021" +
     "\040\020\041\024\043\026\044\010\045\006\047\012\050" +
     "\030\051\025\053\022\054\023\001\002\000\004\004\121" +
-    "\001\002\000\006\012\ufff2\030\ufff2\001\002\000\050\002" +
-    "\ufff5\005\ufff5\012\ufff5\016\ufff5\027\ufff5\030\ufff5\031\ufff5" +
-    "\034\ufff5\037\ufff5\040\ufff5\041\ufff5\043\ufff5\044\ufff5\045" +
-    "\ufff5\047\ufff5\050\ufff5\051\ufff5\053\ufff5\054\ufff5\001\002" +
-    "\000\006\012\ufff4\030\ufff4\001\002\000\004\002\001\001" +
-    "\002\000\020\006\126\013\042\014\043\015\041\016\046" +
-    "\017\047\020\045\001\002\000\114\002\uffe1\004\uffe1\005" +
-    "\uffe1\006\uffe1\010\uffe1\012\uffe1\013\uffe1\014\uffe1\015\uffe1" +
-    "\016\uffe1\017\uffe1\020\uffe1\021\uffe1\022\uffe1\023\uffe1\024" +
-    "\uffe1\025\uffe1\026\uffe1\027\uffe1\030\uffe1\031\uffe1\032\uffe1" +
-    "\033\uffe1\034\uffe1\035\uffe1\036\uffe1\037\uffe1\040\uffe1\041" +
-    "\uffe1\043\uffe1\044\uffe1\045\uffe1\047\uffe1\050\uffe1\051\uffe1" +
-    "\053\uffe1\054\uffe1\001\002\000\060\002\uffd8\005\uffd8\006" +
-    "\uffd8\012\uffd8\016\uffd8\027\uffd8\030\uffd8\031\uffd8\032\uffd8" +
-    "\033\uffd8\034\uffd8\035\uffd8\037\uffd8\040\uffd8\041\uffd8\043" +
-    "\uffd8\044\uffd8\045\uffd8\047\uffd8\050\uffd8\051\uffd8\053\uffd8" +
-    "\054\uffd8\001\002\000\022\005\014\016\005\040\020\041" +
-    "\024\043\026\044\010\045\006\051\032\001\002\000\020" +
-    "\010\132\013\042\014\043\015\041\016\046\017\047\020" +
-    "\045\001\002\000\004\004\133\001\002\000\050\002\ufffd" +
-    "\005\ufffd\012\ufffd\016\ufffd\027\ufffd\030\ufffd\031\ufffd\034" +
-    "\ufffd\037\ufffd\040\ufffd\041\ufffd\043\ufffd\044\ufffd\045\ufffd" +
-    "\047\ufffd\050\ufffd\051\ufffd\053\ufffd\054\ufffd\001\002\000" +
+    "\001\002\000\040\005\014\016\005\027\017\034\013\037" +
+    "\021\040\020\041\024\043\026\044\010\045\006\047\012" +
+    "\050\030\051\025\053\022\054\023\001\002\000\044\005" +
+    "\014\012\ufff2\016\005\027\017\030\ufff2\034\013\037\021" +
+    "\040\020\041\024\043\026\044\010\045\006\047\012\050" +
+    "\030\051\025\053\022\054\023\001\002\000\050\002\ufff5" +
+    "\005\ufff5\012\ufff5\016\ufff5\027\ufff5\030\ufff5\031\ufff5\034" +
+    "\ufff5\037\ufff5\040\ufff5\041\ufff5\043\ufff5\044\ufff5\045\ufff5" +
+    "\047\ufff5\050\ufff5\051\ufff5\053\ufff5\054\ufff5\001\002\000" +
+    "\006\012\ufff4\030\ufff4\001\002\000\004\002\001\001\002" +
+    "\000\020\006\127\013\042\014\043\015\041\016\046\017" +
+    "\047\020\045\001\002\000\114\002\uffe1\004\uffe1\005\uffe1" +
+    "\006\uffe1\010\uffe1\012\uffe1\013\uffe1\014\uffe1\015\uffe1\016" +
+    "\uffe1\017\uffe1\020\uffe1\021\uffe1\022\uffe1\023\uffe1\024\uffe1" +
+    "\025\uffe1\026\uffe1\027\uffe1\030\uffe1\031\uffe1\032\uffe1\033" +
+    "\uffe1\034\uffe1\035\uffe1\036\uffe1\037\uffe1\040\uffe1\041\uffe1" +
+    "\043\uffe1\044\uffe1\045\uffe1\047\uffe1\050\uffe1\051\uffe1\053" +
+    "\uffe1\054\uffe1\001\002\000\060\002\uffd8\005\uffd8\006\uffd8" +
+    "\012\uffd8\016\uffd8\027\uffd8\030\uffd8\031\uffd8\032\uffd8\033" +
+    "\uffd8\034\uffd8\035\uffd8\037\uffd8\040\uffd8\041\uffd8\043\uffd8" +
+    "\044\uffd8\045\uffd8\047\uffd8\050\uffd8\051\uffd8\053\uffd8\054" +
+    "\uffd8\001\002\000\022\005\014\016\005\040\020\041\024" +
+    "\043\026\044\010\045\006\051\032\001\002\000\020\010" +
+    "\133\013\042\014\043\015\041\016\046\017\047\020\045" +
+    "\001\002\000\004\004\134\001\002\000\050\002\ufffd\005" +
+    "\ufffd\012\ufffd\016\ufffd\027\ufffd\030\ufffd\031\ufffd\034\ufffd" +
+    "\037\ufffd\040\ufffd\041\ufffd\043\ufffd\044\ufffd\045\ufffd\047" +
+    "\ufffd\050\ufffd\051\ufffd\053\ufffd\054\ufffd\001\002\000\022" +
+    "\005\014\016\005\040\020\041\024\043\026\044\010\045" +
+    "\006\051\032\001\002\000\022\005\014\016\005\040\020" +
+    "\041\024\043\026\044\010\045\006\051\032\001\002\000" +
     "\022\005\014\016\005\040\020\041\024\043\026\044\010" +
     "\045\006\051\032\001\002\000\022\005\014\016\005\040" +
     "\020\041\024\043\026\044\010\045\006\051\032\001\002" +
     "\000\022\005\014\016\005\040\020\041\024\043\026\044" +
     "\010\045\006\051\032\001\002\000\022\005\014\016\005" +
     "\040\020\041\024\043\026\044\010\045\006\051\032\001" +
-    "\002\000\022\005\014\016\005\040\020\041\024\043\026" +
-    "\044\010\045\006\051\032\001\002\000\022\005\014\016" +
-    "\005\040\020\041\024\043\026\044\010\045\006\051\032" +
-    "\001\002\000\072\002\uffe0\005\uffe0\006\uffe0\012\uffe0\013" +
-    "\042\014\043\015\041\016\uffe0\017\047\020\045\027\uffe0" +
-    "\030\uffe0\031\uffe0\032\uffe0\033\uffe0\034\uffe0\035\uffe0\037" +
-    "\uffe0\040\uffe0\041\uffe0\043\uffe0\044\uffe0\045\uffe0\047\uffe0" +
-    "\050\uffe0\051\uffe0\053\uffe0\054\uffe0\001\002\000\072\002" +
-    "\uffde\005\uffde\006\uffde\012\uffde\013\042\014\043\015\041" +
-    "\016\uffde\017\047\020\045\027\uffde\030\uffde\031\uffde\032" +
-    "\uffde\033\uffde\034\uffde\035\uffde\037\uffde\040\uffde\041\uffde" +
-    "\043\uffde\044\uffde\045\uffde\047\uffde\050\uffde\051\uffde\053" +
-    "\uffde\054\uffde\001\002\000\072\002\uffdc\005\uffdc\006\uffdc" +
-    "\012\uffdc\013\042\014\043\015\041\016\uffdc\017\047\020" +
-    "\045\027\uffdc\030\uffdc\031\uffdc\032\uffdc\033\uffdc\034\uffdc" +
-    "\035\uffdc\037\uffdc\040\uffdc\041\uffdc\043\uffdc\044\uffdc\045" +
-    "\uffdc\047\uffdc\050\uffdc\051\uffdc\053\uffdc\054\uffdc\001\002" +
-    "\000\072\002\uffdf\005\uffdf\006\uffdf\012\uffdf\013\042\014" +
-    "\043\015\041\016\uffdf\017\047\020\045\027\uffdf\030\uffdf" +
-    "\031\uffdf\032\uffdf\033\uffdf\034\uffdf\035\uffdf\037\uffdf\040" +
-    "\uffdf\041\uffdf\043\uffdf\044\uffdf\045\uffdf\047\uffdf\050\uffdf" +
-    "\051\uffdf\053\uffdf\054\uffdf\001\002\000\072\002\uffdd\005" +
-    "\uffdd\006\uffdd\012\uffdd\013\042\014\043\015\041\016\uffdd" +
-    "\017\047\020\045\027\uffdd\030\uffdd\031\uffdd\032\uffdd\033" +
-    "\uffdd\034\uffdd\035\uffdd\037\uffdd\040\uffdd\041\uffdd\043\uffdd" +
-    "\044\uffdd\045\uffdd\047\uffdd\050\uffdd\051\uffdd\053\uffdd\054" +
-    "\uffdd\001\002\000\072\002\uffdb\005\uffdb\006\uffdb\012\uffdb" +
-    "\013\042\014\043\015\041\016\uffdb\017\047\020\045\027" +
-    "\uffdb\030\uffdb\031\uffdb\032\uffdb\033\uffdb\034\uffdb\035\uffdb" +
-    "\037\uffdb\040\uffdb\041\uffdb\043\uffdb\044\uffdb\045\uffdb\047" +
-    "\uffdb\050\uffdb\051\uffdb\053\uffdb\054\uffdb\001\002\000\114" +
-    "\002\uffee\004\uffee\005\uffee\006\uffee\010\uffee\012\uffee\013" +
-    "\uffee\014\uffee\015\uffee\016\uffee\017\uffee\020\uffee\021\uffee" +
-    "\022\uffee\023\uffee\024\uffee\025\uffee\026\uffee\027\uffee\030" +
-    "\uffee\031\uffee\032\uffee\033\uffee\034\uffee\035\uffee\036\uffee" +
-    "\037\uffee\040\uffee\041\uffee\043\uffee\044\uffee\045\uffee\047" +
-    "\uffee\050\uffee\051\uffee\053\uffee\054\uffee\001\002" });
+    "\002\000\072\002\uffe0\005\uffe0\006\uffe0\012\uffe0\013\042" +
+    "\014\043\015\041\016\uffe0\017\047\020\045\027\uffe0\030" +
+    "\uffe0\031\uffe0\032\uffe0\033\uffe0\034\uffe0\035\uffe0\037\uffe0" +
+    "\040\uffe0\041\uffe0\043\uffe0\044\uffe0\045\uffe0\047\uffe0\050" +
+    "\uffe0\051\uffe0\053\uffe0\054\uffe0\001\002\000\072\002\uffde" +
+    "\005\uffde\006\uffde\012\uffde\013\042\014\043\015\041\016" +
+    "\uffde\017\047\020\045\027\uffde\030\uffde\031\uffde\032\uffde" +
+    "\033\uffde\034\uffde\035\uffde\037\uffde\040\uffde\041\uffde\043" +
+    "\uffde\044\uffde\045\uffde\047\uffde\050\uffde\051\uffde\053\uffde" +
+    "\054\uffde\001\002\000\072\002\uffdc\005\uffdc\006\uffdc\012" +
+    "\uffdc\013\042\014\043\015\041\016\uffdc\017\047\020\045" +
+    "\027\uffdc\030\uffdc\031\uffdc\032\uffdc\033\uffdc\034\uffdc\035" +
+    "\uffdc\037\uffdc\040\uffdc\041\uffdc\043\uffdc\044\uffdc\045\uffdc" +
+    "\047\uffdc\050\uffdc\051\uffdc\053\uffdc\054\uffdc\001\002\000" +
+    "\072\002\uffdf\005\uffdf\006\uffdf\012\uffdf\013\042\014\043" +
+    "\015\041\016\uffdf\017\047\020\045\027\uffdf\030\uffdf\031" +
+    "\uffdf\032\uffdf\033\uffdf\034\uffdf\035\uffdf\037\uffdf\040\uffdf" +
+    "\041\uffdf\043\uffdf\044\uffdf\045\uffdf\047\uffdf\050\uffdf\051" +
+    "\uffdf\053\uffdf\054\uffdf\001\002\000\072\002\uffdd\005\uffdd" +
+    "\006\uffdd\012\uffdd\013\042\014\043\015\041\016\uffdd\017" +
+    "\047\020\045\027\uffdd\030\uffdd\031\uffdd\032\uffdd\033\uffdd" +
+    "\034\uffdd\035\uffdd\037\uffdd\040\uffdd\041\uffdd\043\uffdd\044" +
+    "\uffdd\045\uffdd\047\uffdd\050\uffdd\051\uffdd\053\uffdd\054\uffdd" +
+    "\001\002\000\072\002\uffdb\005\uffdb\006\uffdb\012\uffdb\013" +
+    "\042\014\043\015\041\016\uffdb\017\047\020\045\027\uffdb" +
+    "\030\uffdb\031\uffdb\032\uffdb\033\uffdb\034\uffdb\035\uffdb\037" +
+    "\uffdb\040\uffdb\041\uffdb\043\uffdb\044\uffdb\045\uffdb\047\uffdb" +
+    "\050\uffdb\051\uffdb\053\uffdb\054\uffdb\001\002\000\114\002" +
+    "\uffee\004\uffee\005\uffee\006\uffee\010\uffee\012\uffee\013\uffee" +
+    "\014\uffee\015\uffee\016\uffee\017\uffee\020\uffee\021\uffee\022" +
+    "\uffee\023\uffee\024\uffee\025\uffee\026\uffee\027\uffee\030\uffee" +
+    "\031\uffee\032\uffee\033\uffee\034\uffee\035\uffee\036\uffee\037" +
+    "\uffee\040\uffee\041\uffee\043\uffee\044\uffee\045\uffee\047\uffee" +
+    "\050\uffee\051\uffee\053\uffee\054\uffee\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -331,12 +336,12 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\146\000\016\002\014\003\003\004\015\005\010\006" +
+    "\000\147\000\016\002\014\003\003\004\015\005\010\006" +
     "\006\011\026\001\001\000\012\004\070\005\010\006\006" +
-    "\011\026\001\001\000\004\005\147\001\001\000\002\001" +
+    "\011\026\001\001\000\004\005\150\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\006\005\010\006\126\001\001\000" +
-    "\004\005\124\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\006\005\010\006\127\001\001\000" +
+    "\004\005\125\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\006\005" +
@@ -362,20 +367,21 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\006\006\011\026\001\001\000\002\001\001\000\012\004" +
     "\070\005\010\006\006\011\026\001\001\000\002\001\001" +
     "\000\004\005\106\001\001\000\002\001\001\000\002\001" +
-    "\001\000\006\007\111\010\112\001\001\000\004\010\122" +
+    "\001\000\006\007\111\010\112\001\001\000\004\010\123" +
     "\001\001\000\002\001\001\000\004\005\114\001\001\000" +
     "\002\001\001\000\014\003\116\004\015\005\010\006\006" +
     "\011\026\001\001\000\012\004\070\005\010\006\006\011" +
-    "\026\001\001\000\002\001\001\000\002\001\001\000\002" +
+    "\026\001\001\000\002\001\001\000\014\003\121\004\015" +
+    "\005\010\006\006\011\026\001\001\000\012\004\070\005" +
+    "\010\006\006\011\026\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\004\005\130" +
+    "\001\000\002\001\001\000\004\005\131\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\004\005" +
+    "\147\001\001\000\004\005\146\001\001\000\004\005\145" +
+    "\001\001\000\004\005\144\001\001\000\004\005\143\001" +
+    "\001\000\004\005\142\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\005\146\001\001\000\004\005\145\001\001" +
-    "\000\004\005\144\001\001\000\004\005\143\001\001\000" +
-    "\004\005\142\001\001\000\004\005\141\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "" });
+    "\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -720,19 +726,19 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // CASES ::= CASE expresion DOSP instrucciones BREAK PTCOMA 
+          case 15: // CASES ::= CASE expresion DOSP instrucciones BREAK PTCOMA instrucciones 
             {
               NodoCase RESULT =null;
-		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
-		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
-		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
-		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
-		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
-		LinkedList<Nodo> b = (LinkedList<Nodo>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		LinkedList<Nodo> b = (LinkedList<Nodo>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
 		
                 RESULT= new NodoCase((Expresion)a,b);
             
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("CASES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("CASES",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
