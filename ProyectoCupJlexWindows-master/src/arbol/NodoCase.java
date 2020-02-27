@@ -34,5 +34,9 @@ public class NodoCase {
         this.exp = exp;
         this.InstruccionesDeCase = InstruccionesDeCase;
     }
+    
+    public NodoCase(LinkedList<Nodo> InstruccionesDeCase){
+        this.InstruccionesDeCase = InstruccionesDeCase;
+    }
        
 }

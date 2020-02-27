@@ -55,7 +55,7 @@ terminal String PTCOMA,PARIZQ,PARDER,CORIZQ,CORDER,LLAVEIZQ, LLAVEDER;
 terminal String POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL, DESIGUAL;
-terminal String SWITCH, CASE, BREAK;
+terminal String SWITCH, CASE, BREAK,DEFAULT;
 terminal String AND,OR,NOT;
 terminal String INTERROGACION, DOSP;
 terminal String IF, TRUE, FALSE,ELSE; 
@@ -183,6 +183,14 @@ CASES::= CASE expresion:a DOSP instrucciones:b BREAK PTCOMA instrucciones
         |CASE expresion:a DOSP instrucciones:b 
             {:
                 RESULT= new NodoCase((Expresion)a,b);
+            :}
+        |DEFAULT DOSP instrucciones:a
+            {:
+                RESULT= new NodoCase(a);
+            :}
+        |DEFAULT DOSP instrucciones:a  BREAK PTCOMA instrucciones
+            {:
+                RESULT= new NodoCase(a);
             :}
 ;
 
