@@ -31,15 +31,26 @@ public class SwitchCase extends Instruccion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         for(NodoCase nc:ListaDeCase){
-            if(expComp.ejecutar(ts).equals(nc.getExp().ejecutar(ts))){
+            if(nc.getExp()!=null){
+                if(expComp.ejecutar(ts).equals(nc.getExp().ejecutar(ts))){
                 TablaDeSimbolos tablalocal = new TablaDeSimbolos();
                 tablalocal.addAll(ts);
                 for (Nodo in:nc.getInstruccionesDeCase()){
                     if(in instanceof Instruccion){
                         ((Instruccion) in).ejecutar(ts);
+                        }
                     }
                 }
+            }else{
+                TablaDeSimbolos tablalocal = new TablaDeSimbolos();
+                tablalocal.addAll(ts);
+                for (Nodo in:nc.getInstruccionesDeCase()){
+                    if(in instanceof Instruccion){
+                        ((Instruccion) in).ejecutar(ts);
+                        }
+                    }                
             }
+
         }
         return null;
     }
