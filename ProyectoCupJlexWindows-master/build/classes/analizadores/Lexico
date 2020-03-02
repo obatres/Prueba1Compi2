@@ -42,6 +42,7 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "default" {return new Symbol(sym.DEFAULT,yyline,yychar, yytext());}
 "true"    {return new Symbol(sym.TRUE,yyline,yychar, yytext());}
 "false"   {return new Symbol(sym.FALSE,yyline,yychar, yytext());}
+"while"   {return new Symbol(sym.WHILE,yyline,yychar, yytext());}  
 
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
 "(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 

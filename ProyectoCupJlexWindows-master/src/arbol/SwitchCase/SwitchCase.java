@@ -3,8 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arbol;
+package arbol.SwitchCase;
 
+import arbol.Expresion;
+import arbol.Expresion;
+import arbol.Instruccion;
+import arbol.Instruccion;
+import arbol.Nodo;
+import arbol.Nodo;
+import arbol.SwitchCase.NodoCase;
+import arbol.TablaDeSimbolos;
+import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
 /**
@@ -38,7 +47,10 @@ public class SwitchCase extends Instruccion{
                 for (Nodo in:nc.getInstruccionesDeCase()){
                     if(in instanceof Instruccion){
                         ((Instruccion) in).ejecutar(ts);
-                        }
+                        }else if(in instanceof Break){   
+                            System.out.println(((Break) in).getTipoInstruccion());
+                            return null;
+                        } 
                     }
                 }
             }else{
@@ -47,8 +59,11 @@ public class SwitchCase extends Instruccion{
                 for (Nodo in:nc.getInstruccionesDeCase()){
                     if(in instanceof Instruccion){
                         ((Instruccion) in).ejecutar(ts);
-                        }
-                    }                
+                        }else if(in instanceof Break){   
+                            System.out.println(((Break) in).getTipoInstruccion());
+                            return null;
+                        }  
+                }
             }
 
         }

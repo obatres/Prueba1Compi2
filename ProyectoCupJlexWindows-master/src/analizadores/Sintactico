@@ -16,8 +16,9 @@ import arbol.Operacion;
 import arbol.Imprimir;
 import arbol.If;
 import arbol.IfElse;
-import arbol.NodoCase;
-import arbol.SwitchCase;
+import arbol.SwitchCase.NodoCase;
+import arbol.SwitchCase.SwitchCase;
+import arbol.SwitchCase.Break;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
 import arbol.Declaracion;
@@ -59,6 +60,7 @@ terminal String SWITCH, CASE, BREAK,DEFAULT;
 terminal String AND,OR,NOT;
 terminal String INTERROGACION, DOSP;
 terminal String IF, TRUE, FALSE,ELSE; 
+terminal String WHILE;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -76,6 +78,7 @@ non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal Tipo tipovar;
+
 
 
 
@@ -161,6 +164,11 @@ instruccion ::=
         {:
             RESULT= new SwitchCase(b,(Expresion)a);
         :}
+    | BREAK:a PTCOMA
+        {:
+            RESULT= new Break (a);
+        :}
+    | WHILE    
 ;   
 
 
@@ -176,19 +184,11 @@ listacase::= listacase:a CASES:b
                 :}
 ;
             
-CASES::= CASE expresion:a DOSP instrucciones:b BREAK PTCOMA instrucciones
-            {:
-                RESULT= new NodoCase((Expresion)a,b);
-            :}
-        |CASE expresion:a DOSP instrucciones:b 
+CASES::= CASE expresion:a DOSP instrucciones:b 
             {:
                 RESULT= new NodoCase((Expresion)a,b);
             :}
         |DEFAULT DOSP instrucciones:a
-            {:
-                RESULT= new NodoCase(a);
-            :}
-        |DEFAULT DOSP instrucciones:a  BREAK PTCOMA instrucciones
             {:
                 RESULT= new NodoCase(a);
             :}
