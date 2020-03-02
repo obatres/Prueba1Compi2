@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arbol;
+package arbol.SwitchCase;
 
+import arbol.Expresion;
+import arbol.Nodo;
 import java.util.LinkedList;
 
 /**
@@ -13,19 +15,7 @@ import java.util.LinkedList;
  */
 public class NodoCase {
 
-    /**
-     * @return the InstruccionesDeCase
-     */
-    public LinkedList<Nodo> getInstruccionesDeCase() {
-        return InstruccionesDeCase;
-    }
 
-    /**
-     * @return the exp
-     */
-    public Expresion getExp() {
-        return exp;
-    }
     
     private Expresion exp;
     private LinkedList<Nodo> InstruccionesDeCase;
@@ -38,6 +28,20 @@ public class NodoCase {
     public NodoCase(LinkedList<Nodo> InstruccionesDeCase){
         this.InstruccionesDeCase = InstruccionesDeCase;
         this.exp=null;
+    }
+    
+        /**
+     * @return the InstruccionesDeCase
+     */
+    public LinkedList<Nodo> getInstruccionesDeCase() {
+        return InstruccionesDeCase;
+    }
+
+    /**
+     * @return the exp
+     */
+    public Expresion getExp() {
+        return exp;
     }
        
 }
