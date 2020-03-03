@@ -9,35 +9,35 @@ package analizadores;
 public class sym {
   /* terminals */
   public static final int INTERROGACION = 28;
-  public static final int RDECLARA = 40;
+  public static final int RDECLARA = 41;
   public static final int POR = 13;
   public static final int IGUALD = 15;
-  public static final int ENTERO = 35;
+  public static final int ENTERO = 36;
   public static final int CASE = 22;
   public static final int LLAVEDER = 8;
-  public static final int CADENAT = 44;
-  public static final int IDENTIFICADOR = 41;
+  public static final int CADENAT = 45;
+  public static final int IDENTIFICADOR = 42;
   public static final int NOT = 27;
   public static final int MENORIGUAL = 19;
   public static final int AND = 25;
-  public static final int IGUAL = 42;
+  public static final int IGUAL = 43;
   public static final int CORDER = 6;
   public static final int DIVIDIDO = 14;
   public static final int OR = 26;
-  public static final int UMENOS = 38;
+  public static final int UMENOS = 39;
   public static final int IF = 30;
-  public static final int REVALUAR = 39;
+  public static final int REVALUAR = 40;
   public static final int MAYORIGUAL = 18;
-  public static final int DECIMAL = 36;
+  public static final int DECIMAL = 37;
   public static final int EOF = 0;
   public static final int PARIZQ = 3;
   public static final int TRUE = 31;
   public static final int error = 1;
-  public static final int CADENA = 37;
+  public static final int CADENA = 38;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
   public static final int MENOR = 17;
-  public static final int ENTEROT = 43;
+  public static final int ENTEROT = 44;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
   public static final int SWITCH = 21;
@@ -52,6 +52,7 @@ public class sym {
   public static final int FALSE = 32;
   public static final int PARDER = 4;
   public static final int CORIZQ = 5;
+  public static final int DO = 35;
   public static final int MAS = 11;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -89,6 +90,7 @@ public class sym {
   "FALSE",
   "ELSE",
   "WHILE",
+  "DO",
   "ENTERO",
   "DECIMAL",
   "CADENA",

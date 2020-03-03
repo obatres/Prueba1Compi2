@@ -80,3 +80,32 @@ if(54654+1-10-100*2>1){
 				Evaluar["def"];
 				break;
 		}
+entero a;
+
+a=5;
+While (a<10){
+	Evaluar[a];
+	a=a+1;		
+	
+	switch(10){
+		case 5:
+			Evaluar[a+a+a];
+			break;
+		case 6:
+			Evaluar["case 6"];
+			Evaluar[a+a+a+a];
+		case 7:
+			Evaluar["case 7"];
+		break;
+		default:
+			Evaluar["def"];
+	}
+
+}
+
+entero b;
+b=1;
+do {
+	b=b+1;
+	Evaluar[b];
+		}while(b<=10);
