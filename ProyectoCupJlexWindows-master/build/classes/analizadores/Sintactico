@@ -1,9 +1,3 @@
-/*
- * Ejemplo desarrollado por Erick Navarro
- * Blog: e-navarro.blogspot.com
- * Julio - 2018
- */
-
 package analizadores; 
 import arbol.Expresion;
 import arbol.Nodo;
@@ -14,8 +8,10 @@ import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 import arbol.Operacion;
 import arbol.Imprimir;
-import arbol.If;
-import arbol.IfElse;
+import arbol.If.If;
+import arbol.If.IfElse;
+import arbol.While.While;
+import arbol.DoWhile.DoWhile;
 import arbol.SwitchCase.NodoCase;
 import arbol.SwitchCase.SwitchCase;
 import arbol.SwitchCase.Break;
@@ -60,7 +56,7 @@ terminal String SWITCH, CASE, BREAK,DEFAULT;
 terminal String AND,OR,NOT;
 terminal String INTERROGACION, DOSP;
 terminal String IF, TRUE, FALSE,ELSE; 
-terminal String WHILE;
+terminal String WHILE, DO;
 terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
@@ -168,7 +164,16 @@ instruccion ::=
         {:
             RESULT= new Break (a);
         :}
-    | WHILE    
+    | WHILE:s PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER
+        {:
+            //System.out.println(s);
+            RESULT = new While((Expresion)a, b);
+        :}
+    | DO:s LLAVEIZQ instrucciones:b LLAVEDER WHILE PARIZQ expresioncomp:a PARDER PTCOMA 
+        {:
+            //System.out.println(s);
+            RESULT = new DoWhile((Expresion)a,b);
+        :}
 ;   
 
 
