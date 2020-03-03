@@ -65,6 +65,7 @@ terminal String REVALUAR;
 terminal String RDECLARA;
 terminal String IDENTIFICADOR;
 terminal String IGUAL, ENTEROT, CADENAT;
+terminal String PRINT;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -107,7 +108,7 @@ instrucciones ::=
     :}; 
 
 instruccion ::= 
-    REVALUAR CORIZQ expresion:a CORDER PTCOMA
+    PRINT PARIZQ expresion:a PARDER PTCOMA
         {:
             //System.out.println("El valor de la expresión es: "+a);
             RESULT  =  new Imprimir ((Expresion)a);

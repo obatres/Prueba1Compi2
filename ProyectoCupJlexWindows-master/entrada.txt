@@ -1,17 +1,17 @@
-Evaluar[5+5+5+65+"as"];
-Evaluar[2.5+"dsf"+5+5+0.2];
-Evaluar["hola"+"mundo"+"que"+"tal"];
-Evaluar[654/564/654.5];
-Evaluar[2.2*5*5.6*2651];
-Evaluar[2.3-545-545-6.2];
-Evaluar[2^3.5];
-Evaluar[6^2];
-Evaluar[1.2^5.4];
-Evaluar[2%%3.5];
-Evaluar[2.3%%8];
-Evaluar[-54];
-Evaluar[-5.35];
-Evaluar[-(65465+10)];
+Print(5+5+5+65+"as");
+Print(2.5+"dsf"+5+5+0.2);
+Print("hola"+"mundo"+"que"+"tal");
+Print(654/564/654.5);
+Print(2.2*5*5.6*2651);
+Print(2.3-545-545-6.2);
+Print(2^3.5);
+Print(6^2);
+Print(1.2^5.4);
+Print(2%%3.5);
+Print(2.3%%8);
+Print(-54);
+Print(-5.35);
+Print(-(65465+10));
 8==7
 8!=7
 "hola">"hola"
@@ -35,70 +35,70 @@ Evaluar[-(65465+10)];
 Not 8==5
 Declara 500<3 ? 4:5
 if(8>5){
-	Evaluar["Si salio el if"];
-	Evaluar[5+5+5+65+"as"];
-	Evaluar[2.5+"dsf"+5+5+0.2];
-	Evaluar["hola"+"mundo"+"que"+"tal"];
+	Print("Si salio el if");
+	Print(5+5+5+65+"as");
+	Print(2.5+"dsf"+5+5+0.2);
+	Print("hola"+"mundo"+"que"+"tal");
 	"hola">"hola"
 "holas">="hola"
 "hola"<"hola"
 "holas"<="hol"+"a"
 }
 if(5<2){
-	Evaluar["no deberia de ser asi"];
+	Print("no deberia de ser asi");
 }else{
-	Evaluar["funciona el Else"];
+	Print("funciona el Else");
 }
 if(54654+1-10-100*2>1){
-	Evaluar["evalua primer if"];
+	Print("evalua primer if");
 	if("asd">"a"){
-		Evaluar["antesdeswi"];
+		Print("antesdeswi");
 	}
 }else if(5561321>2){
-	Evaluar["evalua segundo if"];
+	Print("evalua segundo if");
 }
 		SWITCH(4){
 			case 5:
-				Evaluar[4];
+				Print(4);
 			break;
-			Evaluar["aqui no"];
+			Print("aqui no");
 			CASE 2:
-				Evaluar["sdas"];
+				Print("sdas");
 			case 4:
 				if("Hola">"h" and 8 >1){
-					Evaluar["Salio el case"];
+					Print("Salio el case");
 				}
-				Evaluar[2];
-				Evaluar["aqui si debe imprimir"];
+				Print(2);
+				Print("aqui si debe imprimir");
 			break;
-			Evaluar["no debe imprimir nada"];
-			Evaluar["aqui tampoco"];
+			Print("no debe imprimir nada");
+			Print("aqui tampoco");
 
 			case 1:
-				Evaluar["sad"];	
+				Print("sad");	
 			default:
-				Evaluar["def"];
+				Print("def");
 				break;
 		}
 entero a;
 
 a=5;
 While (a<10){
-	Evaluar[a];
+	Print(a);
 	a=a+1;		
 	
 	switch(10){
 		case 5:
-			Evaluar[a+a+a];
+			Print(a+a+a);
 			break;
 		case 6:
-			Evaluar["case 6"];
-			Evaluar[a+a+a+a];
+			Print("case 6");
+			Print(a+a+a+a);
 		case 7:
-			Evaluar["case 7"];
+			Print("case 7");
 		break;
 		default:
-			Evaluar["def"];
+			Print("def");
 	}
 
 }
@@ -107,5 +107,5 @@ entero b;
 b=1;
 do {
 	b=b+1;
-	Evaluar[b];
+	Print(b);
 		}while(b<=10);

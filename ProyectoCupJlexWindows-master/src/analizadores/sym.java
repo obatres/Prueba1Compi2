@@ -52,6 +52,7 @@ public class sym {
   public static final int FALSE = 32;
   public static final int PARDER = 4;
   public static final int CORIZQ = 5;
+  public static final int PRINT = 46;
   public static final int DO = 35;
   public static final int MAS = 11;
   public static final String[] terminalNames = new String[] {
@@ -100,7 +101,8 @@ public class sym {
   "IDENTIFICADOR",
   "IGUAL",
   "ENTEROT",
-  "CADENAT"
+  "CADENAT",
+  "PRINT"
   };
 }
 
