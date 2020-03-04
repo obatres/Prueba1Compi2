@@ -43,8 +43,7 @@ public class Declaracion extends Instruccion{
         if(ts.Existe(id)){
             ts.setValor(id, Vector, exp.GetTipo(ts));           
         }else{
-            ts.add(new Simbolo(id, exp.GetTipo(ts)));
-            
+            ts.add(new Simbolo(id, exp.GetTipo(ts)));            
             ts.setValor(id, Vector,exp.GetTipo(ts));
             }
         }
