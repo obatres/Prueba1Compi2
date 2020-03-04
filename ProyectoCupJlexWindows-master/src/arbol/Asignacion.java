@@ -15,6 +15,7 @@ public class Asignacion extends Instruccion{
     
     private final Expresion valor;
 
+
     public Asignacion(String id, Expresion valor) {
         this.id = id;
         this.valor = valor;
@@ -23,7 +24,7 @@ public class Asignacion extends Instruccion{
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-        ts.setValor(id, valor.ejecutar(ts));
+        //ts.setValor(id, valor.ejecutar(ts));
         return null;
     }
     

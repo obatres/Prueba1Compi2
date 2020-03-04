@@ -27,7 +27,7 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
                 return s.getValor();
             }
         }
-        System.out.println("La variable "+id+" no existe en este ámbito.");
+        System.out.println("La variable "+id+" no existe en este ámbito."+"VALOR");
         return "Valor Desconocido";
     }  
     
@@ -37,24 +37,36 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
                 return s.getT();
             }
         }
-        System.out.println("El valor de la variable"+id+"no existe en este ambito");
+        System.out.println("El valor de la variable"+id+"no existe en este ambito"+"TIPO");
         return "Tipo Desconocido";
     }
+
     
-    /**
-     * Método que asigna un valor a una variable específica, si no la encuentra 
-     * no realiza la asignación y despliega un mensaje de error.
-     * @param id Identificador de la variable que quiere buscarse
-     * @param valor Valor que quiere asignársele a la variable buscada
-     */
-    void setValor(String id, Object valor) {
+    
+    
+    
+    void setValor(String id, Object valor, Tipo tipo) {
         for(Simbolo s:this){
             if(s.getId().equals(id)){
                 s.setValor(valor);
+                s.setT(tipo);
                 return;
             }
         }
         System.out.println("La variable "+id+" no existe en este ámbito, por lo "
                 + "que no puede asignársele un valor.");
-    }    
+    } 
+    
+    
+    
+    public boolean Existe(String id){
+        for(Simbolo s:this){
+            if(s.getId().equals(id)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
 }

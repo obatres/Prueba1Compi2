@@ -11,14 +11,23 @@ import arbol.Tipo;
  */
 public class Simbolo {
 
+    private final String id;
+    private Tipo t;
+    private Object valor;
+    
+    /**
+     * @param t the t to set
+     */
+    public void setT(Tipo t) {
+        this.t = t;
+    }
+
     /**
      * @return the t
      */
     public Tipo getT() {
         return t;
     }
-
-    
 
     /**
      * @return the id
@@ -40,10 +49,8 @@ public class Simbolo {
     public void setValor(Object valor) {
         this.valor = valor;
     }
-    //private final TipoSimbolo tipo;
-    private final String id;
-    private final Tipo t;
-    private Object valor;
+
+
 
     /**
      *
@@ -53,10 +60,7 @@ public class Simbolo {
     public Simbolo(String id, Tipo t){
         this.t=t;
         this.id=id;
-    }
-    public static enum TipoSimbolo {
-        NUMERO,
-        CADENA
+        this.valor="null";
     }
     
 }

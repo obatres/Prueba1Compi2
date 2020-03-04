@@ -115,15 +115,15 @@ instruccion ::=
         :}
 
 
-    | tipovar:b IDENTIFICADOR:a PTCOMA
+    | IDENTIFICADOR:a IGUAL expresion:b 
         {:
-            RESULT = new Declaracion (a, b);       
+            RESULT = new Declaracion (a, (Expresion)b,1);       
         :}
 
 
     | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
         {:
-            RESULT = new Asignacion(a,(Expresion)b);
+            RESULT = new Declaracion(a,(Expresion)b,1);
         :}
 
 
