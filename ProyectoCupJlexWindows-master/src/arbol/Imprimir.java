@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package arbol;
-
+ import InterfazGrafica.VentanaPrincipal;
 /**
  *
  * @author obatres_
  */
 public class Imprimir extends Instruccion{
-    
+
     private final Expresion contenido;
 
+           
     public Imprimir(Expresion contenido) {
         this.contenido = contenido;
     }
@@ -25,6 +26,7 @@ public class Imprimir extends Instruccion{
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
         System.out.println(contenido.ejecutar(ts).toString());
+        VentanaPrincipal.consola = VentanaPrincipal.consola + contenido.ejecutar(ts).toString()+"\n";
         return null;
     }
 }

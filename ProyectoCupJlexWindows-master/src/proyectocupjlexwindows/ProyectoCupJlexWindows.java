@@ -2,6 +2,7 @@
 
 package proyectocupjlexwindows;
 
+import InterfazGrafica.VentanaPrincipal;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
@@ -17,6 +18,8 @@ public class ProyectoCupJlexWindows {
      */
     public static void main(String[] args) {
         interpretar("entrada.txt");
+        VentanaPrincipal v = new VentanaPrincipal();
+        v.setVisible(true);
     }
     /**
      * Método que interpreta el contenido del archivo que se encuentra en el path
@@ -68,9 +71,7 @@ public class ProyectoCupJlexWindows {
                     
                     System.out.println("Error al ejecutar un nivel en el arbol AST");  //reportar error
                 }
-                  
-                
-            
+ 
         }
     }
     

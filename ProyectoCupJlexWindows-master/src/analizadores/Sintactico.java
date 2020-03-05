@@ -462,7 +462,6 @@ public class Sintactico extends java_cup.runtime.lr_parser {
 
 
 
-
     public LinkedList<Nodo> AST;
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
