@@ -1,3 +1,13 @@
-a=5;
-a=654+65654+65+654+64+64+"asd";
-print(a);
+
+#* 
+comentario multi
+
+
+*#
+
+.a5_=5;
+print(.a5_);
+# comentario 1 linea
+b_.5 = C(654+654,"ASasd",56.54,234*654,true)
+
+

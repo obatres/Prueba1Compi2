@@ -5,12 +5,15 @@
  */
 package arbol;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author obatres_
  */
 public class id extends Expresion{
-
+    
+    ArrayList<Object> Vector = new ArrayList<Object>();
     /**
      * @return the iden
      */
@@ -40,7 +43,12 @@ public class id extends Expresion{
         // bool existencia=ts.Exist(iden);
         //if (existe) return ts.getValor(iden);
         //Simbolo s = (Simbolo) ts.getValor(iden);
-        return ts.getValor(iden);
+        if (ts.getValor(iden) instanceof ArrayList){
+            Vector = (ArrayList<Object>) ts.getValor(iden);
+            return Vector.get(0);
+        }
+        //return ts.getValor(iden);
+        return null;
     }
 
     @Override

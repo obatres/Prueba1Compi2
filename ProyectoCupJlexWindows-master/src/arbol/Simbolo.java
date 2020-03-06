@@ -5,6 +5,7 @@
  */
 package arbol;
 import arbol.Tipo;
+import java.util.ArrayList;
 /**
  *
  * @author obatres_

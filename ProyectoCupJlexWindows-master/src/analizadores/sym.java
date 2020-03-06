@@ -15,6 +15,7 @@ public class sym {
   public static final int ENTERO = 36;
   public static final int CASE = 22;
   public static final int LLAVEDER = 8;
+  public static final int C = 47;
   public static final int CADENAT = 45;
   public static final int IDENTIFICADOR = 42;
   public static final int NOT = 27;
@@ -33,6 +34,7 @@ public class sym {
   public static final int PARIZQ = 3;
   public static final int TRUE = 31;
   public static final int error = 1;
+  public static final int COMA = 48;
   public static final int CADENA = 38;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
@@ -102,7 +104,9 @@ public class sym {
   "IGUAL",
   "ENTEROT",
   "CADENAT",
-  "PRINT"
+  "PRINT",
+  "C",
+  "COMA"
   };
 }
 

@@ -21,6 +21,8 @@ public class Declaracion extends Instruccion{
     
     ArrayList<Object> Vector = new ArrayList<Object>();
     
+    private String TipoDeVariable;
+    
     
     private int tipoDeclaracion ; //Tipo de Declaracion, vector, arreglo, lista y matriz
     
@@ -35,11 +37,21 @@ public class Declaracion extends Instruccion{
         id = a;
         tipo = t;
     }
+
+    public Declaracion(String id, Tipo tipo, Expresion exp, String TipoDeVariable, int tipoDeclaracion) {
+        this.id = id;
+        this.tipo = tipo;
+        this.exp = exp;
+        this.TipoDeVariable = TipoDeVariable;
+        this.tipoDeclaracion = tipoDeclaracion;
+    }
+    
+    
        
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
        if(tipoDeclaracion==1){
-           Vector.add(exp.ejecutar(ts));
+           Vector.add(0, exp.ejecutar(ts));
         if(ts.Existe(id)){
             ts.setValor(id, Vector, exp.GetTipo(ts));           
         }else{

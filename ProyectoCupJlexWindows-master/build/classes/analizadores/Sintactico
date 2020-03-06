@@ -65,6 +65,7 @@ terminal String RDECLARA;
 terminal String IDENTIFICADOR;
 terminal String IGUAL, ENTEROT, CADENAT;
 terminal String PRINT;
+terminal String C, COMA;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -74,6 +75,7 @@ non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal Tipo tipovar;
+non terminal listaDeclaraciones, ListaExp;
 
 
 
@@ -125,7 +127,9 @@ instruccion ::=
             RESULT = new Declaracion(a,(Expresion)b,1);
         :}
 
+    | IDENTIFICADOR:a IGUAL listaDeclaraciones
 
+    
     | expresioncomp:a
         {:
             RESULT  =  new Imprimir ((Expresion)a);
@@ -202,16 +206,14 @@ CASES::= CASE expresion:a DOSP instrucciones:b
 
 
 
-tipovar::=
-     ENTEROT
-     {: 
-        RESULT= new Tipo(Tipo.tipo.INT);
-     :}
-    |CADENAT 
-    {:
-        RESULT= new Tipo(Tipo.tipo.STRING);
-    :}
-    ;
+listaDeclaraciones::= C PARIZQ ListaExp PARDER
+    
+;
+
+ListaExp ::= ListaExp COMA expresion 
+
+            |expresion
+;
 
 expresion  ::= 
         MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     

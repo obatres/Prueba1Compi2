@@ -25,9 +25,9 @@ BLANCOS=[ \r\t]+
 D=[0-9]+
 DD=[0-9]+("."[  |0-9]+)?
 CADENACOMILLASDOBLES = [\"]([^\"\n]|(\\\"))*[\"]
-COMENTUNILINEA =("//".*\r\n)|("//".*\n)|("//".*\r)
-COMENTMULTILINEA ="/*""/"*([^*/]|[^*]"/"|"*"[^/])*"*"*"*/"
-ID=[A-Za-z]+["_"0-9A-Za-z]*
+COMENTUNILINEA =(\#.*\r\n)|(\#.*\n)|(\#.*\r)
+COMENTMULTILINEA =\#\*(\*|\#)*([^(\#\*)])*(\#|\*)*\*\#
+ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 %%
 
 "Evaluar" {return new Symbol(sym.REVALUAR,yyline,yychar, yytext());}
@@ -45,6 +45,7 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "while"   {return new Symbol(sym.WHILE,yyline,yychar, yytext());} 
 "do"      {return new Symbol(sym.DO,yyline,yychar, yytext());}
 "print"   {return new Symbol(sym.PRINT,yyline,yychar, yytext());}
+"c"       {return new Symbol(sym.C,yyline,yychar, yytext());}
 
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
 "(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 
@@ -53,6 +54,7 @@ ID=[A-Za-z]+["_"0-9A-Za-z]*
 "]" {return new Symbol(sym.CORDER,yyline,yychar, yytext());} 
 "{" {return new Symbol(sym.LLAVEIZQ,yyline,yychar, yytext());} 
 "}" {return new Symbol(sym.LLAVEDER,yyline,yychar, yytext());} 
+"," {return new Symbol(sym.COMA,yyline,yychar, yytext());} 
 
 "+" {return new Symbol(sym.MAS,yyline,yychar, yytext());} 
 "-" {return new Symbol(sym.MENOS,yyline,yychar, yytext());} 

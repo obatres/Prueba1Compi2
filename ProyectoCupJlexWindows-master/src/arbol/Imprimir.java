@@ -26,7 +26,7 @@ public class Imprimir extends Instruccion{
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
         System.out.println(contenido.ejecutar(ts).toString());
-        VentanaPrincipal.consola = VentanaPrincipal.consola + contenido.ejecutar(ts).toString()+"\n";
+        VentanaPrincipal.consola =contenido.ejecutar(ts).toString()+"\n";
         return null;
     }
 }
