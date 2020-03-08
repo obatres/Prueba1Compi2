@@ -5,7 +5,9 @@
  */
 package arbol;
 
+import arbol.Variables.NodoVector;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -19,9 +21,11 @@ public class Declaracion extends Instruccion{
     
     private Expresion exp;
     
-    ArrayList<Object> Vector = new ArrayList<Object>();
+    ArrayList<Object> Vector ;//= new ArrayList<Object>(); //ArrayList que almacena los valores de una variable de tipo Vector
     
-    private String TipoDeVariable;
+    ArrayList<Object> ValoresVariableVector;
+    
+    String TipoDeVariable;
     
     
     private int tipoDeclaracion ; //Tipo de Declaracion, vector, arreglo, lista y matriz
@@ -45,12 +49,27 @@ public class Declaracion extends Instruccion{
         this.TipoDeVariable = TipoDeVariable;
         this.tipoDeclaracion = tipoDeclaracion;
     }
+
+    public Declaracion(String id, ArrayList<Object> ValoresVariableVector,  int tipoDeclaracion, String TipoDeVariable) {
+        this.id = id;
+        //this.tipo = tipo;
+        this.ValoresVariableVector = ValoresVariableVector;
+        this.TipoDeVariable = TipoDeVariable;
+        this.tipoDeclaracion = tipoDeclaracion;
+    }
     
+    /*
+    Tipos de declaracion                                                Tipos de variables
     
+     1      |  Identificador = Expresion                            
+     2      |  Identificador = C( lista de expresiones);                1       |   Vector
+    
+    */
        
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
        if(tipoDeclaracion==1){
+           Vector = new ArrayList<>();
            Vector.add(0, exp.ejecutar(ts));
         if(ts.Existe(id)){
             ts.setValor(id, Vector, exp.GetTipo(ts));           
@@ -58,8 +77,22 @@ public class Declaracion extends Instruccion{
             ts.add(new Simbolo(id, exp.GetTipo(ts)));            
             ts.setValor(id, Vector,exp.GetTipo(ts));
             }
+        }else if(tipoDeclaracion==2) {
+           if(ts.Existe(id)){
+               for (Object t : ValoresVariableVector) {
+                   if (t instanceof Expresion){
+                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)){
+                           this.tipo = new Tipo(Tipo.tipo.INT);
+                       }
+                   }
+               }
+               ts.setValor(id, ValoresVariableVector, tipo);
+           }
         }
        return null;
     }
-    
+
+
+
+
 }
