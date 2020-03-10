@@ -1,13 +1,28 @@
 
-#* 
-comentario multi
+if(8>5){
+	Print("Si salio el if");
+	Print(5+5+5+65+"as");
+	Print(2.5+"dsf"+5+5+0.2);
+	Print("hola"+"mundo"+"que"+"tal");
+	"hola">"hola"
+"holas">="hola"
+"hola"<"hola"
+"holas"<="hol"+"a"
+}
+if(5<2){
+	Print("no deberia de ser asi");
+}else{
+	Print("funciona el Else");
+}
+if(2>1){
+	Print("evalua primer if");
+	if("asd">"a"){
+		Print("antesdeswi");
+	}
+}else if(5561321>2){
+	Print("evalua segundo if");
+}
 
-
-*#
-
+		
 .a5_=5;
 print(.a5_);
-# comentario 1 linea
-b_.5 = C(654+654,"ASasd",56.54,234*654,true)
-
-

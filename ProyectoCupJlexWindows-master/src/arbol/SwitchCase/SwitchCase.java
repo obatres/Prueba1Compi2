@@ -69,5 +69,10 @@ public class SwitchCase extends Instruccion{
         }
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

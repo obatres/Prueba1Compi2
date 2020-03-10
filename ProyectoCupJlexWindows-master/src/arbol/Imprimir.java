@@ -29,4 +29,14 @@ public class Imprimir extends Instruccion{
         VentanaPrincipal.consola =contenido.ejecutar(ts).toString()+"\n";
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Imprimir\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        cont = contenido.Dibujar(builder, nodo, cont);
+        return cont;
+    }
 }

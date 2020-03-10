@@ -206,7 +206,7 @@ CASES::= CASE expresion:a DOSP instrucciones:b
 
 
 
-listaDeclaraciones::= C PARIZQ ListaExp PARDER
+listaDeclaraciones::= C  ListaExp PARDER
     
 ;
 

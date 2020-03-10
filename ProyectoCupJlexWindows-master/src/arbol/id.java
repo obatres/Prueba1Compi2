@@ -55,5 +55,17 @@ public class id extends Expresion{
     public Tipo GetTipo(TablaDeSimbolos ts) {
         return (Tipo) ts.getTipo(iden);
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"id\"]; \n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp1 = "nodo" + ++cont;
+        builder.append(nodoOp1).append(" [label=\""+ iden + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");
+        return cont;
+    }
     
 }

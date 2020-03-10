@@ -37,6 +37,7 @@ public class ProyectoCupJlexWindows {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println("Causa: "+ex.getCause());
         } 
+        DibujarArbol(AST_arbolSintaxisAbstracta);
         ejecutarAST(AST_arbolSintaxisAbstracta);
     }
     
@@ -75,4 +76,24 @@ public class ProyectoCupJlexWindows {
         }
     }
     
+    public static void DibujarArbol (LinkedList<Nodo> arbol){
+        StringBuilder builder = new StringBuilder();
+        int cont = 1;
+        String root = "nodo" + cont;
+        builder.append("digraph lab5 {\n");
+        builder.append(root).append(" [label=\"ARIT\"];\n");
+        
+        for (Nodo nodo : arbol) {
+                      
+            if (nodo instanceof Expresion){
+                cont = ((Expresion) nodo).Dibujar(builder, root, cont);
+            }else if(nodo instanceof Instruccion){
+                cont = ((Instruccion) nodo).Dibujar(builder, root, cont);
+            }
+        }
+        builder.append("}");
+        
+        System.out.println(builder.toString());
+        
+    }
 }

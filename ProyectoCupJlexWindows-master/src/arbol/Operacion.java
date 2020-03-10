@@ -11,6 +11,28 @@ import arbol.Tipo.tipo.*;
  */
 public class Operacion extends Expresion{
 
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Expresion Binaria\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        if(opderadorIzq!=null){
+            cont = opderadorIzq.Dibujar(builder, nodo, cont);            
+        }
+
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + tipo_operacion + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+
+        if(operadorDer!=null){
+            cont = operadorDer.Dibujar(builder, nodo, cont);           
+        }
+
+
+        return cont;    }
+
     public static enum Tipo_operacion{
         SUMA,
         NUMERO,

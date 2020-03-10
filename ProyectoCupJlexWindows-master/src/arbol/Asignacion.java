@@ -27,5 +27,10 @@ public class Asignacion extends Instruccion{
         //ts.setValor(id, valor.ejecutar(ts));
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
