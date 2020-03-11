@@ -40,4 +40,18 @@ public class While extends Instruccion{
         }
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"While\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        for (Nodo n : ListaDeInstrucciones) {
+            if(n instanceof Instruccion){
+                cont = ((Instruccion) n).Dibujar(builder, nodo, cont);   
+            }
+        }
+        return cont;
+    }
 }

@@ -69,7 +69,9 @@ public class IfElse extends Instruccion{
             if (in instanceof Instruccion){
                 cont = ((Instruccion)in).Dibujar(builder, nodoIf, cont);
             }
-        }     
+        }  
+        
+        if (ListaDeInstruccionesElse!=null){
         String nodoElse = "nodo" + ++cont;
         builder.append(nodoElse).append(" [label=\"Else\"];\n");
         builder.append(nodo).append(" -> ").append(nodoElse).append(";\n");
@@ -77,10 +79,10 @@ public class IfElse extends Instruccion{
 
         for(Nodo in: ListaDeInstruccionesElse){
             if (in instanceof Instruccion){
-                cont = ((Instruccion)in).Dibujar(builder, nodoIf, cont);
+                cont = ((Instruccion)in).Dibujar(builder, nodoElse, cont);
             }
         }  
-
+        }
         return cont;  
     }
     

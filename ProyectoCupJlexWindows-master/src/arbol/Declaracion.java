@@ -23,7 +23,7 @@ public class Declaracion extends Instruccion{
     
     ArrayList<Object> Vector ;//= new ArrayList<Object>(); //ArrayList que almacena los valores de una variable de tipo Vector
     
-    ArrayList<Object> ValoresVariableVector;
+    ArrayList<Object> ValoresVariableVector; // variable para recibir los valores de una variable del lenguaje ARIT
     
     String TipoDeVariable;
     
@@ -101,6 +101,13 @@ public class Declaracion extends Instruccion{
         String nodoOp = "nodo" + ++cont;
         builder.append(nodoOp).append(" [label=\"" + id + "\"];\n");
         builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+
+        String nodoVal = "nodo"+ ++cont;
+        builder.append(nodoVal).append(" [label=\"Valor\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoVal).append(";\n");           
+        
+        cont = exp.Dibujar(builder, nodoVal, cont);
 
         return cont;        
     }

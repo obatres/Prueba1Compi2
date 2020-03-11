@@ -88,7 +88,7 @@ public  class If extends Instruccion{
 
         for(Nodo in: ListaDeInstruccionesElse){
             if (in instanceof Instruccion){
-                cont = ((Instruccion)in).Dibujar(builder, nodoIf, cont);
+                cont = ((Instruccion)in).Dibujar(builder, nodoElse, cont);
             }
         }              
         }

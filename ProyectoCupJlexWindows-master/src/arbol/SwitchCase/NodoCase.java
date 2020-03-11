@@ -13,7 +13,7 @@ import java.util.LinkedList;
  *
  * @author obatres_
  */
-public class NodoCase {
+public class NodoCase  extends Nodo{
 
 
     
@@ -42,6 +42,26 @@ public class NodoCase {
      */
     public Expresion getExp() {
         return exp;
+    }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"CASE\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        String nodoE = "nodo" + ++cont;
+        builder.append(nodoE).append(" [label=\""+exp+"\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoE).append(";\n");
+
+        String nodoI = "nodo" + ++cont;
+        builder.append(nodoI).append(" [label=\"Instrucciones\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoI).append(";\n");        
+        
+        for (Nodo nodo1 : InstruccionesDeCase) {
+            cont = nodo1.Dibujar(builder, nodoI, cont);
+        }
+        return cont;
     }
        
 }

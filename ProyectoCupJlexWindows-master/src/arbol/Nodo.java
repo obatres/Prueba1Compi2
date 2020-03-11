@@ -13,4 +13,6 @@ public abstract class Nodo {
     
     int linea;
     int columna;
+    
+    public abstract int Dibujar(StringBuilder builder, String parent, int cont);
 }

@@ -72,7 +72,16 @@ public class SwitchCase extends Instruccion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Switch-case\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        for (NodoCase nodoCase : ListaDeCase) {
+                
+            cont = nodoCase.Dibujar(builder, nodo, cont);
+                }           
+        
+        return cont;
     }
     
 }
