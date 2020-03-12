@@ -15,6 +15,8 @@ import java.util.LinkedList;
  */
 public class Declaracion extends Instruccion{
 
+    
+    int NumeroDeTipo=0;
     private final String id;
 
     Tipo tipo; //Tipo del simbolo (primitivos)
@@ -25,7 +27,7 @@ public class Declaracion extends Instruccion{
     
     ArrayList<Object> ValoresVariableVector; // variable para recibir los valores de una variable del lenguaje ARIT
     
-    String TipoDeVariable;
+    int TipoDeVariable;  //Tipo de variable para distinguir entre Vector, arreglo, lista y matriz
     
     
     private int tipoDeclaracion ; //Tipo de Declaracion, vector, arreglo, lista y matriz
@@ -42,17 +44,10 @@ public class Declaracion extends Instruccion{
         tipo = t;
     }
 
-    public Declaracion(String id, Tipo tipo, Expresion exp, String TipoDeVariable, int tipoDeclaracion) {
-        this.id = id;
-        this.tipo = tipo;
-        this.exp = exp;
-        this.TipoDeVariable = TipoDeVariable;
-        this.tipoDeclaracion = tipoDeclaracion;
-    }
 
-    public Declaracion(String id, ArrayList<Object> ValoresVariableVector,  int tipoDeclaracion, String TipoDeVariable) {
+
+    public Declaracion(String id, ArrayList<Object> ValoresVariableVector,  int tipoDeclaracion, int TipoDeVariable) {
         this.id = id;
-        //this.tipo = tipo;
         this.ValoresVariableVector = ValoresVariableVector;
         this.TipoDeVariable = TipoDeVariable;
         this.tipoDeclaracion = tipoDeclaracion;
@@ -81,12 +76,54 @@ public class Declaracion extends Instruccion{
            if(ts.Existe(id)){
                for (Object t : ValoresVariableVector) {
                    if (t instanceof Expresion){
-                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)){
-                           this.tipo = new Tipo(Tipo.tipo.INT);
+                       
+                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
+                           NumeroDeTipo=1;
+                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
+                           NumeroDeTipo=2;
+                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
+                           NumeroDeTipo=3;
                        }
                    }
                }
+               if(NumeroDeTipo==0){
+                   this.tipo = new Tipo(Tipo.tipo.BOOLEAN);
+               }else if(NumeroDeTipo==1){
+                   this.tipo = new Tipo(Tipo.tipo.INT);
+               }else if(NumeroDeTipo==2){
+                   this.tipo = new Tipo(Tipo.tipo.DOUBLE);
+               }else if(NumeroDeTipo==3){
+                   this.tipo = new Tipo(Tipo.tipo.STRING);
+               }
                ts.setValor(id, ValoresVariableVector, tipo);
+           }else{
+               for (Object t : ValoresVariableVector) {
+                   if (t instanceof Expresion){
+                       
+                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
+                           NumeroDeTipo=1;
+                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
+                           NumeroDeTipo=2;
+                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
+                           NumeroDeTipo=3;
+                       }
+                   }
+               }
+               if(NumeroDeTipo==0){
+                   this.tipo = new Tipo(Tipo.tipo.BOOLEAN);
+               }else if(NumeroDeTipo==1){
+                   this.tipo = new Tipo(Tipo.tipo.INT);
+               }else if(NumeroDeTipo==2){
+                   this.tipo = new Tipo(Tipo.tipo.DOUBLE);
+               }else if(NumeroDeTipo==3){
+                   this.tipo = new Tipo(Tipo.tipo.STRING);
+               }
+               ts.add(new Simbolo(id, this.tipo));
+               //System.out.println(ValoresVariableVector);
+               ts.setValor(id, ValoresVariableVector, tipo);
+//               for (Object t : ValoresVariableVector) {
+//                   System.out.println(((Expresion)t).ejecutar(ts));
+//               }
            }
         }
        return null;
@@ -94,6 +131,7 @@ public class Declaracion extends Instruccion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
+        if(tipoDeclaracion==1){
         String nodo = "nodo" + ++cont;
         builder.append(nodo).append(" [label=\"Asignacion\"];\n");
         builder.append(parent).append(" -> ").append(nodo).append(";\n");
@@ -107,7 +145,9 @@ public class Declaracion extends Instruccion{
         builder.append(nodoVal).append(" [label=\"Valor\"];\n");
         builder.append(nodo).append(" -> ").append(nodoVal).append(";\n");           
         
-        cont = exp.Dibujar(builder, nodoVal, cont);
+        cont = exp.Dibujar(builder, nodoVal, cont);            
+        }
+
 
         return cont;        
     }

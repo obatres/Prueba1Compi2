@@ -17,6 +17,7 @@ import arbol.SwitchCase.SwitchCase;
 import arbol.SwitchCase.Break;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
+import java.util.ArrayList;
 import arbol.Declaracion;
 import arbol.Single;
 import arbol.id;
@@ -75,7 +76,7 @@ non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal Tipo tipovar;
-non terminal listaDeclaraciones, ListaExp;
+non terminal ArrayList <Object> listaDeclaraciones, ListaExp;
 
 
 
@@ -127,8 +128,10 @@ instruccion ::=
             RESULT = new Declaracion(a,(Expresion)b,1);
         :}
 
-    | IDENTIFICADOR:a IGUAL listaDeclaraciones
-
+    | IDENTIFICADOR:a IGUAL listaDeclaraciones:b
+        {:
+            RESULT = new Declaracion(a,b,2,1);
+        :}
     
     | expresioncomp:a
         {:
@@ -136,7 +139,7 @@ instruccion ::=
         :}
 
 
-    | RDECLARA expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
+    |  expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
         {:
             RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
         :}
@@ -206,13 +209,24 @@ CASES::= CASE expresion:a DOSP instrucciones:b
 
 
 
-listaDeclaraciones::= C  ListaExp PARDER
-    
+listaDeclaraciones::= C  ListaExp:a PARDER
+                    {:
+                        RESULT= a;
+                    :}
+                    
 ;
 
-ListaExp ::= ListaExp COMA expresion 
+ListaExp ::= ListaExp:a COMA expresion:b 
+            {:
+                RESULT= a;
+                RESULT.add((Expresion)b);
+            :}
 
-            |expresion
+            |expresion:a
+            {:
+                RESULT = new ArrayList<>();
+                RESULT.add((Expresion)a);
+            :}
 ;
 
 expresion  ::= 

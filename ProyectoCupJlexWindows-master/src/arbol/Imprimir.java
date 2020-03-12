@@ -5,6 +5,7 @@
  */
 package arbol;
  import InterfazGrafica.VentanaPrincipal;
+import java.util.ArrayList;
 /**
  *
  * @author obatres_
@@ -13,11 +14,12 @@ public class Imprimir extends Instruccion{
 
     private final Expresion contenido;
 
-           
+    ArrayList<Object> Salida = new ArrayList<Object>();
+    
+    String sal="";
     public Imprimir(Expresion contenido) {
         this.contenido = contenido;
     }
-    
     /**
      *
      * @param ts
@@ -25,8 +27,21 @@ public class Imprimir extends Instruccion{
      */
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
-        System.out.println(contenido.ejecutar(ts).toString());
-        VentanaPrincipal.consola =contenido.ejecutar(ts).toString()+"\n";
+        
+        if (contenido.ejecutar(ts)instanceof ArrayList){
+            Salida  = (ArrayList<Object>) contenido.ejecutar(ts);
+            for (Object t : Salida) {
+                if (t instanceof Expresion){
+                    System.out.println(((Expresion)t).ejecutar(ts));
+                    sal  += ((Expresion)t).ejecutar(ts).toString()+"\n";                    
+                }
+            }
+            VentanaPrincipal.consola =sal;            
+        }else{
+            System.out.println(contenido.ejecutar(ts).toString());
+            VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
+        }
+
         return null;
     }
 

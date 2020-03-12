@@ -33,7 +33,7 @@ Print(-(65465+10));
 8>10 And 4>5
 8>10 Or 4>1
 Not 8==5
-Declara 500<3 ? 4:5
+500<3 ? 4:5
 if(8>5){
 	Print("Si salio el if");
 	Print(5+5+5+65+"as");
@@ -108,3 +108,5 @@ do {
 	Print(b);
 		}while(b<=10);
 		
+a = c(45,"hosedn",54.534)
+print(a);
