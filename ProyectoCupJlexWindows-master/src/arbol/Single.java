@@ -58,5 +58,19 @@ public class Single extends Expresion{
     public Tipo GetTipo(TablaDeSimbolos ts) {
         return this.tipo;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Exp\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp1 = "nodo" + ++cont;
+        builder.append(nodoOp1).append(" [label=\""+ Valor+ "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");
+
+
+        return cont;
+    }
     
 }

@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arbol;
+package arbol.Variables;
 
 /**
  *
  * @author obatres_
  */
-public abstract class Nodo {
+public class NodoVector {
     
-    int linea;
-    int columna;
-    
-    public abstract int Dibujar(StringBuilder builder, String parent, int cont);
 }

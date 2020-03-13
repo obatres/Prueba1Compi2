@@ -63,6 +63,39 @@ public  class If extends Instruccion{
         }
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"If-Simple\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoIf = "nodo" + ++cont;
+        builder.append(nodoIf).append(" [label=\"If\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoIf).append(";\n");
+
+        for(Nodo in: ListaDeInstrucciones){
+            if (in instanceof Instruccion){
+                cont = ((Instruccion)in).Dibujar(builder, nodoIf, cont);
+            }
+        }  
+        
+        if (ListaDeInstruccionesElse!=null){
+        String nodoElse = "nodo" + ++cont;
+        builder.append(nodoElse).append(" [label=\"Else\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoElse).append(";\n");
+
+
+        for(Nodo in: ListaDeInstruccionesElse){
+            if (in instanceof Instruccion){
+                cont = ((Instruccion)in).Dibujar(builder, nodoElse, cont);
+            }
+        }              
+        }
+
+
+        return cont;        
+    }
     
     
 }

@@ -12,13 +12,23 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/While/While.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Instruccion.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/SwitchCase/SwitchCase.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Sintactico</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/SwitchCase/NodoCase.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Sintactico.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/DoWhile/DoWhile.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/proyectocupjlexwindows/ProyectoCupJlexWindows.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/If/IfElse.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Single.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Lexico</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Instruccion.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Imprimir.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Nodo.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Sintactico</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Expresion.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Declaracion.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Operacion.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/id.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/If/If.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Asignacion.java</file>
         </group>
     </open-files>
 </project-private>

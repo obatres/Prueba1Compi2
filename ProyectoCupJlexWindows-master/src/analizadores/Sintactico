@@ -17,6 +17,7 @@ import arbol.SwitchCase.SwitchCase;
 import arbol.SwitchCase.Break;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
+import java.util.ArrayList;
 import arbol.Declaracion;
 import arbol.Single;
 import arbol.id;
@@ -24,7 +25,6 @@ import java_cup.runtime.*;
 
 parser code 
 {:
-
     public LinkedList<Nodo> AST;
     /**
      * Método al que se llama automáticamente ante algún error sintactico.
@@ -66,6 +66,8 @@ terminal String RDECLARA;
 terminal String IDENTIFICADOR;
 terminal String IGUAL, ENTEROT, CADENAT;
 terminal String PRINT;
+terminal String C, COMA;
+terminal String NULL, BARPLOT;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -75,6 +77,7 @@ non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal Tipo tipovar;
+non terminal ArrayList <Object> listaDeclaraciones, ListaExp;
 
 
 
@@ -115,25 +118,29 @@ instruccion ::=
         :}
 
 
-    | tipovar:b IDENTIFICADOR:a PTCOMA
+    | IDENTIFICADOR:a IGUAL expresion:b 
         {:
-            RESULT = new Declaracion (a, b);       
+            RESULT = new Declaracion (a, (Expresion)b,1);       
         :}
 
 
     | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
         {:
-            RESULT = new Asignacion(a,(Expresion)b);
+            RESULT = new Declaracion(a,(Expresion)b,1);
         :}
 
-
+    | IDENTIFICADOR:a IGUAL listaDeclaraciones:b
+        {:
+            RESULT = new Declaracion(a,b,2,1);
+        :}
+    
     | expresioncomp:a
         {:
             RESULT  =  new Imprimir ((Expresion)a);
         :}
 
 
-    | RDECLARA expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
+    |  expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
         {:
             RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
         :}
@@ -175,6 +182,7 @@ instruccion ::=
             //System.out.println(s);
             RESULT = new DoWhile((Expresion)a,b);
         :}
+    | BARPLOT PARIZQ ListaExp PARDER PTCOMA
 ;   
 
 
@@ -203,16 +211,25 @@ CASES::= CASE expresion:a DOSP instrucciones:b
 
 
 
-tipovar::=
-     ENTEROT
-     {: 
-        RESULT= new Tipo(Tipo.tipo.INT);
-     :}
-    |CADENAT 
-    {:
-        RESULT= new Tipo(Tipo.tipo.STRING);
-    :}
-    ;
+listaDeclaraciones::= C  ListaExp:a PARDER
+                    {:
+                        RESULT= a;
+                    :}
+                    
+;
+
+ListaExp ::= ListaExp:a COMA expresion:b 
+            {:
+                RESULT= a;
+                RESULT.add((Expresion)b);
+            :}
+
+            |expresion:a
+            {:
+                RESULT = new ArrayList<>();
+                RESULT.add((Expresion)a);
+            :}
+;
 
 expresion  ::= 
         MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     
@@ -228,6 +245,7 @@ expresion  ::=
     |   TRUE:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.BOOLEAN));:}
     |   FALSE:a                                {:RESULT=new Single(a,new Tipo(Tipo.tipo.BOOLEAN));:}
     |   IDENTIFICADOR:a                        {:RESULT=new id(a);:}
+    |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;
 

@@ -25,6 +25,14 @@ public class Break extends Nodo{
     public Break(String TipoInstruccion) {
         this.TipoInstruccion = TipoInstruccion;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Break\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");        
+        return cont;
+    }
     
     
     

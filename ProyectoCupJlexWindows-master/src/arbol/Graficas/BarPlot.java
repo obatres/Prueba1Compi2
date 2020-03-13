@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arbol;
+package arbol.Graficas;
+
+import arbol.Expresion;
+import arbol.Instruccion;
+import arbol.TablaDeSimbolos;
+import java.util.ArrayList;
 
 /**
  *
  * @author obatres_
  */
-public class Asignacion extends Instruccion{
+public class BarPlot extends Instruccion{
 
-    private final String id;
+    private ArrayList<Object> ParametrosBarPlot;
+
+    public BarPlot(ArrayList<Object> ParametrosBarPlot) {
+        this.ParametrosBarPlot = ParametrosBarPlot;
+    }  
     
-    private final Expresion valor;
-
-
-    public Asignacion(String id, Expresion valor) {
-        this.id = id;
-        this.valor = valor;
-    }
-   
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-        //ts.setValor(id, valor.ejecutar(ts));
-        return null;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

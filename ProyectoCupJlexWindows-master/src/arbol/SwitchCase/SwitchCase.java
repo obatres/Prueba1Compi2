@@ -69,5 +69,19 @@ public class SwitchCase extends Instruccion{
         }
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Switch-case\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        for (NodoCase nodoCase : ListaDeCase) {
+                
+            cont = nodoCase.Dibujar(builder, nodo, cont);
+                }           
+        
+        return cont;
+    }
     
 }

@@ -39,5 +39,18 @@ public class DoWhile extends Instruccion{
         } while ((Boolean)exp.ejecutar(ts));
         return null;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Do While\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        for (Nodo n : ListaDeInstrucciones) {
+            if(n instanceof Instruccion){
+                cont = ((Instruccion) n).Dibujar(builder, nodo, cont);   
+            }
+        }
+        return cont;    }
     
 }
