@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class Declaracion extends Instruccion{
 
     
-    int NumeroDeTipo=0;
+    int NumeroDeTipo;
     private final String id;
 
     Tipo tipo; //Tipo del simbolo (primitivos)
@@ -77,11 +77,11 @@ public class Declaracion extends Instruccion{
                for (Object t : ValoresVariableVector) {
                    if (t instanceof Expresion){
                        
-                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
+                       if (((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
                            NumeroDeTipo=1;
-                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
+                       }else if(((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
                            NumeroDeTipo=2;
-                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
+                       }else if(((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
                            NumeroDeTipo=3;
                        }
                    }
@@ -95,16 +95,17 @@ public class Declaracion extends Instruccion{
                }else if(NumeroDeTipo==3){
                    this.tipo = new Tipo(Tipo.tipo.STRING);
                }
+
                ts.setValor(id, ValoresVariableVector, tipo);
            }else{
                for (Object t : ValoresVariableVector) {
                    if (t instanceof Expresion){
                        
-                       if (((Expresion) t).GetTipo(ts).equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
+                       if (((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
                            NumeroDeTipo=1;
-                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
+                       }else if(((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.DOUBLE)&&NumeroDeTipo<=1){
                            NumeroDeTipo=2;
-                       }else if(((Expresion) t).GetTipo(ts).equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
+                       }else if(((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.STRING)&&NumeroDeTipo<=2){
                            NumeroDeTipo=3;
                        }
                    }
@@ -118,8 +119,10 @@ public class Declaracion extends Instruccion{
                }else if(NumeroDeTipo==3){
                    this.tipo = new Tipo(Tipo.tipo.STRING);
                }
+                 
+         
                ts.add(new Simbolo(id, this.tipo));
-               //System.out.println(ValoresVariableVector);
+
                ts.setValor(id, ValoresVariableVector, tipo);
 //               for (Object t : ValoresVariableVector) {
 //                   System.out.println(((Expresion)t).ejecutar(ts));

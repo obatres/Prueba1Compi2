@@ -67,6 +67,7 @@ terminal String IDENTIFICADOR;
 terminal String IGUAL, ENTEROT, CADENAT;
 terminal String PRINT;
 terminal String C, COMA;
+terminal String NULL, BARPLOT;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -181,6 +182,7 @@ instruccion ::=
             //System.out.println(s);
             RESULT = new DoWhile((Expresion)a,b);
         :}
+    | BARPLOT PARIZQ ListaExp PARDER PTCOMA
 ;   
 
 
@@ -243,6 +245,7 @@ expresion  ::=
     |   TRUE:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.BOOLEAN));:}
     |   FALSE:a                                {:RESULT=new Single(a,new Tipo(Tipo.tipo.BOOLEAN));:}
     |   IDENTIFICADOR:a                        {:RESULT=new id(a);:}
+    |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
 ;
 

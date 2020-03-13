@@ -38,10 +38,12 @@ public class sym {
   public static final int CADENA = 38;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
+  public static final int NULL = 49;
   public static final int MENOR = 17;
   public static final int ENTEROT = 44;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
+  public static final int BARPLOT = 50;
   public static final int SWITCH = 21;
   public static final int MAYOR = 16;
   public static final int POTENCIA = 9;
@@ -106,7 +108,9 @@ public class sym {
   "CADENAT",
   "PRINT",
   "C",
-  "COMA"
+  "COMA",
+  "NULL",
+  "BARPLOT"
   };
 }
 

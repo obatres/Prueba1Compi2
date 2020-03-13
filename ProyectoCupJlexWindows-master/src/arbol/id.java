@@ -43,14 +43,17 @@ public class id extends Expresion{
         // bool existencia=ts.Exist(iden);
         //if (existe) return ts.getValor(iden);
         //Simbolo s = (Simbolo) ts.getValor(iden);
-        if (ts.getValor(iden) instanceof ArrayList){
-            Vector = (ArrayList<Object>) ts.getValor(iden);
-            if (Vector.size()>=2){
-                return Vector;   
-            }else if(Vector.size()==1){
-                return Vector.get(0);
-            }
+        if(ts.Existe(iden)){
+            if (ts.getValor(iden) instanceof ArrayList){
+                Vector = (ArrayList<Object>) ts.getValor(iden);
+                if (Vector.size()>=2){
+                    return Vector;   
+                }else if(Vector.size()==1){
+                    return Vector.get(0);
+                }
+            }            
         }
+
         //return ts.getValor(iden);
         return null;
     }
