@@ -10,6 +10,7 @@ import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
 import arbol.Tipo;
 import java.util.ArrayList;
+import java.lang.NullPointerException;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -62,11 +63,20 @@ public class PiePlot extends Instruccion{
         }
         
         DefaultPieDataset data = new DefaultPieDataset();
-        for (int i = 0; i < Numericos.size(); i++) {
-            //((Expresion)Labels.get(i)).ejecutar(ts).toString();
-            //Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString());
-            data.setValue(((Expresion)Labels.get(i)).ejecutar(ts).toString(),Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
-        } 
+        if(Numericos.size()==Labels.size()){
+            for (int i = 0; i < Numericos.size(); i++) {
+                data.setValue(((Expresion)Labels.get(i)).ejecutar(ts).toString(),Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
+            }            
+        }else if(Numericos.size()>Labels.size()){
+            //REPORTAR ERROR DE TAMAÑO DE VECTORES
+            for (int i = 0; i < Labels.size(); i++) {
+                data.setValue(((Expresion)Labels.get(i)).ejecutar(ts).toString(),Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));   
+            }
+            for (int i = Labels.size(); i < Numericos.size(); i++) {
+                data.setValue("Desconocido"+i,Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
+            }
+        }
+
         
         JFreeChart chart2 = ChartFactory.createPieChart(main, data,true,true,false);
         ChartPanel panel2 = new ChartPanel(chart2);
