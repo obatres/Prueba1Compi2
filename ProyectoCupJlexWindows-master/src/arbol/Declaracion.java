@@ -73,8 +73,12 @@ public class Declaracion extends Instruccion{
             ts.setValor(id, Vector,exp.GetTipo(ts));
             }
         }else if(tipoDeclaracion==2) {
+            Vector = new ArrayList<>();
+            for (int i = 0; i < ValoresVariableVector.size(); i++) {
+               Vector.add(ValoresVariableVector.get(i));
+            }
            if(ts.Existe(id)){
-               for (Object t : ValoresVariableVector) {
+               for (Object t : Vector) {
                    if (t instanceof Expresion){
                        
                        if (((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
@@ -96,9 +100,9 @@ public class Declaracion extends Instruccion{
                    this.tipo = new Tipo(Tipo.tipo.STRING);
                }
 
-               ts.setValor(id, ValoresVariableVector, tipo);
+               ts.setValor(id, Vector, tipo);
            }else{
-               for (Object t : ValoresVariableVector) {
+               for (Object t : Vector) {
                    if (t instanceof Expresion){
                        
                        if (((Expresion) t).GetTipo(ts).tp.equals(Tipo.tipo.INT)&&NumeroDeTipo<=0){
@@ -123,7 +127,7 @@ public class Declaracion extends Instruccion{
          
                ts.add(new Simbolo(id, this.tipo));
 
-               ts.setValor(id, ValoresVariableVector, tipo);
+               ts.setValor(id, Vector, tipo);
 //               for (Object t : ValoresVariableVector) {
 //                   System.out.println(((Expresion)t).ejecutar(ts));
 //               }

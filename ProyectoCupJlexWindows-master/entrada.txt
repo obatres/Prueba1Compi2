@@ -1,6 +1,9 @@
-		
-a = c(45,"hosedn",54.534)
-a = c(3.5,5.5) 
-print(a);
-
-BaRPLot(5,5,5,6);
+numericos = c(45,56,54.56)
+labels = c("sad","ASd","sda")
+xlab="xlab";
+ylab="ylab";
+main="main";
+Barplot(numericos,xlab,ylab,main, labels);
+numericos = c(11,15,20,25,65)
+labels = c("Columna 1", "Columna 2","Columna 3","Columna 4", "Columna 5")
+Barplot(numericos,xlab,ylab,main, labels);
