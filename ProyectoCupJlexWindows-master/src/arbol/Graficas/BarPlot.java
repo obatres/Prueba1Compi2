@@ -78,12 +78,20 @@ public class BarPlot extends Instruccion{
         }
          
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        
-        for (int i = 0; i < Numericos.size(); i++) {
-            //System.out.println(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
-            //System.out.println(((Expresion)Labels.get(i)).ejecutar(ts).toString());
-            dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,((Expresion)Labels.get(i)).ejecutar(ts).toString());
-        }    
+        if(Numericos.size()==Labels.size()){
+            for (int i = 0; i < Numericos.size(); i++) {
+                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,((Expresion)Labels.get(i)).ejecutar(ts).toString());
+            }              
+        }else if (Numericos.size()>Labels.size()){
+            //REPORTAR ERROR DE TAMAÑO DE VECTORES
+            for (int i = 0; i < Labels.size(); i++) {
+                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,((Expresion)Labels.get(i)).ejecutar(ts).toString());
+            }
+            for (int i = Labels.size(); i < Numericos.size(); i++) {
+                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,"Desconocido"+i);
+            }
+        }
+  
         JFreeChart chart =  ChartFactory.createBarChart3D(main,xlab, ylab, dataset, PlotOrientation.VERTICAL,true,true, false);
         ChartPanel panel = new ChartPanel(chart);
         JFrame ventana = new JFrame("grafica");
