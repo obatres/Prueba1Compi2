@@ -27,8 +27,7 @@ public class Imprimir extends Instruccion{
      */
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
-        
-        if (contenido.ejecutar(ts)instanceof ArrayList){
+        if (contenido.ejecutar(ts) instanceof ArrayList){
             Salida  = (ArrayList<Object>) contenido.ejecutar(ts);
             for (Object t : Salida) {
                 if (t instanceof Expresion){
@@ -41,7 +40,7 @@ public class Imprimir extends Instruccion{
             System.out.println(contenido.ejecutar(ts).toString());
             VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
         }
-
+        
         return null;
     }
 
