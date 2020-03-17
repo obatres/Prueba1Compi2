@@ -47,7 +47,10 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 "print"   {return new Symbol(sym.PRINT,yyline,yychar, yytext());}
 "c("       {return new Symbol(sym.C,yyline,yychar, yytext());}
 "NULL"       {return new Symbol(sym.NULL,yyline,yychar, yytext());}
+
+
 "BarPlot"       {return new Symbol(sym.BARPLOT,yyline,yychar, yytext());}
+"pie"           {return new Symbol(sym.PIE,yyline,yychar, yytext());}
 
 ";" {return new Symbol(sym.PTCOMA,yyline,yychar, yytext());} 
 "(" {return new Symbol(sym.PARIZQ,yyline,yychar, yytext());} 

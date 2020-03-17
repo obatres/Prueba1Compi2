@@ -14,6 +14,7 @@ public class sym {
   public static final int IGUALD = 15;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
+  public static final int PIE = 51;
   public static final int LLAVEDER = 8;
   public static final int C = 47;
   public static final int CADENAT = 45;
@@ -110,7 +111,8 @@ public class sym {
   "C",
   "COMA",
   "NULL",
-  "BARPLOT"
+  "BARPLOT",
+  "PIE"
   };
 }
 
