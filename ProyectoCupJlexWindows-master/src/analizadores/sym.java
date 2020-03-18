@@ -8,15 +8,17 @@ package analizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int FUNCTION = 47;
   public static final int INTERROGACION = 28;
   public static final int RDECLARA = 41;
   public static final int POR = 13;
   public static final int IGUALD = 15;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
-  public static final int PIE = 51;
+  public static final int PIE = 53;
   public static final int LLAVEDER = 8;
-  public static final int C = 47;
+  public static final int DEFFUN = 48;
+  public static final int C = 49;
   public static final int CADENAT = 45;
   public static final int IDENTIFICADOR = 42;
   public static final int NOT = 27;
@@ -35,16 +37,16 @@ public class sym {
   public static final int PARIZQ = 3;
   public static final int TRUE = 31;
   public static final int error = 1;
-  public static final int COMA = 48;
+  public static final int COMA = 50;
   public static final int CADENA = 38;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
-  public static final int NULL = 49;
+  public static final int NULL = 51;
   public static final int MENOR = 17;
   public static final int ENTEROT = 44;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
-  public static final int BARPLOT = 50;
+  public static final int BARPLOT = 52;
   public static final int SWITCH = 21;
   public static final int MAYOR = 16;
   public static final int POTENCIA = 9;
@@ -108,6 +110,8 @@ public class sym {
   "ENTEROT",
   "CADENAT",
   "PRINT",
+  "FUNCTION",
+  "DEFFUN",
   "C",
   "COMA",
   "NULL",

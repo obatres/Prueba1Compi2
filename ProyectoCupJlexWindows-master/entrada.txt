@@ -9,3 +9,19 @@ labels = c("Columna 1", "Columna 2","Columna 3")
 Barplot(numericos,xlab,ylab,main, labels);
 
 PiE(numericos,labels,main);
+
+Identificador = function( ) {
+	PiE(numericos,labels,main);
+}
+
+Identificador = function(a,b=54,c=54){
+	PiE(numericos,labels,main);
+}
+
+Identificador = (a,b=54,c=54)=>{
+		PiE(numericos,labels,main);
+}
+
+Identificador =()=>{
+			PiE(numericos,labels,main);
+}

@@ -17,6 +17,9 @@ import arbol.SwitchCase.SwitchCase;
 import arbol.SwitchCase.Break;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
+import arbol.Funciones.Parametro;
+import arbol.Funciones.DefinicionDeFuncion;
+import arbol.Funciones.Funcion;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -67,7 +70,7 @@ terminal String REVALUAR;
 terminal String RDECLARA;
 terminal String IDENTIFICADOR;
 terminal String IGUAL, ENTEROT, CADENAT;
-terminal String PRINT;
+terminal String PRINT, FUNCTION,DEFFUN;
 terminal String C, COMA;
 terminal String NULL, BARPLOT,PIE;
 
@@ -80,6 +83,9 @@ non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal Tipo tipovar;
 non terminal ArrayList <Object> listaDeclaraciones, ListaExp;
+non terminal Parametro Parametros ;
+non terminal ArrayList <Parametro> ListaParametros;
+non terminal Nodo Funcion;
 
 
 
@@ -97,19 +103,24 @@ start with ini;
 
 ini::=instrucciones:a
     {:
-    parser.AST=a;
+        parser.AST=a;
     :};
 
 instrucciones ::= 
    instrucciones:a instruccion:b 
     {:
-    RESULT= a;
-    RESULT.add(b);
+        RESULT= a;
+        RESULT.add(b);
+    :}
+ |instrucciones:a Funcion:b 
+    {:
+        RESULT= a;
+        RESULT.add(b);
     :}
  | instruccion:a 
     {:
-    RESULT= new LinkedList<>();
-    RESULT.add(a);
+        RESULT= new LinkedList<>();
+        RESULT.add(a);
     :}; 
 
 instruccion ::= 
@@ -195,6 +206,50 @@ instruccion ::=
         
 ;   
 
+Funcion::=    IDENTIFICADOR:a IGUAL FUNCTION PARIZQ PARDER LLAVEIZQ instrucciones:b LLAVEDER 
+            {:
+                Funcion f = new Funcion(a,b);
+                RESULT = new DefinicionDeFuncion(f);                
+            :}
+            | IDENTIFICADOR:a IGUAL FUNCTION PARIZQ ListaParametros:b PARDER LLAVEIZQ instrucciones:c LLAVEDER
+            {:
+                Funcion f = new Funcion(a,b,c);
+                RESULT = new DefinicionDeFuncion(f);
+            :}
+            | IDENTIFICADOR:a IGUAL PARIZQ ListaParametros:b  DEFFUN LLAVEIZQ instrucciones:c LLAVEDER
+            {:
+                Funcion f = new Funcion(a,b,c);
+                RESULT = new DefinicionDeFuncion(f);
+            :}
+            | IDENTIFICADOR:a IGUAL PARIZQ  DEFFUN LLAVEIZQ instrucciones:c LLAVEDER
+            {:
+                Funcion f = new Funcion(a,c);
+                RESULT = new DefinicionDeFuncion(f);   
+            :}
+     ;
+
+
+ListaParametros::= ListaParametros:a COMA Parametros:b
+                    {:
+                        RESULT = a;
+                        RESULT.add(b);
+                    :}
+                   | Parametros:a
+                   {:
+                        RESULT = new ArrayList<>();
+                        RESULT.add(a);
+                   :}
+    ;
+
+Parametros::=
+            IDENTIFICADOR:a
+            {:
+                RESULT=new Parametro(a);
+            :}
+            |IDENTIFICADOR:a IGUAL expresion:b
+            {:
+                RESULT = new Parametro((Expresion)b,a);
+            :};
 
 listacase::= listacase:a CASES:b
                 {:  
@@ -219,8 +274,6 @@ CASES::= CASE expresion:a DOSP instrucciones:b
 ;
 
 
-
-
 listaDeclaraciones::= C  ListaExp:a PARDER
                     {:
                         RESULT= a;
@@ -240,6 +293,8 @@ ListaExp ::= ListaExp:a COMA expresion:b
                 RESULT.add((Expresion)a);
             :}
 ;
+
+
 
 expresion  ::= 
         MENOS expresion:a                      {:RESULT=new Operacion(Operacion.Tipo_operacion.UMENOS,(Expresion)a);:}%prec UMENOS     

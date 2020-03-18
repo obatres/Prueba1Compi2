@@ -4,6 +4,8 @@ package proyectocupjlexwindows;
 
 import InterfazGrafica.VentanaPrincipal;
 import arbol.Expresion;
+import arbol.Funciones.Funcion;
+import arbol.Funciones.TabladeFunciones;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.TablaDeSimbolos;
@@ -16,6 +18,7 @@ public class ProyectoCupJlexWindows {
     /**
      * @param args argumentos de la linea de comando
      */
+            public static TabladeFunciones tf = new TabladeFunciones();
     public static void main(String[] args) {
         interpretar("entrada.txt");
         VentanaPrincipal v = new VentanaPrincipal();
@@ -54,6 +57,7 @@ public class ProyectoCupJlexWindows {
         }
         //Se crea una tabla de símbolos global para ejecutar las instrucciones.
         TablaDeSimbolos ts=new TablaDeSimbolos();
+        //public static TabladeFunciones tf = new TabladeFunciones();
         //Se ejecuta cada instruccion en el ast, es decir, cada instruccion de 
         //la lista principal de instrucciones.
         for(Nodo ins:ast){
