@@ -46,7 +46,7 @@ public class DefinicionDeFuncion extends Instruccion{
 //        }
 //        
 //        System.out.println("va a definir una funcion nueva");
-       System.out.println(proyectocupjlexwindows.ProyectoCupJlexWindows.tf);
+ //      System.out.println(proyectocupjlexwindows.ProyectoCupJlexWindows.tf);
         return null;
     }
 

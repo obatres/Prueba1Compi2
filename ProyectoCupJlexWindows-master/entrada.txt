@@ -1,27 +1,30 @@
 numericos = c(45,56,54.56)
-labels = c("sad","ASd","sda")
-xlab="xlab";
-ylab="ylab";
-main="main";
-Barplot(numericos,xlab,ylab,main, labels);
-numericos = c(11,15,20,25,65)
-labels = c("Columna 1", "Columna 2","Columna 3")
-Barplot(numericos,xlab,ylab,main, labels);
 
-PiE(numericos,labels,main);
 
 Identificador = function( ) {
+labels = c("sad","ASd","sda")
+	xlab="xlab";
+	ylab="ylab";
+	main="main";
+	Barplot(numericos,xlab,ylab,main, labels);
+	numericos = c(11,15,20,25,65)
+	labels = c("Columna 1", "Columna 2","Columna 3")
+	Barplot(numericos,xlab,ylab,main, labels);
+	Print(main+" "+xlab+" "+ylab);
 	PiE(numericos,labels,main);
 }
 
-Identificador = function(a,b=54,c=54){
-	PiE(numericos,labels,main);
+
+hola = function(a){
+	Print(a);
+		
+		PiE(numericos,labels,a);
+		jota="rojo";
+		Print(jota+" adentro del metodo hola");
 }
 
-Identificador = (a,b=54,c=54)=>{
-		PiE(numericos,labels,main);
-}
+		Print(jota);
 
-Identificador =()=>{
-			PiE(numericos,labels,main);
-}
+Identificador();
+
+hola("Grafica colores");

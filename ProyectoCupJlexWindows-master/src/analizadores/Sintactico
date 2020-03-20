@@ -20,6 +20,8 @@ import arbol.Tipo;
 import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
+import arbol.Funciones.LlamadaFuncion;
+import arbol.Funciones.Default;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -66,11 +68,9 @@ terminal String ENTERO;
 terminal String DECIMAL;
 terminal String CADENA;
 terminal String UMENOS;
-terminal String REVALUAR;
-terminal String RDECLARA;
 terminal String IDENTIFICADOR;
-terminal String IGUAL, ENTEROT, CADENAT;
-terminal String PRINT, FUNCTION,DEFFUN;
+terminal String IGUAL;
+terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA;
 terminal String NULL, BARPLOT,PIE;
 
@@ -81,11 +81,15 @@ non terminal Nodo expresion;
 non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
-non terminal Tipo tipovar;
 non terminal ArrayList <Object> listaDeclaraciones, ListaExp;
 non terminal Parametro Parametros ;
 non terminal ArrayList <Parametro> ListaParametros;
+non terminal ArrayList <Expresion> ParametrosLlamada;
 non terminal Nodo Funcion;
+non terminal Llamada;
+non terminal Graficas;
+non terminal Ciclos;
+non terminal DefinicionVariables;
 
 
 
@@ -131,22 +135,11 @@ instruccion ::=
         :}
 
 
-    | IDENTIFICADOR:a IGUAL expresion:b 
+    |DefinicionVariables:a
         {:
-            RESULT = new Declaracion (a, (Expresion)b,1);       
+           RESULT =(Nodo)a;
         :}
 
-
-    | IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
-        {:
-            RESULT = new Declaracion(a,(Expresion)b,1);
-        :}
-
-    | IDENTIFICADOR:a IGUAL listaDeclaraciones:b
-        {:
-            RESULT = new Declaracion(a,b,2,1);
-        :}
-    
     | expresioncomp:a
         {:
             RESULT  =  new Imprimir ((Expresion)a);
@@ -159,23 +152,95 @@ instruccion ::=
         :}
 
 
-    | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER  
+    | Ciclos:a
+    {:  
+        RESULT = (Nodo)a;
+    :}
+    |Graficas:a
+    {:
+        RESULT=(Nodo)a;
+    :}  
+    |Llamada:a
+    {:
+        RESULT=(Nodo)a;
+    :}
+        
+;   
+
+DefinicionVariables::=      IDENTIFICADOR:a IGUAL expresion:b 
+                        {:
+                            RESULT = new Declaracion (a, (Expresion)b,1);       
+                        :}
+
+                        |   IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
+                        {:
+                            RESULT = new Declaracion(a,(Expresion)b,1);
+                        :}
+
+                        |   IDENTIFICADOR:a IGUAL listaDeclaraciones:b
+                        {:
+                            RESULT = new Declaracion(a,b,2,1);
+                        :}
+                        |   IDENTIFICADOR:a IGUAL listaDeclaraciones:b PTCOMA
+                        {:
+                            RESULT = new Declaracion(a,b,2,1);
+                        :}
+                         ;
+
+Llamada::=   IDENTIFICADOR:a PARIZQ PARDER PTCOMA
+            {:
+                RESULT = new LlamadaFuncion(a);
+            :}
+            |IDENTIFICADOR:a PARIZQ ParametrosLlamada:b PARDER PTCOMA
+            {:
+                RESULT = new LlamadaFuncion(b,a);
+            :}
+            |IDENTIFICADOR:a PARIZQ PARDER 
+            {:
+                RESULT = new LlamadaFuncion(a);
+            :}
+            |IDENTIFICADOR:a PARIZQ ParametrosLlamada:b PARDER 
+            {:  
+                RESULT = new LlamadaFuncion(b,a);
+            :}
+;
+
+ParametrosLlamada::=    ParametrosLlamada:a COMA expresion:b
+                    {:
+                        RESULT=a;
+                        RESULT.add((Expresion)b);
+                    :}
+                    |   expresion:a
+                    {:
+                        RESULT = new ArrayList<>();
+                        RESULT.add((Expresion)a);
+                    :}
+                    ;
+
+Graficas::= 
+        BARPLOT PARIZQ ListaExp:a PARDER PTCOMA
+            {:
+                RESULT= new BarPlot(a);
+            :}
+        | PIE PARIZQ ListaExp:a PARDER PTCOMA  
+            {:
+                RESULT= new PiePlot(a);
+            :};
+
+Ciclos::=IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER  
         {:
             RESULT= new If((Operacion)a,b);
         :}
-
 
     | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER ELSE LLAVEIZQ instrucciones:c LLAVEDER
         {:
             RESULT= new If((Operacion)a,b,c);
         :}
 
-
     | IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER ELSE IF PARIZQ expresioncomp:d PARDER LLAVEIZQ instrucciones:c LLAVEDER
         {:
             RESULT= new IfElse((Operacion)a,(Operacion)d,b,c);
         :}
-
 
     | SWITCH:s PARIZQ expresion:a PARDER LLAVEIZQ listacase:b LLAVEDER    
         {:
@@ -194,17 +259,7 @@ instruccion ::=
         {:
             //System.out.println(s);
             RESULT = new DoWhile((Expresion)a,b);
-        :}
-    | BARPLOT PARIZQ ListaExp:a PARDER PTCOMA
-        {:
-            RESULT= new BarPlot(a);
-        :}
-    | PIE PARIZQ ListaExp:a PARDER PTCOMA  
-        {:
-            RESULT= new PiePlot(a);
-        :}
-        
-;   
+        :};
 
 Funcion::=    IDENTIFICADOR:a IGUAL FUNCTION PARIZQ PARDER LLAVEIZQ instrucciones:b LLAVEDER 
             {:
@@ -226,6 +281,7 @@ Funcion::=    IDENTIFICADOR:a IGUAL FUNCTION PARIZQ PARDER LLAVEIZQ instruccione
                 Funcion f = new Funcion(a,c);
                 RESULT = new DefinicionDeFuncion(f);   
             :}
+
      ;
 
 
@@ -249,7 +305,8 @@ Parametros::=
             |IDENTIFICADOR:a IGUAL expresion:b
             {:
                 RESULT = new Parametro((Expresion)b,a);
-            :};
+            :}
+;
 
 listacase::= listacase:a CASES:b
                 {:  
@@ -267,7 +324,7 @@ CASES::= CASE expresion:a DOSP instrucciones:b
             {:
                 RESULT= new NodoCase((Expresion)a,b);
             :}
-        |DEFAULT DOSP instrucciones:a
+        |DEFAULT  instrucciones:a
             {:
                 RESULT= new NodoCase(a);
             :}
@@ -313,7 +370,8 @@ expresion  ::=
     |   IDENTIFICADOR:a CORIZQ expresion CORDER CORIZQ expresion CORDER 
     |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
-;
+    |   DEF                                    {:RESULT= new Default();:}
+    ;
 
 
 expresioncomp::=

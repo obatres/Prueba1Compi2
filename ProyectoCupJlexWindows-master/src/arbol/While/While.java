@@ -34,7 +34,7 @@ public class While extends Instruccion{
             tablalocal.addAll(ts);
             for (Nodo en : ListaDeInstrucciones) {
                 if(en instanceof Instruccion){
-                    ((Instruccion) en).ejecutar(ts);
+                    ((Instruccion) en).ejecutar(tablalocal);
                 }  
             } 
         }

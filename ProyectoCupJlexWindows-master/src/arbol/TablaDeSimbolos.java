@@ -45,7 +45,7 @@ public class TablaDeSimbolos extends LinkedList<Simbolo>{
     
     
     
-    void setValor(String id, Object valor, Tipo tipo) {
+    public void setValor(String id, Object valor, Tipo tipo) {
         for(Simbolo s:this){
             if(s.getId().equals(id)){
                 s.setValor(valor);

@@ -6,6 +6,7 @@
 package arbol.Funciones;
 
 import arbol.Expresion;
+import arbol.id;
 
 /**
  *
