@@ -1,4 +1,6 @@
 numericos = c(45,56,true)
 numericos = c(45,560.2,true, "false")
-
+rojo = c(true, false, false)
 print(numericos);
+
+typeOF(rojo);
