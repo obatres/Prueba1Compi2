@@ -4,6 +4,8 @@ package proyectocupjlexwindows;
 
 import InterfazGrafica.VentanaPrincipal;
 import arbol.Expresion;
+import arbol.Funciones.Funcion;
+import arbol.Funciones.TabladeFunciones;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.TablaDeSimbolos;
@@ -16,6 +18,7 @@ public class ProyectoCupJlexWindows {
     /**
      * @param args argumentos de la linea de comando
      */
+            public static TabladeFunciones tf = new TabladeFunciones();
     public static void main(String[] args) {
         interpretar("entrada.txt");
         VentanaPrincipal v = new VentanaPrincipal();
@@ -54,6 +57,7 @@ public class ProyectoCupJlexWindows {
         }
         //Se crea una tabla de símbolos global para ejecutar las instrucciones.
         TablaDeSimbolos ts=new TablaDeSimbolos();
+        //public static TabladeFunciones tf = new TabladeFunciones();
         //Se ejecuta cada instruccion en el ast, es decir, cada instruccion de 
         //la lista principal de instrucciones.
         for(Nodo ins:ast){
@@ -68,8 +72,7 @@ public class ProyectoCupJlexWindows {
                 {                           //Para todas las instancias de la clase Instruccion se ejecuta el metodo "ejecutar()"
                     ((Instruccion)ins).ejecutar(ts);//que recibe como parametro la tabla de simbolos de la misma instancia dentro del arbol
                 }else{                              //y devuelve la ejecucion de instrucciones como condicionales o ciclos
-                    
-                    
+   
                     System.out.println("Error al ejecutar un nivel en el arbol AST");  //reportar error
                 }
  
@@ -90,6 +93,7 @@ public class ProyectoCupJlexWindows {
             }else if(nodo instanceof Instruccion){
                 cont = ((Instruccion) nodo).Dibujar(builder, root, cont);
             }
+            cont = nodo.Dibujar(builder, root, cont);
         }
         builder.append("}");
         

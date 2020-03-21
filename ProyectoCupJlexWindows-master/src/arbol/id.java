@@ -52,6 +52,8 @@ public class id extends Expresion{
                     return Vector.get(0);
                 }
             }            
+        }else{
+            return "no hay variable aun";
         }
 
         //return ts.getValor(iden);

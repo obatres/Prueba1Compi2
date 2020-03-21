@@ -6,6 +6,7 @@
 package InterfazGrafica;
 
 import arbol.Expresion;
+import arbol.Funciones.TabladeFunciones;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.TablaDeSimbolos;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 /**
  *
  * @author obatres_
@@ -32,6 +34,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     
     public static String consola="";
+    public static TabladeFunciones tf = new TabladeFunciones();
     public VentanaPrincipal() {
         initComponents();
     }

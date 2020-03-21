@@ -35,7 +35,6 @@ public class PiePlot extends Instruccion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         if(ParametrosPie.size()==3){
-            System.out.println("Cantidad de parametros correctos");
             if(((Expresion)ParametrosPie.get(0)).ejecutar(ts) instanceof ArrayList){
                 if(((Expresion)ParametrosPie.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.DOUBLE)||((Expresion)ParametrosPie.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.INT)){
                     Numericos = (ArrayList<Object>) ((Expresion)ParametrosPie.get(0)).ejecutar(ts);

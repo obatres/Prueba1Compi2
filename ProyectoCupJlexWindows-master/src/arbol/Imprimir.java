@@ -37,6 +37,7 @@ public class Imprimir extends Instruccion{
             }
             VentanaPrincipal.consola =sal;            
         }else{
+            //System.out.println("no se puede imprimir el valor, es desconocido");
             System.out.println(contenido.ejecutar(ts).toString());
             VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
         }

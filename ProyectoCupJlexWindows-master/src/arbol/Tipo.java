@@ -29,7 +29,8 @@ public class Tipo {
         NULL, // Valor Null
         NEW, // Instancia de un nuevo objeto ej: Carro c = new Carro
         CALL, // Llamada a un metodo o funcion ej: Motor(), Hola(sd)
-        KEY //Declaracion de una llave
+        KEY, //Declaracion de una llave
+        DEF
     }
       
     public Tipo(tipo tp){
@@ -106,6 +107,13 @@ public class Tipo {
 
     public boolean isNull(){
         if(tp==tipo.NULL){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isDef(){
+        if(tp==tipo.DEF){
             return true;
         }
         return false;
