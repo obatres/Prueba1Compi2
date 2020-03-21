@@ -72,8 +72,7 @@ public class ProyectoCupJlexWindows {
                 {                           //Para todas las instancias de la clase Instruccion se ejecuta el metodo "ejecutar()"
                     ((Instruccion)ins).ejecutar(ts);//que recibe como parametro la tabla de simbolos de la misma instancia dentro del arbol
                 }else{                              //y devuelve la ejecucion de instrucciones como condicionales o ciclos
-                    
-                    
+   
                     System.out.println("Error al ejecutar un nivel en el arbol AST");  //reportar error
                 }
  
@@ -94,6 +93,7 @@ public class ProyectoCupJlexWindows {
             }else if(nodo instanceof Instruccion){
                 cont = ((Instruccion) nodo).Dibujar(builder, root, cont);
             }
+            cont = nodo.Dibujar(builder, root, cont);
         }
         builder.append("}");
         

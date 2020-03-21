@@ -9,7 +9,9 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Simbolo;
+import arbol.Single;
 import arbol.TablaDeSimbolos;
+import arbol.Tipo;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -50,7 +52,6 @@ public class LlamadaFuncion extends Instruccion{
             ParametrosDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getParametros(identificadorLlamada);
             InstruccionesDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getInstrucciones(identificadorLlamada);
             if(ParametrosLlamada==null&&ParametrosDeclaracion==null){
-                System.out.println("funcion sin parametros");
                 for (Nodo n : InstruccionesDeclaracion) {
                     if( n instanceof Instruccion){
                         ((Instruccion) n).ejecutar(tablalocal);
@@ -58,8 +59,11 @@ public class LlamadaFuncion extends Instruccion{
                 }
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
                 for (int i = 0; i < ParametrosLlamada.size(); i++) {
-                    if(ParametrosLlamada.get(i).ejecutar(tablalocal) instanceof Default){
-                        System.out.println("Valor Default");
+                    if(ParametrosLlamada.get(i).GetTipo(ts).tp.equals(Tipo.tipo.DEF)){
+                        Vector = new ArrayList<>();
+                        Vector.add(0,ParametrosDeclaracion.get(i).getValorParametro().ejecutar(tablalocal));
+                        tablalocal.add(new Simbolo(ParametrosDeclaracion.get(i).getIdParametro(), ParametrosDeclaracion.get(i).getValorParametro().GetTipo(tablalocal)));
+                        tablalocal.setValor(ParametrosDeclaracion.get(i).getIdParametro(),Vector,ParametrosDeclaracion.get(i).getValorParametro().GetTipo(tablalocal));                       
                     }else{
                         Vector = new ArrayList<>();
                         Vector.add(0,ParametrosLlamada.get(i).ejecutar(tablalocal));
@@ -72,8 +76,6 @@ public class LlamadaFuncion extends Instruccion{
                         ((Instruccion) n).ejecutar(tablalocal);
                     }
                 }
-                System.out.println(tablalocal);
-                System.out.println("cantidad de parametros coincide");
             }else{
                 System.out.println("cantidad de parametros no coincide");
             }

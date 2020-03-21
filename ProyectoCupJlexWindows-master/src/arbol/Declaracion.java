@@ -90,17 +90,65 @@ public class Declaracion extends Instruccion{
                        }
                    }
                }
+               
+               ArrayList<Object> NuevoVector = new ArrayList<>();
                if(NumeroDeTipo==0){
                    this.tipo = new Tipo(Tipo.tipo.BOOLEAN);
+                   NuevoVector=Vector;
                }else if(NumeroDeTipo==1){
                    this.tipo = new Tipo(Tipo.tipo.INT);
+                   for (Object t : Vector) {
+                       if(t instanceof Expresion){
+                           if(((Expresion) t).GetTipo(ts).isBoolean()){
+                               if(((Expresion)t).ejecutar(ts).equals("true")){
+                                   NuevoVector.add(new Single("1", new Tipo (Tipo.tipo.INT)));
+                               }else if(((Expresion)t).ejecutar(ts).equals("false")){
+                                   NuevoVector.add(new Single("0", new Tipo (Tipo.tipo.INT)));
+                               }
+                           }else if(((Expresion) t).GetTipo(ts).isInt()){
+                               NuevoVector.add(t);
+                           }
+                       }
+                   }
                }else if(NumeroDeTipo==2){
                    this.tipo = new Tipo(Tipo.tipo.DOUBLE);
+                   for (Object t : Vector) {
+                       if(t instanceof Expresion){
+                           if(((Expresion) t).GetTipo(ts).isBoolean()){
+                               if(((Expresion)t).ejecutar(ts).equals("true")){
+                                   NuevoVector.add(new Single("1.0", new Tipo (Tipo.tipo.DOUBLE)));
+                               }else if(((Expresion)t).ejecutar(ts).equals("false")){
+                                   NuevoVector.add(new Single("0.0", new Tipo (Tipo.tipo.DOUBLE)));
+                               }
+                           }else if(((Expresion) t).GetTipo(ts).isInt()){
+                               NuevoVector.add(new Single(Double.parseDouble(((Expresion)t).ejecutar(ts).toString()), new Tipo (Tipo.tipo.DOUBLE)));
+                           }else if(((Expresion) t).GetTipo(ts).isDouble()){
+                               NuevoVector.add(t);
+                           }
+                       }
+                   }                   
                }else if(NumeroDeTipo==3){
                    this.tipo = new Tipo(Tipo.tipo.STRING);
+                   for (Object t : Vector) {
+                       if(t instanceof Expresion){
+                           if(((Expresion) t).GetTipo(ts).isBoolean()){
+                               if(((Expresion)t).ejecutar(ts).equals("true")){
+                                   NuevoVector.add(new Single("true", new Tipo (Tipo.tipo.STRING)));
+                               }else if(((Expresion)t).ejecutar(ts).equals("false")){
+                                   NuevoVector.add(new Single("false", new Tipo (Tipo.tipo.STRING)));
+                               }
+                           }else if(((Expresion) t).GetTipo(ts).isInt()){
+                               NuevoVector.add(new Single(((Expresion)t).ejecutar(ts).toString(), new Tipo (Tipo.tipo.STRING)));
+                           }else if(((Expresion) t).GetTipo(ts).isDouble()){
+                               NuevoVector.add(new Single(((Expresion)t).ejecutar(ts).toString(), new Tipo (Tipo.tipo.STRING)));
+                           }else if(((Expresion) t).GetTipo(ts).isString()){
+                               NuevoVector.add(t);
+                           }
+                       }
+                   }                    
                }
 
-               ts.setValor(id, Vector, tipo);
+               ts.setValor(id, NuevoVector, tipo);
            }else{
                for (Object t : Vector) {
                    if (t instanceof Expresion){

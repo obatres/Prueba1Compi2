@@ -27,7 +27,6 @@ import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
-import arbol.Funciones.Default;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -1751,7 +1750,10 @@ class CUP$Sintactico$actions {
           case 62: // expresion ::= DEF 
             {
               Nodo RESULT =null;
-		RESULT= new Default();
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String a = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("expresion",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

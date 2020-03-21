@@ -21,7 +21,6 @@ import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
-import arbol.Funciones.Default;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -370,7 +369,7 @@ expresion  ::=
     |   IDENTIFICADOR:a CORIZQ expresion CORDER CORIZQ expresion CORDER 
     |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
-    |   DEF                                    {:RESULT= new Default();:}
+    |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
     ;
 
 
