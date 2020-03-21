@@ -23,6 +23,7 @@ public class sym {
   public static final int MENORIGUAL = 19;
   public static final int AND = 25;
   public static final int IGUAL = 41;
+  public static final int TYPEOF = 51;
   public static final int CORDER = 6;
   public static final int DIVIDIDO = 14;
   public static final int OR = 26;
@@ -110,7 +111,8 @@ public class sym {
   "COMA",
   "NULL",
   "BARPLOT",
-  "PIE"
+  "PIE",
+  "TYPEOF"
   };
 }
 

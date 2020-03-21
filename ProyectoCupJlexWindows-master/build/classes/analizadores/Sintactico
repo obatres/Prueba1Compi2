@@ -21,6 +21,7 @@ import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
+import arbol.Funciones.FuncionesDefinidas.TypeOf;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ terminal String IGUAL;
 terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA;
 terminal String NULL, BARPLOT,PIE;
+terminal String TYPEOF;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -162,6 +164,10 @@ instruccion ::=
     |Llamada:a
     {:
         RESULT=(Nodo)a;
+    :}
+    |TYPEOF PARIZQ expresion:a PARDER PTCOMA
+    {:
+        RESULT = new TypeOf((Expresion)a);
     :}
         
 ;   
@@ -370,6 +376,7 @@ expresion  ::=
     |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
     |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
+
     ;
 
 
