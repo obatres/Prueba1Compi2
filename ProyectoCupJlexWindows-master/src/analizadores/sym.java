@@ -14,7 +14,7 @@ public class sym {
   public static final int IGUALD = 15;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
-  public static final int PIE = 50;
+  public static final int PIE = 51;
   public static final int LLAVEDER = 8;
   public static final int DEFFUN = 44;
   public static final int C = 46;
@@ -23,10 +23,11 @@ public class sym {
   public static final int MENORIGUAL = 19;
   public static final int AND = 25;
   public static final int IGUAL = 41;
-  public static final int TYPEOF = 51;
+  public static final int TYPEOF = 52;
   public static final int CORDER = 6;
   public static final int DIVIDIDO = 14;
   public static final int OR = 26;
+  public static final int CC = 48;
   public static final int UMENOS = 39;
   public static final int IF = 30;
   public static final int MAYORIGUAL = 18;
@@ -39,15 +40,16 @@ public class sym {
   public static final int CADENA = 38;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
-  public static final int NULL = 48;
+  public static final int NULL = 49;
   public static final int MENOR = 17;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
-  public static final int BARPLOT = 49;
+  public static final int BARPLOT = 50;
   public static final int SWITCH = 21;
   public static final int MAYOR = 16;
   public static final int POTENCIA = 9;
   public static final int ELSE = 33;
+  public static final int LENGHT = 53;
   public static final int WHILE = 34;
   public static final int LLAVEIZQ = 7;
   public static final int DEFAULT = 24;
@@ -109,10 +111,12 @@ public class sym {
   "DEF",
   "C",
   "COMA",
+  "CC",
   "NULL",
   "BARPLOT",
   "PIE",
-  "TYPEOF"
+  "TYPEOF",
+  "LENGHT"
   };
 }
 

@@ -47,6 +47,8 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 ")=>"           {return new Symbol(sym.DEFFUN,yyline,yychar, yytext());}
 "default"       {return new Symbol(sym.DEF,yyline,yychar, yytext());}
 "TypeOf"        {return new Symbol(sym.TYPEOF,yyline,yychar, yytext());}
+"lenght"        {return new Symbol(sym.LENGHT,yyline,yychar, yytext());}
+"C"             {return new Symbol(sym.CC,yyline,yychar, yytext());}
 
 
 

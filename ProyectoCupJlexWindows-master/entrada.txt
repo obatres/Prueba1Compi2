@@ -4,3 +4,5 @@ rojo = c(true, false, false)
 print(numericos);
 
 typeOF(rojo);
+
+LEnght(rojo);
