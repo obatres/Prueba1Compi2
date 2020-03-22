@@ -23,6 +23,7 @@ import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
 import arbol.Funciones.FuncionesDefinidas.TypeOf;
 import arbol.Funciones.FuncionesDefinidas.Lenght;
+import arbol.Funciones.FuncionesDefinidas.StringLenght;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ terminal String IGUAL;
 terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA, CC;
 terminal String NULL, BARPLOT,PIE;
-terminal String TYPEOF,LENGHT;
+terminal String TYPEOF,LENGHT, STRINGLENGHT;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -174,7 +175,10 @@ instruccion ::=
     {:
         RESULT = new Lenght((Expresion)a);
     :}
-        
+    |STRINGLENGHT PARIZQ expresion:a PARDER PTCOMA
+    {:
+        RESULT = new StringLenght((Expresion) a);
+    :}
 ;   
 
 DefinicionVariables::=      IDENTIFICADOR:a IGUAL expresion:b 
