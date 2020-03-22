@@ -49,6 +49,7 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 "TypeOf"        {return new Symbol(sym.TYPEOF,yyline,yychar, yytext());}
 "lenght"        {return new Symbol(sym.LENGHT,yyline,yychar, yytext());}
 "C"             {return new Symbol(sym.CC,yyline,yychar, yytext());}
+"StringLenght"  {return new Symbol(sym.STRINGLENGHT,yyline,yychar, yytext());}
 
 
 

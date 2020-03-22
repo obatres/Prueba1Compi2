@@ -38,6 +38,7 @@ public class sym {
   public static final int error = 1;
   public static final int COMA = 47;
   public static final int CADENA = 38;
+  public static final int STRINGLENGHT = 54;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
   public static final int NULL = 49;
@@ -116,7 +117,8 @@ public class sym {
   "BARPLOT",
   "PIE",
   "TYPEOF",
-  "LENGHT"
+  "LENGHT",
+  "STRINGLENGHT"
   };
 }
 
