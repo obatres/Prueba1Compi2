@@ -56,6 +56,7 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 "toLowerCase"   {return new Symbol(sym.TOLOWERCASE,yyline,yychar, yytext());}
 "toUpperCase"   {return new Symbol(sym.TOUPPERCASE,yyline,yychar, yytext());}
 "trunk"         {return new Symbol(sym.TRUNK,yyline,yychar, yytext());}
+"round"         {return new Symbol(sym.ROUND,yyline,yychar, yytext());}
 
 
 

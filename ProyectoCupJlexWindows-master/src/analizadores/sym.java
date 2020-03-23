@@ -66,6 +66,7 @@ public class sym {
   public static final int FALSE = 32;
   public static final int PARDER = 4;
   public static final int CORIZQ = 5;
+  public static final int ROUND = 61;
   public static final int PRINT = 42;
   public static final int DO = 35;
   public static final int MAS = 11;
@@ -130,7 +131,8 @@ public class sym {
   "REMOVE",
   "TOLOWERCASE",
   "TOUPPERCASE",
-  "TRUNK"
+  "TRUNK",
+  "ROUND"
   };
 }
 
