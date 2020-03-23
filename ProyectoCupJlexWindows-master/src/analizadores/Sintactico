@@ -25,6 +25,7 @@ import arbol.Funciones.FuncionesDefinidas.TypeOf;
 import arbol.Funciones.FuncionesDefinidas.Lenght;
 import arbol.Funciones.FuncionesDefinidas.StringLenght;
 import arbol.Funciones.FuncionesDefinidas.Remove;
+import arbol.Funciones.FuncionesDefinidas.toLowerCase;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -77,6 +78,7 @@ terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA, CC;
 terminal String NULL, BARPLOT,PIE;
 terminal String TYPEOF,LENGHT, STRINGLENGHT, LENGHTPAR, STRINGLENGHTPAR, REMOVE;
+terminal String TOLOWERCASE;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -180,7 +182,7 @@ instruccion ::=
     {:
         RESULT = new StringLenght((Expresion) a);
     :}
- 
+     
 ;   
 
 DefinicionVariables::=      IDENTIFICADOR:a IGUAL expresion:b 
@@ -388,9 +390,10 @@ expresion  ::=
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
     |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
     |   CC PARIZQ ListaExp:a PARDER
-    |   LENGHTPAR expresion:a PARDER PTCOMA                      {:RESULT = new Lenght((Expresion)a);:}
-    |   STRINGLENGHTPAR expresion:a PARDER PTCOMA                {:RESULT = new StringLenght((Expresion) a); :}
-    |   REMOVE PARIZQ expresion:a COMA expresion:b PARDER PTCOMA {:RESULT = new Remove((Expresion)a, (Expresion)b);:} 
+    |   LENGHTPAR expresion:a PARDER PTCOMA                         {:RESULT = new Lenght((Expresion)a);:}
+    |   STRINGLENGHTPAR expresion:a PARDER PTCOMA                   {:RESULT = new StringLenght((Expresion) a); :}
+    |   REMOVE PARIZQ expresion:a COMA expresion:b PARDER PTCOMA    {:RESULT = new Remove((Expresion)a, (Expresion)b);:} 
+    |   TOLOWERCASE PARIZQ expresion:a PARDER PTCOMA                {:RESULT = new toLowerCase((Expresion)a);:} 
 ;
 
 

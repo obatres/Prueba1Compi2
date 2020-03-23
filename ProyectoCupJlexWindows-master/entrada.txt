@@ -17,3 +17,7 @@ print(joder);
 j=Remove(pachon, reloj);
 
 print(j);
+
+f=c("toLOWErcase")
+h=toLOWErcase(f);
+print(h);
