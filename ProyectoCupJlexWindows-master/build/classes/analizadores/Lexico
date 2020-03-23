@@ -53,7 +53,7 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 "StringLenght"  {return new Symbol(sym.STRINGLENGHT,yyline,yychar, yytext());}
 "StringLenght(" {return new Symbol(sym.STRINGLENGHTPAR,yyline,yychar, yytext());}
 "remove"        {return new Symbol(sym.REMOVE,yyline,yychar, yytext());}
-"toLowerCase"   {return new Symbol(sym.REMOVE,yyline,yychar, yytext());}
+"toLowerCase"   {return new Symbol(sym.TOLOWERCASE,yyline,yychar, yytext());}
 
 
 

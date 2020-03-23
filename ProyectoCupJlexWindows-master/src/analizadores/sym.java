@@ -17,6 +17,7 @@ public class sym {
   public static final int ENTERO = 36;
   public static final int CASE = 22;
   public static final int PIE = 51;
+  public static final int TOLOWERCASE = 58;
   public static final int LLAVEDER = 8;
   public static final int DEFFUN = 44;
   public static final int C = 46;
@@ -124,7 +125,8 @@ public class sym {
   "STRINGLENGHT",
   "LENGHTPAR",
   "STRINGLENGHTPAR",
-  "REMOVE"
+  "REMOVE",
+  "TOLOWERCASE"
   };
 }
 
