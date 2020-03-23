@@ -1,7 +1,8 @@
 numericos = c(45,56,true)
 numericos = c(45,560.2,true, "false")
 rojo = c(true, false, false)
-pachon = c("azul", "rojos", 4,5)
+pachon = c("azul")
+reloj = c("ul")
 print(numericos);
 
 typeOF(rojo);
@@ -11,3 +12,8 @@ hola=LEnght(rojo);
 joder=StringLenght(pachon);
 
 print(joder);
+
+
+j=Remove(pachon, reloj);
+
+print(j);

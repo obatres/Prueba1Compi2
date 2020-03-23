@@ -13,6 +13,7 @@ public class sym {
   public static final int INTERROGACION = 28;
   public static final int POR = 13;
   public static final int IGUALD = 15;
+  public static final int REMOVE = 57;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
   public static final int PIE = 51;
@@ -122,7 +123,8 @@ public class sym {
   "LENGHT",
   "STRINGLENGHT",
   "LENGHTPAR",
-  "STRINGLENGHTPAR"
+  "STRINGLENGHTPAR",
+  "REMOVE"
   };
 }
 
