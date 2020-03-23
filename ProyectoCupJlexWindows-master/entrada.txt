@@ -22,4 +22,5 @@ f=c("toLOWErcase")
 h=toUPperCase(f);
 f=c(5.8)
 k=trunk(f);
+k=round(f);
 print(k);
