@@ -11,6 +11,7 @@ public class sym {
   public static final int FUNCTION = 43;
   public static final int LENGHTPAR = 55;
   public static final int INTERROGACION = 28;
+  public static final int TOUPPERCASE = 59;
   public static final int POR = 13;
   public static final int IGUALD = 15;
   public static final int REMOVE = 57;
@@ -126,7 +127,8 @@ public class sym {
   "LENGHTPAR",
   "STRINGLENGHTPAR",
   "REMOVE",
-  "TOLOWERCASE"
+  "TOLOWERCASE",
+  "TOUPPERCASE"
   };
 }
 
