@@ -75,7 +75,7 @@ terminal String IGUAL;
 terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA, CC;
 terminal String NULL, BARPLOT,PIE;
-terminal String TYPEOF,LENGHT, STRINGLENGHT;
+terminal String TYPEOF,LENGHT, STRINGLENGHT, LENGHTPAR, STRINGLENGHTPAR;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -386,8 +386,9 @@ expresion  ::=
     |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
     |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
     |   CC PARIZQ ListaExp:a PARDER
-
-    ;
+    |   LENGHTPAR expresion:a PARDER PTCOMA    {:RESULT = new Lenght((Expresion)a);:}
+    |   STRINGLENGHTPAR expresion:a PARDER PTCOMA {:RESULT = new StringLenght((Expresion) a); :}
+;
 
 
 expresioncomp::=

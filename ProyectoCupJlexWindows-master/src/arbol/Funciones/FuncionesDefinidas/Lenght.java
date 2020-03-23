@@ -36,7 +36,7 @@ public class Lenght  extends Expresion{
             }
         }
         System.out.println(contador);
-        VentanaPrincipal.consola+="Tamaño de "+contador;
+        //VentanaPrincipal.consola+="Tamaño de "+contador;
         return contador;
     }
 

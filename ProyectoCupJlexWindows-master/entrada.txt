@@ -1,11 +1,13 @@
 numericos = c(45,56,true)
 numericos = c(45,560.2,true, "false")
 rojo = c(true, false, false)
-pachon = c("azul", "rojos")
+pachon = c("azul", "rojos", 4,5)
 print(numericos);
 
 typeOF(rojo);
 
-LEnght(rojo);
+hola=LEnght(rojo);
 
-StringLenght(pachon);
+joder=StringLenght(pachon);
+
+print(joder);
