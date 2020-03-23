@@ -27,6 +27,7 @@ import arbol.Funciones.FuncionesDefinidas.StringLenght;
 import arbol.Funciones.FuncionesDefinidas.Remove;
 import arbol.Funciones.FuncionesDefinidas.toLowerCase;
 import arbol.Funciones.FuncionesDefinidas.toUperCase;
+import arbol.Funciones.FuncionesDefinidas.Trunk;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String C, COMA, CC;
 terminal String NULL, BARPLOT,PIE;
 terminal String TYPEOF,LENGHT, STRINGLENGHT, LENGHTPAR, STRINGLENGHTPAR, REMOVE;
-terminal String TOLOWERCASE, TOUPPERCASE;
+terminal String TOLOWERCASE, TOUPPERCASE, TRUNK;
 
 non terminal ini;
 non terminal LinkedList<Nodo> instrucciones;
@@ -183,6 +184,7 @@ instruccion ::=
     {:
         RESULT = new StringLenght((Expresion) a);
     :}
+
 
      
 ;   
@@ -397,6 +399,7 @@ expresion  ::=
     |   REMOVE PARIZQ expresion:a COMA expresion:b PARDER PTCOMA    {:RESULT = new Remove((Expresion)a, (Expresion)b);:} 
     |   TOLOWERCASE PARIZQ expresion:a PARDER PTCOMA                {:RESULT = new toLowerCase((Expresion)a);:} 
     |   TOUPPERCASE PARIZQ expresion:a PARDER PTCOMA                {: RESULT = new toUperCase((Expresion)a);:}
+    |   TRUNK PARIZQ expresion:a PARDER PTCOMA                      {: RESULT = new Trunk((Expresion)a);:}
 ;
 
 

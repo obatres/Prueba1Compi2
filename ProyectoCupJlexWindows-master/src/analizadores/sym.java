@@ -47,6 +47,7 @@ public class sym {
   public static final int MENOS = 12;
   public static final int NULL = 49;
   public static final int MENOR = 17;
+  public static final int TRUNK = 60;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
   public static final int BARPLOT = 50;
@@ -128,7 +129,8 @@ public class sym {
   "STRINGLENGHTPAR",
   "REMOVE",
   "TOLOWERCASE",
-  "TOUPPERCASE"
+  "TOUPPERCASE",
+  "TRUNK"
   };
 }
 
