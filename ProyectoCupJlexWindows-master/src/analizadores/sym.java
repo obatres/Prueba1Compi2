@@ -9,9 +9,11 @@ package analizadores;
 public class sym {
   /* terminals */
   public static final int FUNCTION = 43;
+  public static final int LENGHTPAR = 55;
   public static final int INTERROGACION = 28;
   public static final int POR = 13;
   public static final int IGUALD = 15;
+  public static final int REMOVE = 57;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
   public static final int PIE = 51;
@@ -49,6 +51,7 @@ public class sym {
   public static final int SWITCH = 21;
   public static final int MAYOR = 16;
   public static final int POTENCIA = 9;
+  public static final int STRINGLENGHTPAR = 56;
   public static final int ELSE = 33;
   public static final int LENGHT = 53;
   public static final int WHILE = 34;
@@ -118,7 +121,10 @@ public class sym {
   "PIE",
   "TYPEOF",
   "LENGHT",
-  "STRINGLENGHT"
+  "STRINGLENGHT",
+  "LENGHTPAR",
+  "STRINGLENGHTPAR",
+  "REMOVE"
   };
 }
 

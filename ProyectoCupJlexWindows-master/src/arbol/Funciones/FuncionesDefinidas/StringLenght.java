@@ -44,8 +44,8 @@ public class StringLenght extends Expresion{
                 System.out.println("Parametro incorrecto");
             }
             System.out.println(cadena.length());
-            VentanaPrincipal.consola += cadena.length();
-            return new Single(cadena.length(),new Tipo(Tipo.tipo.INT));
+            //VentanaPrincipal.consola += cadena.length();
+            return cadena.length();
         }else{
             System.out.println("Parametro incorrecto");
         }
