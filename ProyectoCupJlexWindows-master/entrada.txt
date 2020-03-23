@@ -20,4 +20,6 @@ print(j);
 
 f=c("toLOWErcase")
 h=toUPperCase(f);
-print(h);
+f=c(5.8)
+k=trunk(f);
+print(k);
