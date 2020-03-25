@@ -5,6 +5,7 @@
  */
 package arbol;
 import arbol.Tipo.tipo.*;
+import java.util.ArrayList;
 /**
  *
  * @author obatres_
@@ -100,6 +101,8 @@ public class Operacion extends Expresion{
 
 /*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
         if(tipo_operacion==Tipo_operacion.SUMA){
+            System.out.println(opderadorIzq.getClass());
+            System.out.println(operadorDer.getClass());
             if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){               
                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
@@ -224,6 +227,7 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.MENOR){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    System.out.println(opderadorIzq);
                     return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())<Double.parseDouble(operadorDer.ejecutar(ts).toString());
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){

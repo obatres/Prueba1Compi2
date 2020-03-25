@@ -85,9 +85,7 @@ public class DeclaracionVariable extends Instruccion {
         }else{
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
-        }
-
-        
+        }     
         Vector.clear();
         return null;
     }

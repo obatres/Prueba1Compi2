@@ -1,8 +1,6 @@
-#n=c("Sdasd", 654,c(5,"azul",c("rojo","amarillo","verde")));
-
-#p=c(2, 5.45,c(3,4.254,c(true,false,true)));
-
-j="asd"
-j=1
-print(j);
-print(j);
+a=5;
+print(a);
+While (a<10){
+	Print(a);
+	a=a+1;		
+}
