@@ -9,29 +9,28 @@ package analizadores;
 public class sym {
   /* terminals */
   public static final int FUNCTION = 43;
-  public static final int LENGHTPAR = 55;
+  public static final int LENGHTPAR = 54;
   public static final int INTERROGACION = 28;
-  public static final int TOUPPERCASE = 59;
+  public static final int TOUPPERCASE = 58;
   public static final int POR = 13;
   public static final int IGUALD = 15;
-  public static final int REMOVE = 57;
+  public static final int REMOVE = 56;
   public static final int ENTERO = 36;
   public static final int CASE = 22;
-  public static final int PIE = 51;
-  public static final int TOLOWERCASE = 58;
+  public static final int PIE = 50;
+  public static final int TOLOWERCASE = 57;
   public static final int LLAVEDER = 8;
   public static final int DEFFUN = 44;
-  public static final int C = 46;
   public static final int IDENTIFICADOR = 40;
   public static final int NOT = 27;
   public static final int MENORIGUAL = 19;
   public static final int AND = 25;
   public static final int IGUAL = 41;
-  public static final int TYPEOF = 52;
+  public static final int TYPEOF = 51;
   public static final int CORDER = 6;
   public static final int DIVIDIDO = 14;
   public static final int OR = 26;
-  public static final int CC = 48;
+  public static final int CC = 47;
   public static final int UMENOS = 39;
   public static final int IF = 30;
   public static final int MAYORIGUAL = 18;
@@ -40,23 +39,23 @@ public class sym {
   public static final int PARIZQ = 3;
   public static final int TRUE = 31;
   public static final int error = 1;
-  public static final int COMA = 47;
+  public static final int COMA = 46;
   public static final int CADENA = 38;
-  public static final int STRINGLENGHT = 54;
+  public static final int STRINGLENGHT = 53;
   public static final int MODULO = 10;
   public static final int MENOS = 12;
-  public static final int NULL = 49;
+  public static final int NULL = 48;
   public static final int MENOR = 17;
-  public static final int TRUNK = 60;
+  public static final int TRUNK = 59;
   public static final int BREAK = 23;
   public static final int DESIGUAL = 20;
-  public static final int BARPLOT = 50;
+  public static final int BARPLOT = 49;
   public static final int SWITCH = 21;
   public static final int MAYOR = 16;
   public static final int POTENCIA = 9;
-  public static final int STRINGLENGHTPAR = 56;
+  public static final int STRINGLENGHTPAR = 55;
   public static final int ELSE = 33;
-  public static final int LENGHT = 53;
+  public static final int LENGHT = 52;
   public static final int WHILE = 34;
   public static final int LLAVEIZQ = 7;
   public static final int DEFAULT = 24;
@@ -66,7 +65,7 @@ public class sym {
   public static final int FALSE = 32;
   public static final int PARDER = 4;
   public static final int CORIZQ = 5;
-  public static final int ROUND = 61;
+  public static final int ROUND = 60;
   public static final int PRINT = 42;
   public static final int DO = 35;
   public static final int MAS = 11;
@@ -117,7 +116,6 @@ public class sym {
   "FUNCTION",
   "DEFFUN",
   "DEF",
-  "C",
   "COMA",
   "CC",
   "NULL",
