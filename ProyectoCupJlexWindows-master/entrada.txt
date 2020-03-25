@@ -1,6 +1,6 @@
-a=5;
-print(a);
-While (a<10){
-	Print(a);
-	a=a+1;		
+a=c("a","b");
+While (a<"adios"){
+	a=a+"d";
+
+	print(a);	
 }

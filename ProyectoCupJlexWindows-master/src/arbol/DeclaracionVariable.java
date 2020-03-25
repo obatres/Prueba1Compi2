@@ -79,6 +79,8 @@ public class DeclaracionVariable extends Instruccion {
             }
         }else if(exp instanceof Single){
             Valor.add(0, exp.ejecutar(ts));
+        }else{
+            Valor.add(0, exp.ejecutar(ts));
         }
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
