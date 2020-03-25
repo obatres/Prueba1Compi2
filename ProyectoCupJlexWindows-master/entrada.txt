@@ -1,6 +1,12 @@
 a=c("a","b");
-While (a<"adios"){
-	a=a+"d";
-
-	print(a);	
+b="s";
+if(a>b){
+	Print("Si salio el if");
+	Print(5+5+5+65+"as");
+	Print(2.5+"dsf"+5+5+0.2);
+	Print("hola"+"mundo"+"que"+"tal");
+	"hola">"hola"
+"holas">="hola"
+"hola"<"hola"
+"holas"<="hol"+"a"
 }
