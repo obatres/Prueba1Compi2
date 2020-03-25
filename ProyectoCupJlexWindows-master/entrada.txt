@@ -2,6 +2,7 @@
 
 #p=c(2, 5.45,c(3,4.254,c(true,false,true)));
 
-j=c(5,c(4,5,5,c(false,true),c(45.6,0.332)));
+j="asd"
+j=1
 print(j);
 print(j);

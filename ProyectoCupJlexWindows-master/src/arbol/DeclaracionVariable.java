@@ -77,6 +77,8 @@ public class DeclaracionVariable extends Instruccion {
                     }
                 }                     
             }
+        }else if(exp instanceof Single){
+            Valor.add(0, exp.ejecutar(ts));
         }
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
@@ -84,7 +86,7 @@ public class DeclaracionVariable extends Instruccion {
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }
-        //System.out.println(Valor);
+
         
         Vector.clear();
         return null;
