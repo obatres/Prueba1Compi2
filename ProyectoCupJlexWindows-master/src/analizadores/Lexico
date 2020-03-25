@@ -41,7 +41,6 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 "while"   {return new Symbol(sym.WHILE,yyline,yychar, yytext());} 
 "do"      {return new Symbol(sym.DO,yyline,yychar, yytext());}
 "print"   {return new Symbol(sym.PRINT,yyline,yychar, yytext());}
-"c("            {return new Symbol(sym.C,yyline,yychar, yytext());}
 "NULL"          {return new Symbol(sym.NULL,yyline,yychar, yytext());}
 "function"      {return new Symbol(sym.FUNCTION,yyline,yychar, yytext());}
 ")=>"           {return new Symbol(sym.DEFFUN,yyline,yychar, yytext());}

@@ -29,19 +29,30 @@ public class Imprimir extends Instruccion{
     public Object ejecutar( TablaDeSimbolos ts ){
         if (contenido.ejecutar(ts) instanceof ArrayList){
             Salida  = (ArrayList<Object>) contenido.ejecutar(ts);
+            System.out.print("[");
+            sal  += "[";    
             for (Object t : Salida) {
                 if (t instanceof Expresion){
                     System.out.println(((Expresion)t).ejecutar(ts));
                     sal  += ((Expresion)t).ejecutar(ts).toString()+"\n";                    
+                }else{
+                    
+                    System.out.print(t);
+                    System.out.print(",");
+                    sal  += t.toString()+",";                      
                 }
             }
-            VentanaPrincipal.consola =sal;            
+            System.out.print("]");
+            sal  += "]";    
+            sal  += "\n"; 
+            VentanaPrincipal.consola +=sal; 
+                    
         }else{
             //System.out.println("no se puede imprimir el valor, es desconocido");
             System.out.println(contenido.ejecutar(ts).toString());
             VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
         }
-        
+
         return null;
     }
 

@@ -1,26 +1,8 @@
-numericos = c(45,56,true)
-numericos = c(45,560.2,true, "false")
-rojo = c(true, false, false)
-pachon = c("azul")
-reloj = c("ul")
-print(numericos);
+#n=c("Sdasd", 654,c(5,"azul",c("rojo","amarillo","verde")));
 
-typeOF(rojo);
+#p=c(2, 5.45,c(3,4.254,c(true,false,true)));
 
-hola=LEnght(rojo);
-
-joder=StringLenght(pachon);
-
-print(joder);
-
-
-j=Remove(pachon, reloj);
-
+j="asd"
+j=1
 print(j);
-
-f=c("toLOWErcase")
-h=toUPperCase(f);
-f=c(5.8)
-k=trunk(f);
-k=round(f);
-print(k);
+print(j);

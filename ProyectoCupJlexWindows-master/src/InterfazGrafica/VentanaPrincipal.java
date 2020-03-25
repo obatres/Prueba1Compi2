@@ -228,6 +228,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AbrirArchivoActionPerformed
 
     private void EjecutaJfelxCupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaJfelxCupActionPerformed
+        this.TextoSalida.setText("");
+        consola="";
         interpretar();
     }//GEN-LAST:event_EjecutaJfelxCupActionPerformed
 
