@@ -7,6 +7,7 @@ package arbol.Funciones.FuncionesDefinidas;
 
 import arbol.DeclaracionVariable;
 import arbol.Expresion;
+import arbol.Operacion;
 import arbol.Simbolo;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -37,6 +38,8 @@ public class C  extends Expresion{
                 DeclaracionVariable.Vector.add(object);
             }else if(object instanceof C){
                 ((C) object).ejecutar(ts);
+            }else if(object instanceof Operacion){
+                DeclaracionVariable.Vector.add(new Single(((Operacion) object).ejecutar(ts),((Operacion) object).GetTipo(ts)) );
             }
         }
         

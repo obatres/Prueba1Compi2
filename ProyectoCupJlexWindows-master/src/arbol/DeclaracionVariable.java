@@ -84,7 +84,7 @@ public class DeclaracionVariable extends Instruccion {
         }
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
-        }else{
+        }else{    
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }     
