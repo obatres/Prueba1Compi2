@@ -8,10 +8,10 @@ package arbol.Funciones.FuncionesDefinidas;
 import arbol.DeclaracionVariable;
 import arbol.Expresion;
 import arbol.Operacion;
-import arbol.Simbolo;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
 import arbol.Tipo;
+import arbol.id;
 import java.util.ArrayList;
 
 /**
@@ -40,6 +40,18 @@ public class C  extends Expresion{
                 ((C) object).ejecutar(ts);
             }else if(object instanceof Operacion){
                 DeclaracionVariable.Vector.add(new Single(((Operacion) object).ejecutar(ts),((Operacion) object).GetTipo(ts)) );
+            }else if(object instanceof id){
+                if(((id) object).ejecutar(ts) instanceof ArrayList){
+                    for (Object i : (ArrayList)((id) object).ejecutar(ts)) {
+                        if(i instanceof ArrayList){
+                            
+                        }else{
+                            DeclaracionVariable.Vector.add(new Single(i, ((id) object).GetTipo(ts)));   
+                        }
+                    }
+                }else{
+                    DeclaracionVariable.Vector.add(new Single(((id) object).ejecutar(ts),((id) object).GetTipo(ts)));
+                }
             }
         }
         
