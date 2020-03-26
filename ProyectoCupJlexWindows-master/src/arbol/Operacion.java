@@ -5,6 +5,7 @@
  */
 package arbol;
 import arbol.Tipo.tipo.*;
+import java.util.ArrayList;
 /**
  *
  * @author obatres_
@@ -101,22 +102,96 @@ public class Operacion extends Expresion{
 /*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
         if(tipo_operacion==Tipo_operacion.SUMA){
             if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){               
-                   return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){  
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1+ val2; 
+                    //return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
                }else if(operadorDer.GetTipo(ts).isString()){
-                   return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2;                  
+                   //return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
                }              
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1+ val2;
                 }else if(operadorDer.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2; 
                 }                  
             }else if(opderadorIzq.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2; 
             }else if(opderadorIzq.GetTipo(ts).isBoolean()){
                 if(operadorDer.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());    
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2;    
                 }
             }else{
                 //TODO reportar error de tipo
@@ -125,11 +200,35 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.RESTA){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1- val2;
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())-Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1- val2;
                 }
             }else{
                 //TODO reportar error de tipo
@@ -138,11 +237,35 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.MULTIPLICACION){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1*val2;
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())*Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1* val2;
                 }
             }else{
                 //TODO reportar error de tipo
@@ -164,11 +287,35 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.POTENCIA){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return Math.pow(val1, val2);                       
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return Math.pow(val1, val2);   
                 }
             }else{
                 //TODO reportar error de tipo
@@ -177,11 +324,35 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.MODULO){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1%val2;                    
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1%val2;  
                 }
             }else{
                 //TODO reportar error de tipo
@@ -189,7 +360,13 @@ public class Operacion extends Expresion{
 /*------------------------------------------------------UNARIO MENOS----------------------------------------------------------------------------*/              
         }else if(tipo_operacion==Tipo_operacion.UMENOS){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
-                return -Double.parseDouble(opderadorIzq.ejecutar(ts).toString());
+                    Double val1;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double)((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }                
+                return -val1;
             }else{
                 //TODO reportar error de tipo
             }
@@ -197,55 +374,199 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.IGUALIGUAL){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())==Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1.equals(val2);
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return (operadorDer.ejecutar(ts).toString()).equals(opderadorIzq.ejecutar(ts).toString());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return (val1.toString().equals( val2.toString()));   
             }
 /*------------------------------------------------------NO IGUAL----------------------------------------------------------------------------*/                 
         }else if(tipo_operacion==Tipo_operacion.DESIGUAL){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())!=Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return !val1.equals(val2);
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return !(operadorDer.ejecutar(ts).toString()).equals(opderadorIzq.ejecutar(ts).toString());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return !(val1.toString().equals( val2.toString()));                
             }            
 /*------------------------------------------------------MAYOR QUE----------------------------------------------------------------------------*/  
         }else if(tipo_operacion==Tipo_operacion.MAYOR){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())>Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1>val2;
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return (opderadorIzq.ejecutar(ts).toString().length())>(operadorDer.ejecutar(ts).toString().length());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1.length()>val2.length();
             }      
 /*------------------------------------------------------MENOR QUE----------------------------------------------------------------------------*/ 
         }else if(tipo_operacion==Tipo_operacion.MENOR){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())<Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ 
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1<val2;
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return (opderadorIzq.ejecutar(ts).toString().length())<(operadorDer.ejecutar(ts).toString().length());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1.length()<val2.length();               
             }   
 /*------------------------------------------------------MAYOR IGUAL QUE----------------------------------------------------------------------------*/  
         }else if(tipo_operacion==Tipo_operacion.MAYORIGUAL){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())>=Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1>=val2;
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return (opderadorIzq.ejecutar(ts).toString().length())>=(operadorDer.ejecutar(ts).toString().length());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1.length()>=val2.length();   
             }   
 /*------------------------------------------------------MENOR IGUAL QUE----------------------------------------------------------------------------*/ 
         }else if(tipo_operacion==Tipo_operacion.MENORIGUAL){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())<=Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1<=val2;
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
-               return (opderadorIzq.ejecutar(ts).toString().length())<=(operadorDer.ejecutar(ts).toString().length());  
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1.length()<=val2.length();   
             }  
 /*-------------------------------------------------------------AND----------------------------------------------------------------------------*/             
         }else if(tipo_operacion==Tipo_operacion.AND){
@@ -297,21 +618,32 @@ public class Operacion extends Expresion{
         @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {
         if (opderadorIzq.GetTipo(ts).isInt()){
-            if(operadorDer.GetTipo(ts).isInt()){
-                return new Tipo(Tipo.tipo.INT);  
-            }else if(operadorDer.GetTipo(ts).isDouble()){
-                return new Tipo(Tipo.tipo.DOUBLE);
-            }else if(operadorDer.GetTipo(ts).isString()){
-                return new Tipo(Tipo.tipo.STRING);
+            if(operadorDer!=null){
+                if(operadorDer.GetTipo(ts).isInt()){
+                    return new Tipo(Tipo.tipo.INT);  
+                }else if(operadorDer.GetTipo(ts).isDouble()){
+                    return new Tipo(Tipo.tipo.DOUBLE);
+                }else if(operadorDer.GetTipo(ts).isString()){
+                    return new Tipo(Tipo.tipo.STRING);
+                }else{
+                    //TODO reportar error de tipo
+                }                
             }else{
-                //TODO reportar error de tipo
+                return new Tipo(Tipo.tipo.INT); 
             }
         }else if(opderadorIzq.GetTipo(ts).isDouble()){
-            if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                return new Tipo(Tipo.tipo.DOUBLE);
-            }else if(operadorDer.GetTipo(ts).isString()){
-                return new Tipo(Tipo.tipo.STRING);
+            if(operadorDer!=null){
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
+                    return new Tipo(Tipo.tipo.DOUBLE);
+                }else if(operadorDer.GetTipo(ts).isString()){
+                    return new Tipo(Tipo.tipo.STRING);
+                }else{
+
+                }                
+            }else{
+                return new Tipo(Tipo.tipo.DOUBLE); 
             }
+
         }else if(opderadorIzq.GetTipo(ts).isString()){
             return new Tipo(Tipo.tipo.STRING);
         }else if(opderadorIzq.GetTipo(ts).isBoolean()){

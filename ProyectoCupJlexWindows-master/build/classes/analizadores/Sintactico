@@ -157,13 +157,6 @@ instruccion ::=
             RESULT  =  new Imprimir ((Expresion)a);
         :}
 
-
-    |  expresioncomp:a INTERROGACION expresion:b DOSP expresion:c 
-        {:
-            RESULT=new Imprimir((Expresion)new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c)); 
-        :}
-
-
     | Ciclos:a
     {:  
         RESULT = (Nodo)a;
@@ -389,6 +382,9 @@ expresion  ::=
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
+    |   expresioncomp:a INTERROGACION expresion:b DOSP expresion:c {:
+                                                                 RESULT=new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c); 
+                                                                    :}
 ;
 
 

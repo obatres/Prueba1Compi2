@@ -1,8 +1,12 @@
-#n=c("Sdasd", 654,c(5,"azul",c("rojo","amarillo","verde")));
-
-#p=c(2, 5.45,c(3,4.254,c(true,false,true)));
-
-j="asd"
-j=1
-print(j);
-print(j);
+a=c("a","b");
+b="s";
+if(a>b){
+	Print("Si salio el if");
+	Print(5+5+5+65+"as");
+	Print(2.5+"dsf"+5+5+0.2);
+	Print("hola"+"mundo"+"que"+"tal");
+	"hola">"hola"
+"holas">="hola"
+"hola"<"hola"
+"holas"<="hol"+"a"
+}
