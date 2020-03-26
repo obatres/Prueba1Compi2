@@ -165,11 +165,35 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.POTENCIA){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return Math.pow(val1, val2);                       
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Math.pow(Double.parseDouble(opderadorIzq.ejecutar(ts).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return Math.pow(val1, val2);   
                 }
             }else{
                 //TODO reportar error de tipo
@@ -191,7 +215,6 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1%val2;                    
-                   // return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())%Double.parseDouble(operadorDer.ejecutar(ts).toString());
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
