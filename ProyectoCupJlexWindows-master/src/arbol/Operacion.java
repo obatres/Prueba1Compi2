@@ -102,22 +102,96 @@ public class Operacion extends Expresion{
 /*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
         if(tipo_operacion==Tipo_operacion.SUMA){
             if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){               
-                   return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){  
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1+ val2; 
+                    //return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
                }else if(operadorDer.GetTipo(ts).isString()){
-                   return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2;                  
+                   //return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
                }              
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1;
+                    Double val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                    }else{
+                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
+                    }else{
+                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                    }                    
+                    return val1+ val2;
                 }else if(operadorDer.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2; 
                 }                  
             }else if(opderadorIzq.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2; 
             }else if(opderadorIzq.GetTipo(ts).isBoolean()){
                 if(operadorDer.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());    
+                    String val1;
+                    String val2;
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    }
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
+                    }else{
+                        val2= operadorDer.ejecutar(ts).toString();                    
+                    }                    
+                    return val1+val2;    
                 }
             }else{
                 //TODO reportar error de tipo
