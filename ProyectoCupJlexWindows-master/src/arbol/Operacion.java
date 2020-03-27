@@ -102,97 +102,256 @@ public class Operacion extends Expresion{
 /*------------------------------------------------------SUMA----------------------------------------------------------------------------*/    
         if(tipo_operacion==Tipo_operacion.SUMA){
             if (opderadorIzq.GetTipo(ts).isInt()){ // EJEMPLO DE OPERADOR IZQUIERDO  1,546,100
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){  
-                    Double val1;
-                    Double val2;
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ 
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1+ val2; 
-                    //return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())+Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())+Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) +Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1+Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    }   
+                    
+                    
+                    
+                    
                }else if(operadorDer.GetTipo(ts).isString()){
-                    String val1;
-                    String val2;
-                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val1= opderadorIzq.ejecutar(ts).toString();                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val2= operadorDer.ejecutar(ts).toString();                    
-                    }                    
-                    return val1+val2;                  
-                   //return (opderadorIzq.ejecutar(ts).toString())+(operadorDer.ejecutar(ts).toString());
-               }              
+                   
+                   
+                   
+                    String val1 = "";
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){   
+                        vec1=((ArrayList)opderadorIzq.ejecutar(ts));   
+                        if(operadorDer.ejecutar(ts)instanceof ArrayList){
+                            vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                            if(vec1.size()==vec2.size()){                                  
+                                for (int i = 0; i < vec1.size(); i++) {
+                                    vec3.add((vec1.get(i).toString())+(vec2.get(i).toString()));
+                                }    
+                                return vec3;     
+                            }else{
+                                System.out.println("error de tamaños");
+                            }                             
+                        }else if(operadorDer.ejecutar(ts)instanceof String){
+                            return (vec1.get(0).toString()) + (operadorDer.ejecutar(ts).toString());
+                        }   
+                    }else{                       
+                        val1=(opderadorIzq.ejecutar(ts).toString());                          
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                            
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                          
+                            return val1+(operadorDer.ejecutar(ts).toString());                           
+                        }                        
+                    } 
+                    
+                }else{
+                   
+                    System.out.println("error de tipos");
+               }        
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1+ val2;
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())+Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) +Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1+Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    }  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }else if(operadorDer.GetTipo(ts).isString()){
-                    String val1;
-                    String val2;
-                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val1= opderadorIzq.ejecutar(ts).toString();                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val2= operadorDer.ejecutar(ts).toString();                    
-                    }                    
-                    return val1+val2; 
-                }                  
+                    
+                    
+                    
+                    
+                    String val1 = "";
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){   
+                        vec1=((ArrayList)opderadorIzq.ejecutar(ts));   
+                        if(operadorDer.ejecutar(ts)instanceof ArrayList){
+                            vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                            if(vec1.size()==vec2.size()){                                  
+                                for (int i = 0; i < vec1.size(); i++) {
+                                    vec3.add((vec1.get(i).toString())+(vec2.get(i).toString()));
+                                }    
+                                return vec3;     
+                            }else{
+                                System.out.println("error de tamaños");
+                            }                             
+                        }else if(operadorDer.ejecutar(ts)instanceof String){
+                            return (vec1.get(0).toString()) + (operadorDer.ejecutar(ts).toString());
+                        }   
+                    }else{                       
+                        val1=(opderadorIzq.ejecutar(ts).toString());                          
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                            
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                          
+                            return val1+(operadorDer.ejecutar(ts).toString());                           
+                        }                        
+                    }  
+                }else{
+                    System.out.println("error de tipos");
+                }       
+                
+                
+                
+                
+                
+                
+                
             }else if(opderadorIzq.GetTipo(ts).isString()){
-                    String val1;
-                    String val2;
-                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                
+                
+                
+                
+                    String val1 = "";
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){   
+                        vec1=((ArrayList)opderadorIzq.ejecutar(ts));   
+                        if(operadorDer.ejecutar(ts)instanceof ArrayList){
+                            vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                            if(vec1.size()==vec2.size()){                                  
+                                for (int i = 0; i < vec1.size(); i++) {
+                                    vec3.add((vec1.get(i).toString())+(vec2.get(i).toString()));
+                                }    
+                                return vec3;     
+                            }else{
+                                System.out.println("error de tamaños");
+                            }                             
+                        }else if(operadorDer.ejecutar(ts)instanceof String){
+                            return (vec1.get(0).toString()) + (operadorDer.ejecutar(ts).toString());
+                        }   
+                    }else{                       
+                        val1=(opderadorIzq.ejecutar(ts).toString());                          
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                            
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                          
+                            return val1+(operadorDer.ejecutar(ts).toString());                           
+                        }                        
                     }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val2= operadorDer.ejecutar(ts).toString();                    
-                    }                    
-                    return val1+val2; 
+                    
+                    
+                    
+                    
+                    
+                    
+                    
             }else if(opderadorIzq.GetTipo(ts).isBoolean()){
                 if(operadorDer.GetTipo(ts).isString()){
-                    String val1;
-                    String val2;
-                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val1= opderadorIzq.ejecutar(ts).toString();                     
+                    
+                    
+                    
+                    String val1 = "";
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){   
+                        vec1=((ArrayList)opderadorIzq.ejecutar(ts));   
+                        if(operadorDer.ejecutar(ts)instanceof ArrayList){
+                            vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                            if(vec1.size()==vec2.size()){                                  
+                                for (int i = 0; i < vec1.size(); i++) {
+                                    vec3.add((vec1.get(i).toString())+(vec2.get(i).toString()));
+                                }    
+                                return vec3;     
+                            }else{
+                                System.out.println("error de tamaños");
+                            }                             
+                        }else if(operadorDer.ejecutar(ts)instanceof String){
+                            return (vec1.get(0).toString()) + (operadorDer.ejecutar(ts).toString());
+                        }   
+                    }else{                       
+                        val1=(opderadorIzq.ejecutar(ts).toString());                          
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                            
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1+(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                          
+                            return val1+(operadorDer.ejecutar(ts).toString());                           
+                        }                        
                     }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=((ArrayList)operadorDer.ejecutar(ts)).get(0).toString();
-                    }else{
-                        val2= operadorDer.ejecutar(ts).toString();                    
-                    }                    
-                    return val1+val2;    
+                    
+                    
+                }else{
+                    System.out.println("error de tipos");
                 }
+  
             }else{
                 //TODO reportar error de tipo
             } 
@@ -200,35 +359,90 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.RESTA){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1- val2;
-                }     
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())-Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) -Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1-Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1-Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
+                
+                
+                
+                
+                
+                }    
+                
+                
+                
+                
+                
+                
+                
+                
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1- val2;
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())-Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) -Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1-Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1-Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
+                    
+                    
+                    
+                    
                 }
             }else{
                 //TODO reportar error de tipo
@@ -237,35 +451,78 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.MULTIPLICACION){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1*val2;
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())*Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) *Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1*Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1*Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
+                    
+                    
+                    
+                    
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1* val2;
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())*Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) *Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1*Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1*Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
+                    
+                    
                 }
             }else{
                 //TODO reportar error de tipo
@@ -274,11 +531,67 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.DIVISION){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())/Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) /Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1/Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1/Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString())/Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())/Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) /Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1/Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1/Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    } 
                 }
             }else{
                 //TODO reportar error de tipo
@@ -287,35 +600,81 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.POTENCIA){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return Math.pow(val1, val2);                       
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Math.pow(Double.parseDouble(vec1.get(i).toString()),Double.parseDouble(vec2.get(i).toString())));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Math.pow(Double.parseDouble(vec1.get(0).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return Math.pow(val1,Double.parseDouble(vec2.get(0).toString()));                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return Math.pow(val1,Double.parseDouble(operadorDer.ejecutar(ts).toString()));                           
+                        }                                         
+                    }     
+                    
+                    
+                    
+                    
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Math.pow(Double.parseDouble(vec1.get(i).toString()),Double.parseDouble(vec2.get(i).toString())));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Math.pow(Double.parseDouble(vec1.get(0).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString()));                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return Math.pow(val1,Double.parseDouble(vec2.get(0).toString()));                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return Math.pow(val1,Double.parseDouble(operadorDer.ejecutar(ts).toString()));                           
+                        }                                         
                     }                    
-                    return Math.pow(val1, val2);   
+                 
+ 
                 }
             }else{
                 //TODO reportar error de tipo
@@ -324,35 +683,83 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.MODULO){
             if(opderadorIzq.GetTipo(ts).isInt()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1%val2;                    
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())%Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) %Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1%Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1%Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    }   
+                    
+                    
+                    
+                    
+                    
                 }     
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    Double val1;
-                    Double val2;
+                    
+                    
+                    
+                    Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec2 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }
-                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
-                        val2=(Double) ((ArrayList)operadorDer.ejecutar(ts)).get(0);
-                    }else{
-                        val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
-                    }                    
-                    return val1%val2;  
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts)); 
+                            if(operadorDer.ejecutar(ts)instanceof ArrayList){                              
+                                vec2=((ArrayList)operadorDer.ejecutar(ts)); 
+                                if(vec1.size()==vec2.size()){                                   
+                                    for (int i = 0; i < vec1.size(); i++) {                                       
+                                        vec3.add(Double.parseDouble(vec1.get(i).toString())%Double.parseDouble(vec2.get(i).toString()));                                       
+                                    }                                     
+                                    return vec3;                                    
+                                }else{                                   
+                                    System.out.println("error de tamaños");                                   
+                                }
+                            }else if(operadorDer.ejecutar(ts)instanceof String){                               
+                                return Double.parseDouble(vec1.get(0).toString()) %Double.parseDouble(operadorDer.ejecutar(ts).toString());                                
+                            }         
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                       
+                        if(operadorDer.ejecutar(ts) instanceof ArrayList){                          
+                            vec2=((ArrayList)operadorDer.ejecutar(ts));                           
+                            return val1%Double.parseDouble(vec2.get(0).toString());                       
+                        }else if(operadorDer.ejecutar(ts)instanceof String){                         
+                            return val1%Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
+                        }                                         
+                    }  
+                    
+                    
+                    
+                    
                 }
             }else{
                 //TODO reportar error de tipo
@@ -360,13 +767,28 @@ public class Operacion extends Expresion{
 /*------------------------------------------------------UNARIO MENOS----------------------------------------------------------------------------*/              
         }else if(tipo_operacion==Tipo_operacion.UMENOS){
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
-                    Double val1;
+                
+                
+                
+                   Double val1 = 0.0;
+                    ArrayList<Object> vec1 = new ArrayList<>();
+                    ArrayList<Object> vec3 = new ArrayList<>();
+                    
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double)((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
-                    }else{
-                        val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
-                    }                
-                return -val1;
+                            vec1=((ArrayList)opderadorIzq.ejecutar(ts));                                 
+                                for (int i = 0; i < vec1.size(); i++) {                                       
+                                    vec3.add(-Double.parseDouble(vec1.get(i).toString()));                                       
+                                }                                     
+                                return vec3;                                    
+                    }else{                        
+                        val1=Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                                                
+                            return -val1;                                           
+                    }  
+                
+                
+                
+                
+                
             }else{
                 //TODO reportar error de tipo
             }
@@ -592,15 +1014,58 @@ public class Operacion extends Expresion{
         }else if(tipo_operacion==Tipo_operacion.TERNARIO){
             if(operadorTer.ejecutar(ts).equals(true)){
                 if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(opderadorIzq.ejecutar(ts).toString());
+                    
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        ArrayList<Object>vec=new ArrayList<>();
+                        for (Object object : (ArrayList)opderadorIzq.ejecutar(ts)) {
+                            vec.add(object);
+                        }
+                        return vec;
+                    }else{
+                        return Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                        
+                    }
+
+                    
+                    
+                    
                 }else if(opderadorIzq.GetTipo(ts).isString()){
-                    return (opderadorIzq.ejecutar(ts).toString());
+                    
+                    
+                    if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
+                        ArrayList<Object>vec=new ArrayList<>();
+                        for (Object object : (ArrayList)opderadorIzq.ejecutar(ts)) {
+                            vec.add(object);
+                        }
+                        return vec;
+                    }else{
+                        return (opderadorIzq.ejecutar(ts).toString());                        
+                    }
+                    
                 }
             }else {
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    return Double.parseDouble(operadorDer.ejecutar(ts).toString());
+                    
+                    
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        ArrayList<Object>vec=new ArrayList<>();
+                        for (Object object : (ArrayList)operadorDer.ejecutar(ts)) {
+                            vec.add(object);
+                        }
+                        return vec;
+                    }else{
+                        return Double.parseDouble(operadorDer.ejecutar(ts).toString());                        
+                    }
+                    
                 }else if(operadorDer.GetTipo(ts).isString()){
-                    return (operadorDer.ejecutar(ts).toString());
+                    if(operadorDer.ejecutar(ts) instanceof ArrayList){
+                        ArrayList<Object>vec=new ArrayList<>();
+                        for (Object object : (ArrayList)operadorDer.ejecutar(ts)) {
+                            vec.add(object);
+                        }
+                        return vec;
+                    }else{
+                        return (operadorDer.ejecutar(ts).toString());                        
+                    }
                 }               
             }
             

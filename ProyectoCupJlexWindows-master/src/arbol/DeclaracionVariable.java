@@ -38,9 +38,9 @@ public class DeclaracionVariable extends Instruccion {
                 for (Object o : Vector) {
                     if(((Expresion)o).GetTipo(ts).isBoolean()){
                         if(((Expresion)o).ejecutar(ts).equals("true")){
-                            Valor.add(1);
+                            Valor.add("1");
                         }else if(((Expresion)o).ejecutar(ts).equals("false")){
-                            Valor.add(0);
+                            Valor.add("0");
                         }
                     }else{
                         Valor.add(((Expresion)o).ejecutar(ts));
@@ -50,9 +50,9 @@ public class DeclaracionVariable extends Instruccion {
                 for (Object o : Vector) {
                     if(((Expresion)o).GetTipo(ts).isBoolean()){
                         if(((Expresion)o).ejecutar(ts).equals("true")){
-                            Valor.add(1.0);
+                            Valor.add("1.0");
                         }else if(((Expresion)o).ejecutar(ts).equals("false")){
-                            Valor.add(0.0);
+                            Valor.add("0.0");
                         }
                     }else if (((Expresion)o).GetTipo(ts).isInt()){
                         Valor.add(Double.parseDouble(((Expresion)o).ejecutar(ts).toString()));
