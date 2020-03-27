@@ -32,6 +32,7 @@ import arbol.Funciones.FuncionesDefinidas.Round;
 import arbol.Funciones.FuncionesDefinidas.C;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
+import arbol.Retorno.Retorno;
 import java.util.ArrayList;
 import arbol.Declaracion;
 import arbol.DeclaracionVariable;
@@ -70,6 +71,7 @@ terminal String POTENCIA, MODULO;
 terminal String MAS,MENOS,POR,DIVIDIDO;
 terminal String IGUALD, MAYOR,MENOR, MAYORIGUAL, MENORIGUAL, DESIGUAL;
 terminal String SWITCH, CASE, BREAK,DEFAULT;
+terminal String RETURN;
 terminal String AND,OR,NOT;
 terminal String INTERROGACION, DOSP;
 terminal String IF, TRUE, FALSE,ELSE; 
@@ -168,6 +170,10 @@ instruccion ::=
     |Llamada:a
     {:
         RESULT=(Nodo)a;
+    :}
+    |   RETURN expresion:a PTCOMA                               
+    {: 
+        RESULT = new Retorno((Expresion)a);
     :}
     |TYPEOF PARIZQ expresion:a PARDER PTCOMA
     {:
