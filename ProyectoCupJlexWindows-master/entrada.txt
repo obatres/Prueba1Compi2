@@ -1,6 +1,5 @@
-a=c("a","b",654,0,50.54,true);
-b=c("s");
-cd=c(a,b);
-
-p=c(a,cd);
-print(p);
+a=c(56,0,1,true);
+cd=c("aS",1,2);
+b=c(5>10?a:cd);
+cg=5;
+print(b+cd);
