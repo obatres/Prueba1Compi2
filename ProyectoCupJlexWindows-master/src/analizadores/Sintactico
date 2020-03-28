@@ -175,6 +175,10 @@ instruccion ::=
     {: 
         RESULT = new Retorno((Expresion)a);
     :}
+    |   RETURN PTCOMA
+    {:
+        RESULT = new Retorno();
+    :}
     |TYPEOF PARIZQ expresion:a PARDER PTCOMA
     {:
         RESULT = new TypeOf((Expresion)a);

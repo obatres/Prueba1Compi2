@@ -20,7 +20,9 @@ public class Retorno extends Expresion{
     public Retorno(Expresion exp) {
         this.exp = exp;
     }
-    
+
+    public Retorno() {
+    }
     
     
     @Override

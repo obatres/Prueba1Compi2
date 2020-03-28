@@ -64,15 +64,16 @@ public class PiePlot extends Instruccion{
         DefaultPieDataset data = new DefaultPieDataset();
         if(Numericos.size()==Labels.size()){
             for (int i = 0; i < Numericos.size(); i++) {
-                data.setValue(((Expresion)Labels.get(i)).ejecutar(ts).toString(),Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
+                //System.out.println(Labels.get(i).getClass());
+                data.setValue(Labels.get(i).toString(),Double.parseDouble(Numericos.get(i).toString()));
             }            
         }else if(Numericos.size()>Labels.size()){
             //REPORTAR ERROR DE TAMAÑO DE VECTORES
             for (int i = 0; i < Labels.size(); i++) {
-                data.setValue(((Expresion)Labels.get(i)).ejecutar(ts).toString(),Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));   
+                data.setValue((Labels.get(i)).toString(),Double.parseDouble(Numericos.get(i).toString()));   
             }
             for (int i = Labels.size(); i < Numericos.size(); i++) {
-                data.setValue("Desconocido"+i,Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()));
+                data.setValue("Desconocido"+i,Double.parseDouble(Numericos.get(i).toString()));
             }
         }
 
