@@ -1,14 +1,7 @@
 a=1;
 
-Identificador = function( ) {
-	return;
-	print(6565+654+6+6*321+654/1654.654%%65^654.654^54);
-}
-
-Identificador();
-
-getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
+getVectorEstudiante = function() {
     return(654);
 }
 
-getVectorEstudiante(5, 5, 5, 5, 5, 5);
+getVectorEstudiante();

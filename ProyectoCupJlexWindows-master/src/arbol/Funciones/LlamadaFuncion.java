@@ -53,20 +53,21 @@ public class LlamadaFuncion extends Instruccion{
             ParametrosDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getParametros(identificadorLlamada);
             InstruccionesDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getInstrucciones(identificadorLlamada);
             if(ParametrosLlamada==null&&ParametrosDeclaracion==null){
-                // <editor-fold desc="LLAMADA SIN PARAMETROS">> 
+                //LLAMADA SIN PARAMETROS
+                
+                // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
                 for (Nodo n : InstruccionesDeclaracion) {
                     if( n instanceof Instruccion){
                         // <editor-fold desc="INSTRUCCION">>    
                         if(n instanceof Retorno){
                             // <editor-fold desc="RETORNO">> 
-                            System.out.println("retorno");
                             if (((Retorno) n).ejecutar(ts)==(Object)0){
                                 // <editor-fold desc="SIN VALOR">> 
                                 return null;
                                 // </editor-fold>
-                            }else{
+                            }else {
                                 // <editor-fold desc="CON VALOR">> 
-                                System.out.println("retorno valor");
+                                return ((Retorno) n).ejecutar(ts);
                                 // </editor-fold>
                             }
                             // </editor-fold>
@@ -76,26 +77,51 @@ public class LlamadaFuncion extends Instruccion{
                         // </editor-fold>
                     }
                 }
+                
                 // </editor-fold>
+            
+                
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
+                // <editor-fold desc="LLAMADA CON PARAMETROS">> 
                 for (int i = 0; i < ParametrosLlamada.size(); i++) {
+                    
                     if(ParametrosLlamada.get(i).GetTipo(ts).tp.equals(Tipo.tipo.DEF)){
+                        // <editor-fold desc="PARAMETROS DEFAULT">> 
                         Vector = new ArrayList<>();
                         Vector.add(0,ParametrosDeclaracion.get(i).getValorParametro().ejecutar(tablalocal));
                         tablalocal.add(new Simbolo(ParametrosDeclaracion.get(i).getIdParametro(), ParametrosDeclaracion.get(i).getValorParametro().GetTipo(tablalocal)));
                         tablalocal.setValor(ParametrosDeclaracion.get(i).getIdParametro(),Vector,ParametrosDeclaracion.get(i).getValorParametro().GetTipo(tablalocal));                       
+                        // </editor-fold>
                     }else{
+                        // <editor-fold desc="PARAMETROS GUARDADOS">> 
                         Vector = new ArrayList<>();
                         Vector.add(0,ParametrosLlamada.get(i).ejecutar(tablalocal));
                         tablalocal.add(new Simbolo(ParametrosDeclaracion.get(i).getIdParametro(), ParametrosLlamada.get(i).GetTipo(tablalocal)));
                         tablalocal.setValor(ParametrosDeclaracion.get(i).getIdParametro(),Vector,ParametrosLlamada.get(i).GetTipo(tablalocal));
-                    }
-                }                
-                for (Nodo n : InstruccionesDeclaracion) {
-                    if( n instanceof Instruccion){
-                        ((Instruccion) n).ejecutar(tablalocal);
+                        // </editor-fold>
                     }
                 }
+                // </editor-fold>
+                
+                // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
+                for (Nodo n : InstruccionesDeclaracion) {
+                    if( n instanceof Instruccion){
+                        if(n instanceof Retorno){
+                            if(((Retorno) n).ejecutar(ts)==(Object)0){
+                                // <editor-fold desc="SIN VALOR">> 
+                                return null;
+                                // </editor-fold>     
+                            }else{
+                                // <editor-fold desc="CON VALOR">> 
+                                return ((Retorno) n).ejecutar(ts);
+                                // </editor-fold>                                
+                            }
+                        }else{
+                            ((Instruccion) n).ejecutar(tablalocal);    
+                        }
+                    }
+                }
+                // </editor-fold>
             }else{
                 System.out.println("cantidad de parametros no coincide");
             }
