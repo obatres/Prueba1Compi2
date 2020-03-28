@@ -1648,7 +1648,6 @@ class CUP$Sintactico$actions {
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		LinkedList<Nodo> b = (LinkedList<Nodo>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		
-            //System.out.println(s);
             RESULT = new While((Expresion)a, b);
         
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Ciclos",14, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
@@ -1669,7 +1668,6 @@ class CUP$Sintactico$actions {
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		
-            //System.out.println(s);
             RESULT = new DoWhile((Expresion)a,b);
         
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Ciclos",14, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-8)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);

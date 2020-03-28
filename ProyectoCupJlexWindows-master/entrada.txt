@@ -1,9 +1,14 @@
+a=1;
 
-if((10+26*6546/654.654%%654.465/54^654.103)>1){
-	Print("evalua primer if");
-	if(("asd"+"s")>"a"){
-		Print("antesdeswi");
-	}
+Identificador = function( ) {
+	return;
+	print(6565+654+6+6*321+654/1654.654%%65^654.654^54);
 }
 
-		Print(10+26*6546/654.654%%654.465/54^654.103-654564);
+Identificador();
+
+getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
+    return(654);
+}
+
+getVectorEstudiante(5, 5, 5, 5, 5, 5);

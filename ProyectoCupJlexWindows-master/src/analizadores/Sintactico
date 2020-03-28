@@ -262,12 +262,10 @@ Ciclos::=IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER
         :}
     | WHILE:s PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER
         {:
-            //System.out.println(s);
             RESULT = new While((Expresion)a, b);
         :}
     | DO:s LLAVEIZQ instrucciones:b LLAVEDER WHILE PARIZQ expresioncomp:a PARDER PTCOMA 
         {:
-            //System.out.println(s);
             RESULT = new DoWhile((Expresion)a,b);
         :};
 

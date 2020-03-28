@@ -8,6 +8,7 @@ package arbol.Funciones;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
+import arbol.Retorno.Retorno;
 import arbol.Simbolo;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -52,11 +53,30 @@ public class LlamadaFuncion extends Instruccion{
             ParametrosDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getParametros(identificadorLlamada);
             InstruccionesDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getInstrucciones(identificadorLlamada);
             if(ParametrosLlamada==null&&ParametrosDeclaracion==null){
+                // <editor-fold desc="LLAMADA SIN PARAMETROS">> 
                 for (Nodo n : InstruccionesDeclaracion) {
                     if( n instanceof Instruccion){
-                        ((Instruccion) n).ejecutar(tablalocal);
+                        // <editor-fold desc="INSTRUCCION">>    
+                        if(n instanceof Retorno){
+                            // <editor-fold desc="RETORNO">> 
+                            System.out.println("retorno");
+                            if (((Retorno) n).ejecutar(ts)==(Object)0){
+                                // <editor-fold desc="SIN VALOR">> 
+                                return null;
+                                // </editor-fold>
+                            }else{
+                                // <editor-fold desc="CON VALOR">> 
+                                System.out.println("retorno valor");
+                                // </editor-fold>
+                            }
+                            // </editor-fold>
+                        }else{
+                           ((Instruccion) n).ejecutar(tablalocal);                            
+                        }
+                        // </editor-fold>
                     }
                 }
+                // </editor-fold>
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
                 for (int i = 0; i < ParametrosLlamada.size(); i++) {
                     if(ParametrosLlamada.get(i).GetTipo(ts).tp.equals(Tipo.tipo.DEF)){
