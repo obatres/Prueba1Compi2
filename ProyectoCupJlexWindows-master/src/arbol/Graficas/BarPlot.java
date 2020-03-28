@@ -45,7 +45,7 @@ public class BarPlot extends Instruccion{
             if(((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts) instanceof ArrayList){
                 if(((Expresion)ParametrosBarPlot.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.DOUBLE)||((Expresion)ParametrosBarPlot.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.INT))
                     //System.out.println("listado de numeros");
-                    Numericos = (ArrayList<Object>) ((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts);
+                    Numericos = (ArrayList) ((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts);
             }  else{
                 //Parametro incorrecto, se esperaba un listado de numeros
             }
@@ -69,7 +69,7 @@ public class BarPlot extends Instruccion{
             if(((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts) instanceof ArrayList){
                 if(((Expresion)ParametrosBarPlot.get(4)).GetTipo(ts).tp.equals(Tipo.tipo.STRING)){
                     //System.out.println("Lista de labels");
-                    Labels = (ArrayList<Object>) ((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts);
+                    Labels = (ArrayList) ((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts);
                     //sSystem.out.println(Labels);
                 }
             }
@@ -80,15 +80,15 @@ public class BarPlot extends Instruccion{
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         if(Numericos.size()==Labels.size()){
             for (int i = 0; i < Numericos.size(); i++) {
-                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,((Expresion)Labels.get(i)).ejecutar(ts).toString());
+                dataset.setValue(Double.parseDouble((Numericos.get(i)).toString()), main,(Labels.get(i)).toString());
             }              
         }else if (Numericos.size()>Labels.size()){
             //REPORTAR ERROR DE TAMAÑO DE VECTORES
             for (int i = 0; i < Labels.size(); i++) {
-                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,((Expresion)Labels.get(i)).ejecutar(ts).toString());
+                dataset.setValue(Double.parseDouble(Numericos.get(i).toString()), main,(Labels.get(i).toString()));
             }
             for (int i = Labels.size(); i < Numericos.size(); i++) {
-                dataset.setValue(Double.parseDouble(((Expresion)Numericos.get(i)).ejecutar(ts).toString()), main,"Desconocido"+i);
+                dataset.setValue(Double.parseDouble((Numericos.get(i)).toString()), main,"Desconocido"+i);
             }
         }
   
