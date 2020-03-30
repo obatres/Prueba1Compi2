@@ -104,6 +104,7 @@ non terminal Llamada;
 non terminal Graficas;
 non terminal Ciclos;
 non terminal DefinicionVariables;
+non terminal Sentencia, SentIgual, SentDef,FinSent,SentFunc, SentParam;
 
 
 
@@ -124,22 +125,65 @@ ini::=instrucciones:a
         parser.AST=a;
     :};
 
-instrucciones ::= 
-   instrucciones:a instruccion:b 
-    {:
-        RESULT= a;
-        RESULT.add(b);
-    :}
- |instrucciones:a Funcion:b 
-    {:
-        RESULT= a;
-        RESULT.add(b);
-    :}
- | instruccion:a 
-    {:
-        RESULT= new LinkedList<>();
-        RESULT.add(a);
-    :}; 
+instrucciones ::=   instrucciones:a instruccion:b 
+                    {:
+                        RESULT= a;
+                        RESULT.add(b);
+                    :}
+                 | instruccion:a 
+                    {:
+                        RESULT= new LinkedList<>();
+                        RESULT.add(a);
+                    :}; 
+
+
+Sentencia::= IDENTIFICADOR:a SentIgual:b {: System.out.println(a+" "+b);:} 
+            ;
+
+
+SentIgual::= IGUAL:a SentDef:b  {: System.out.println(a+" "+b);:}
+            |PARIZQ ParametrosLlamada PARDER
+            |PARIZQ PARDER;
+
+
+SentDef::=  expresion:a {: System.out.println(a);:} 
+            | FUNCTION:a PARIZQ:b SentFunc {: System.out.println(a+" "+b);:}
+            | PARIZQ:a SentFunc {:System.out.println(a);:};
+
+
+SentFunc::= PARDER:a LLAVEIZQ:b instrucciones LLAVEDER:c {: System.out.println(a+" "+b+" "+c); :}
+            
+            |ListaParametros:b PARDER SentParam                                     
+            
+            |PARDER DEFFUN LLAVEIZQ instrucciones:c LLAVEDER;
+
+
+SentParam::= LLAVEIZQ instrucciones:c LLAVEDER 
+            |DEFFUN LLAVEIZQ instrucciones:c LLAVEDER ;
+
+
+ListaExp ::= ListaExp:a COMA expresion:b 
+            {:
+                RESULT= a;
+                RESULT.add((Expresion)b);
+            :}
+
+            | expresion:a
+            {:
+                RESULT = new ArrayList<>();
+                RESULT.add((Expresion)a);
+            :}
+;
+
+Parametros::=  IDENTIFICADOR:a
+
+            |Sentencia;
+
+
+ListaParametros::= ListaParametros:a COMA Parametros:b         
+
+                   | Parametros:a;
+
 
 instruccion ::= 
     PRINT PARIZQ expresion:a PARDER PTCOMA
@@ -147,17 +191,9 @@ instruccion ::=
             //System.out.println("El valor de la expresión es: "+a);
             RESULT  =  new Imprimir ((Expresion)a);
         :}
+    | Sentencia:a PTCOMA {: System.out.println(a);:}
 
-
-    |DefinicionVariables:a
-        {:
-           RESULT =(Nodo)a;
-        :}
-
-    | expresioncomp:a
-        {:
-            RESULT  =  new Imprimir ((Expresion)a);
-        :}
+    | Sentencia:a 
 
     | Ciclos:a
     {:  
@@ -167,10 +203,6 @@ instruccion ::=
     {:
         RESULT=(Nodo)a;
     :}  
-    |Llamada:a
-    {:
-        RESULT=(Nodo)a;
-    :}
     |   RETURN expresion:a PTCOMA                               
     {: 
         RESULT = new Retorno((Expresion)a);
@@ -191,29 +223,10 @@ instruccion ::=
     {:
         RESULT = new StringLenght((Expresion) a);
     :}
-
-
-      
+    
 ;   
 
 
-Llamada::=   IDENTIFICADOR:a PARIZQ PARDER PTCOMA
-            {:
-                RESULT = new LlamadaFuncion(a);
-            :}
-            |IDENTIFICADOR:a PARIZQ ParametrosLlamada:b PARDER PTCOMA
-            {:
-                RESULT = new LlamadaFuncion(b,a);
-            :}
-            |IDENTIFICADOR:a PARIZQ PARDER 
-            {:
-                RESULT = new LlamadaFuncion(a);
-            :}
-            |IDENTIFICADOR:a PARIZQ ParametrosLlamada:b PARDER 
-            {:  
-                RESULT = new LlamadaFuncion(b,a);
-            :}
-;
 
 ParametrosLlamada::=    ParametrosLlamada:a COMA expresion:b
                     {:
@@ -269,52 +282,8 @@ Ciclos::=IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER
             RESULT = new DoWhile((Expresion)a,b);
         :};
 
-Funcion::=    IDENTIFICADOR:a IGUAL FUNCTION PARIZQ PARDER LLAVEIZQ instrucciones:b LLAVEDER 
-            {:
-                Funcion f = new Funcion(a,b);
-                RESULT = new DefinicionDeFuncion(f);                
-            :}
-            | IDENTIFICADOR:a IGUAL FUNCTION PARIZQ ListaParametros:b PARDER LLAVEIZQ instrucciones:c LLAVEDER
-            {:
-                Funcion f = new Funcion(a,b,c);
-                RESULT = new DefinicionDeFuncion(f);
-            :}
-            | IDENTIFICADOR:a IGUAL PARIZQ ListaParametros:b  DEFFUN LLAVEIZQ instrucciones:c LLAVEDER
-            {:
-                Funcion f = new Funcion(a,b,c);
-                RESULT = new DefinicionDeFuncion(f);
-            :}
-            | IDENTIFICADOR:a IGUAL PARIZQ  DEFFUN LLAVEIZQ instrucciones:c LLAVEDER
-            {:
-                Funcion f = new Funcion(a,c);
-                RESULT = new DefinicionDeFuncion(f);   
-            :}
-
-     ;
 
 
-ListaParametros::= ListaParametros:a COMA Parametros:b
-                    {:
-                        RESULT = a;
-                        RESULT.add(b);
-                    :}
-                   | Parametros:a
-                   {:
-                        RESULT = new ArrayList<>();
-                        RESULT.add(a);
-                   :}
-    ;
-
-Parametros::=
-            IDENTIFICADOR:a
-            {:
-                RESULT=new Parametro(a);
-            :}
-            |IDENTIFICADOR:a IGUAL expresion:b
-            {:
-                RESULT = new Parametro((Expresion)b,a);
-            :}
-;
 
 listacase::= listacase:a CASES:b
                 {:  
@@ -338,29 +307,7 @@ CASES::= CASE expresion:a DOSP instrucciones:b
             :}
 ;
 
-DefinicionVariables::=      IDENTIFICADOR:a IGUAL expresion:b 
-                        {:
-                            RESULT = new DeclaracionVariable ((Expresion)b,a);       
-                        :}
 
-                        |   IDENTIFICADOR:a IGUAL expresion:b PTCOMA 
-                        {:
-                            RESULT = new DeclaracionVariable ((Expresion)b,a);
-                        :}
-                         ;
-
-ListaExp ::= ListaExp:a COMA expresion:b 
-            {:
-                RESULT= a;
-                RESULT.add((Expresion)b);
-            :}
-
-            |expresion:a
-            {:
-                RESULT = new ArrayList<>();
-                RESULT.add((Expresion)a);
-            :}
-;
 
 
 
@@ -380,7 +327,7 @@ expresion  ::=
     |   IDENTIFICADOR:a                        {:RESULT=new id(a);:}
     |   IDENTIFICADOR:a CORIZQ expresion CORDER CORIZQ expresion CORDER 
     |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
-    |   PARIZQ expresion:a PARDER              {:RESULT=a;:}
+    //|   PARIZQ expresion:a PARDER              {:RESULT=a;:}
     |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
     |   LENGHTPAR expresion:a PARDER                          {:RESULT = new Lenght((Expresion)a);:}
     |   STRINGLENGHTPAR expresion:a PARDER                    {:RESULT = new StringLenght((Expresion) a); :}
@@ -390,6 +337,7 @@ expresion  ::=
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
+    |   IDENTIFICADOR PARIZQ ParametrosLlamada PARDER 
     |   expresioncomp:a INTERROGACION expresion:b DOSP expresion:c {:
                                                                  RESULT=new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c); 
                                                                     :}
