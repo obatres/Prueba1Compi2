@@ -41,6 +41,8 @@ import arbol.Funciones.FuncionesDefinidas.C;
 import arbol.Sentencias.Sentencia;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
+import arbol.Sentencias.Llamada;
+import arbol.Sentencias.LlamadaAMetodo;
 import arbol.Retorno.Retorno;
 import java.util.ArrayList;
 import arbol.Declaracion;
@@ -966,7 +968,7 @@ class CUP$Sintactico$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		 RESULT = new Sentencia(a,1);
+		 RESULT = new Sentencia(a);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -978,7 +980,7 @@ class CUP$Sintactico$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT = new Sentencia(a,1);
+		 RESULT = new Sentencia(a);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("instruccion",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1088,7 +1090,14 @@ class CUP$Sintactico$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT = new Asigna(a,(Expresion)b);
+		 if(b instanceof Def){ 
+                                                RESULT = new Asigna(a,((Def)b).getExp());
+                                            }else if(b instanceof Llamada){
+                                                RESULT = new LlamadaAMetodo(a,(Llamada)b);
+                                            }else{
+                                                RESULT=b;
+                                            }
+                                        
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Sentencia",16, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1112,7 +1121,10 @@ class CUP$Sintactico$actions {
           case 16: // SentIgual ::= Llamada 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT= a;
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("SentIgual",17, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1121,7 +1133,10 @@ class CUP$Sintactico$actions {
           case 17: // Llamada ::= PARIZQ ParametrosLlamada PARDER 
             {
               Object RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		ArrayList<Expresion> a = (ArrayList<Expresion>)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		 RESULT = new Llamada(a); 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Llamada",12, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1130,7 +1145,7 @@ class CUP$Sintactico$actions {
           case 18: // Llamada ::= PARIZQ PARDER 
             {
               Object RESULT =null;
-
+		 RESULT = new Llamada (); 
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Llamada",12, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1142,7 +1157,7 @@ class CUP$Sintactico$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
 		Nodo a = (Nodo)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
-		 RESULT = (Expresion)a;
+		 RESULT = new Def((Expresion)a);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("SentDef",18, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

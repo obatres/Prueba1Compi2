@@ -42,7 +42,7 @@ public class Imprimir extends Instruccion{
                     sal  += t.toString()+",";                      
                 }
             }
-            System.out.print("]");
+            System.out.print("]\n");
             sal  += "]";    
             sal  += "\n"; 
             VentanaPrincipal.consola +=sal; 

@@ -35,6 +35,8 @@ import arbol.Funciones.FuncionesDefinidas.C;
 import arbol.Sentencias.Sentencia;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
+import arbol.Sentencias.Llamada;
+import arbol.Sentencias.LlamadaAMetodo;
 import arbol.Retorno.Retorno;
 import java.util.ArrayList;
 import arbol.Declaracion;
@@ -146,9 +148,9 @@ instruccion ::=
                                                 {:
                                                     RESULT  =  new Imprimir ((Expresion)a);
                                                 :}
-    | Sentencia:a PTCOMA {: RESULT = new Sentencia(a,1);:}
+    | Sentencia:a PTCOMA {: RESULT = new Sentencia(a);:}
 
-    | Sentencia:a {: RESULT = new Sentencia(a,1);:}
+    | Sentencia:a {: RESULT = new Sentencia(a);:}
 
     | Ciclos:a
     {:  
@@ -181,21 +183,28 @@ instruccion ::=
     
 ;   
 
-Sentencia::= IDENTIFICADOR:a SentIgual:b {: RESULT = new Asigna(a,(Expresion)b);:} 
+Sentencia::= IDENTIFICADOR:a SentIgual:b{: if(b instanceof Def){ 
+                                                RESULT = new Asigna(a,((Def)b).getExp());
+                                            }else if(b instanceof Llamada){
+                                                RESULT = new LlamadaAMetodo(a,(Llamada)b);
+                                            }else{
+                                                RESULT=b;
+                                            }
+                                        :} 
             
             ;
 
 
 SentIgual::= IGUAL:a SentDef:b  {: RESULT = b;:}
-            |Llamada;
+            |Llamada:a {:RESULT= a;:};
 
 
-Llamada::=PARIZQ ParametrosLlamada PARDER
-            |PARIZQ PARDER;
+Llamada::=PARIZQ ParametrosLlamada:a PARDER {: RESULT = new Llamada(a); :}
+            |PARIZQ PARDER {: RESULT = new Llamada (); :};
 
 
 
-SentDef::=  expresion:a {: RESULT = (Expresion)a;:} 
+SentDef::=  expresion:a {: RESULT = new Def((Expresion)a);:} 
             
             |Funcion ;
 

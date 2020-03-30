@@ -7,6 +7,7 @@ package arbol.Sentencias;
 
 import arbol.DeclaracionVariable;
 import arbol.Expresion;
+import arbol.Funciones.LlamadaFuncion;
 import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
 
@@ -18,30 +19,39 @@ public class Sentencia extends Instruccion{
 
     
     public Object Sentencia;
-    public int tipo;
+    //public int tipo;
 
     /*
     *
     *   Tipo = 1; es una declaracion de variable
     *
     */
-    public Sentencia(Object Sentencia, int tipo) {
+    public Sentencia(Object Sentencia) {
         this.Sentencia = Sentencia;
-        this.tipo = tipo;
+        
     }
 
-    
-
-    
-    
-    
-    
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-            if(tipo==1){   
+            if(Sentencia instanceof Asigna){   
                 // <editor-fold desc="DECLARACION DE VARIABLE">> 
                 DeclaracionVariable d = new DeclaracionVariable(((Asigna)Sentencia).getExp(), ((Asigna)Sentencia).getIdentificador());
                 return d.ejecutar(ts);
+                // </editor-fold>
+            }else if(Sentencia instanceof LlamadaAMetodo){
+                // <editor-fold desc="LLAMADA A METODO">> 
+                LlamadaFuncion f;
+                if(((Llamada)((LlamadaAMetodo)Sentencia).getLlamada()).getParametrosLlamada()==(null)){
+                    // <editor-fold desc="SIN PARAMETROS">> 
+                    f = new LlamadaFuncion (((LlamadaAMetodo)Sentencia).getIdentificador());
+                    return f.ejecutar(ts);
+                    // </editor-fold>
+                }else{
+                    // <editor-fold desc="CON PARAMETROS">> 
+                    f = new LlamadaFuncion(((Llamada)((LlamadaAMetodo)Sentencia).getLlamada()).getParametrosLlamada(),((LlamadaAMetodo)Sentencia).getIdentificador());
+                    return f.ejecutar(ts);
+                    // </editor-fold>
+                }
                 // </editor-fold>
             }else{
                 return null;                
