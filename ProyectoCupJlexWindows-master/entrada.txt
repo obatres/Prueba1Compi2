@@ -1,21 +1,4 @@
-a=1;
-b=funcion("sad");
+a=1
+print(a);
 
-b = function ( a=5 ,b="Sd", kdf)
-	{ 
-		print(5); 
-	}
-
-d = (b)=>{	
-	print(5);
-	}
-
-factorial = function(n){
- if(n <= 0){
- print(a);
- jota(sda);
- jota()
- }
- 
-}
 

@@ -17,6 +17,8 @@ import arbol.SwitchCase.SwitchCase;
 import arbol.SwitchCase.Break;
 import arbol.Tipo.tipo.*;
 import arbol.Tipo;
+import arbol.Sentencias.Def;
+import arbol.Sentencias.Asigna;
 import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
@@ -30,6 +32,7 @@ import arbol.Funciones.FuncionesDefinidas.toUperCase;
 import arbol.Funciones.FuncionesDefinidas.Trunk;
 import arbol.Funciones.FuncionesDefinidas.Round;
 import arbol.Funciones.FuncionesDefinidas.C;
+import arbol.Sentencias.Sentencia;
 import arbol.Graficas.BarPlot;
 import arbol.Graficas.PiePlot;
 import arbol.Retorno.Retorno;
@@ -99,7 +102,7 @@ non terminal ArrayList <Object>  ListaExp;
 non terminal Parametro Parametros ;
 non terminal ArrayList <Parametro> ListaParametros;
 non terminal ArrayList <Expresion> ParametrosLlamada;
-non terminal Nodo Funcion;
+non terminal Funcion;
 non terminal Llamada;
 non terminal Graficas;
 non terminal Ciclos;
@@ -119,7 +122,7 @@ precedence left MAYOR,MENOR, MAYORIGUAL, MENORIGUAL;
 precedence right UMENOS, NOT; 
 
 start with ini; 
-
+/**********************************************************************LISTA DE INSTRUCCIONES*/
 ini::=instrucciones:a
     {:
         parser.AST=a;
@@ -136,19 +139,70 @@ instrucciones ::=   instrucciones:a instruccion:b
                         RESULT.add(a);
                     :}; 
 
+/**********************************************************************INSTRUCCIONES*/
 
-Sentencia::= IDENTIFICADOR:a SentIgual:b {: System.out.println(a+" "+b);:} 
+instruccion ::= 
+    PRINT PARIZQ expresion:a PARDER PTCOMA
+                                                {:
+                                                    RESULT  =  new Imprimir ((Expresion)a);
+                                                :}
+    | Sentencia:a PTCOMA {: RESULT = new Sentencia(a,1);:}
+
+    | Sentencia:a {: RESULT = new Sentencia(a,1);:}
+
+    | Ciclos:a
+    {:  
+        RESULT = (Nodo)a;
+    :}
+    |Graficas:a
+    {:
+        RESULT=(Nodo)a;
+    :}  
+    |   RETURN expresion:a PTCOMA                               
+    {: 
+        RESULT = new Retorno((Expresion)a);
+    :}
+    |   RETURN PTCOMA
+    {:
+        RESULT = new Retorno();
+    :}
+    |TYPEOF PARIZQ expresion:a PARDER PTCOMA
+    {:
+        RESULT = new TypeOf((Expresion)a);
+    :}
+    |LENGHT PARIZQ expresion:a PARDER PTCOMA
+    {:
+        RESULT = new Lenght((Expresion)a);
+    :}
+    |STRINGLENGHT PARIZQ expresion:a PARDER PTCOMA
+    {:
+        RESULT = new StringLenght((Expresion) a);
+    :}
+    
+;   
+
+Sentencia::= IDENTIFICADOR:a SentIgual:b {: RESULT = new Asigna(a,(Expresion)b);:} 
+            
             ;
 
 
-SentIgual::= IGUAL:a SentDef:b  {: System.out.println(a+" "+b);:}
-            |PARIZQ ParametrosLlamada PARDER
+SentIgual::= IGUAL:a SentDef:b  {: RESULT = b;:}
+            |Llamada;
+
+
+Llamada::=PARIZQ ParametrosLlamada PARDER
             |PARIZQ PARDER;
 
 
-SentDef::=  expresion:a {: System.out.println(a);:} 
-            | FUNCTION:a PARIZQ:b SentFunc {: System.out.println(a+" "+b);:}
+
+SentDef::=  expresion:a {: RESULT = (Expresion)a;:} 
+            
+            |Funcion ;
+
+
+Funcion::= FUNCTION:a PARIZQ:b SentFunc {: System.out.println(a+" "+b);:}
             | PARIZQ:a SentFunc {:System.out.println(a);:};
+
 
 
 SentFunc::= PARDER:a LLAVEIZQ:b instrucciones LLAVEDER:c {: System.out.println(a+" "+b+" "+c); :}
@@ -183,49 +237,6 @@ Parametros::=  IDENTIFICADOR:a
 ListaParametros::= ListaParametros:a COMA Parametros:b         
 
                    | Parametros:a;
-
-
-instruccion ::= 
-    PRINT PARIZQ expresion:a PARDER PTCOMA
-        {:
-            //System.out.println("El valor de la expresión es: "+a);
-            RESULT  =  new Imprimir ((Expresion)a);
-        :}
-    | Sentencia:a PTCOMA {: System.out.println(a);:}
-
-    | Sentencia:a 
-
-    | Ciclos:a
-    {:  
-        RESULT = (Nodo)a;
-    :}
-    |Graficas:a
-    {:
-        RESULT=(Nodo)a;
-    :}  
-    |   RETURN expresion:a PTCOMA                               
-    {: 
-        RESULT = new Retorno((Expresion)a);
-    :}
-    |   RETURN PTCOMA
-    {:
-        RESULT = new Retorno();
-    :}
-    |TYPEOF PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new TypeOf((Expresion)a);
-    :}
-    |LENGHT PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new Lenght((Expresion)a);
-    :}
-    |STRINGLENGHT PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new StringLenght((Expresion) a);
-    :}
-    
-;   
-
 
 
 ParametrosLlamada::=    ParametrosLlamada:a COMA expresion:b
