@@ -33,6 +33,7 @@ public class C  extends Expresion{
         
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        
         for (Object object : ListaExp) {
             if(object instanceof Single){
                 DeclaracionVariable.Vector.add(object);

@@ -6,6 +6,8 @@
 package arbol;
 
 import arbol.Funciones.FuncionesDefinidas.C;
+import arbol.Funciones.LlamadaFuncionExp;
+import arbol.Sentencias.Llamada;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +20,7 @@ public class DeclaracionVariable extends Instruccion {
     
     public static ArrayList<Object> Vector = new ArrayList<>();
     ArrayList<Object> Valor = new ArrayList<>();
+    
     public DeclaracionVariable(Expresion exp, String identificador) {
         this.exp = exp;
         this.identificador = identificador;
@@ -28,8 +31,11 @@ public class DeclaracionVariable extends Instruccion {
            
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        
         exp.ejecutar(ts);
+        
         if(exp instanceof C){
+            // <editor-fold desc="FUNCION C">> 
             if(exp.GetTipo(ts).isBoolean()){
                 for (Object o : Vector) {
                     Valor.add(((Expresion)o).ejecutar(ts));
@@ -77,14 +83,19 @@ public class DeclaracionVariable extends Instruccion {
                     }
                 }                     
             }
+            // </editor-fold>
         }else if(exp instanceof Single){
             Valor.add(0, exp.ejecutar(ts));
+        }else if(exp instanceof LlamadaFuncionExp){
+            Valor.add(0,exp.ejecutar(ts));
         }else{
             Valor.add(0, exp.ejecutar(ts));
         }
+        
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
-        }else{    
+        }else{
+           
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }   

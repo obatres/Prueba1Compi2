@@ -1,5 +1,17 @@
-a=c(56,0,1,true);
-cd=c("aS",1,2);
-b=c(5>10?a:cd);
-cg=5;
-print(b+cd);
+
+
+getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
+    Vector = c(carnet, inicial, nombre, apellido, seccion, nota);
+    return Vector;
+}
+
+
+
+
+V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
+
+J=c(5,V);
+
+print(J);
+
+#*jota = 

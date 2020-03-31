@@ -8,6 +8,7 @@ package arbol.If;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Operacion;
+import arbol.Retorno.Retorno;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
@@ -47,7 +48,12 @@ public  class If extends Instruccion{
             tablalocal.addAll(ts);
             for(Nodo in: ListaDeInstrucciones){
                 if (in instanceof Instruccion){
-                    ((Instruccion) in).ejecutar(ts);
+                    if(in instanceof Retorno){
+                        return ((Retorno) in).ejecutar(tablalocal);
+                    }else{
+                       ((Instruccion) in).ejecutar(tablalocal); 
+                    }
+                    
                 }
             }
         }else{
@@ -56,7 +62,11 @@ public  class If extends Instruccion{
                 tablalocal.addAll(ts);
                 for(Nodo in: ListaDeInstruccionesElse){
                     if(in instanceof Instruccion){
-                        ((Instruccion)in).ejecutar(ts);
+                        if(in instanceof Retorno){
+                            return ((Retorno) in).ejecutar(tablalocal);
+                        }else{
+                            ((Instruccion)in).ejecutar(tablalocal);   
+                        }
                     }
                 }
             }
