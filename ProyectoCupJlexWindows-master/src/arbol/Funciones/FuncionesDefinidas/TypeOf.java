@@ -31,7 +31,6 @@ public class TypeOf extends Expresion{
     public Object ejecutar(TablaDeSimbolos ts) {
         t = exp.GetTipo(ts);
         System.out.println(t.tp);
-        //VentanaPrincipal.consola += t.tp;
         return t.tp;
     }
 

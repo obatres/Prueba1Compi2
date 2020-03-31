@@ -29,14 +29,9 @@ public class Lenght  extends Expresion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         if( exp.ejecutar(ts) instanceof ArrayList){
-            for (Object o : (ArrayList)exp.ejecutar(ts)) {
-                if(o instanceof Single){
-                    contador++;
-                }
-            }
+            contador=((ArrayList)exp.ejecutar(ts)).size();
         }
         System.out.println(contador);
-        //VentanaPrincipal.consola+="Tamaño de "+contador;
         return contador;
     }
 

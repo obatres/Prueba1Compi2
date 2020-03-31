@@ -10,7 +10,8 @@ getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota)
 
 V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
 
-J=c(5,V);
-print(StringLenght(V));
+J=c(V);
+P=lenght(J)
+print(P);
 
 #*jota = 
