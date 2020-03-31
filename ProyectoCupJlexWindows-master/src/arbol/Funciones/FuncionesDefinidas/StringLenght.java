@@ -28,23 +28,29 @@ public class StringLenght extends Expresion{
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        
         if (exp.GetTipo(ts).isString()){
             Object j;
-            
-            if (exp.ejecutar(ts) instanceof ArrayList){
-                for (Object t : (ArrayList)exp.ejecutar(ts)) {
-                    cadena+=((Expresion)t).ejecutar(ts);
+            Object o = exp.ejecutar(ts);
+            if (o instanceof ArrayList){
+                String cadena2="";
+                for (Object t : (ArrayList)o) {
+                    if( t instanceof Expresion){
+                        cadena2+=((Expresion)t).ejecutar(ts);                        
+                    }else if(t instanceof String){
+                        cadena2+=t;
+                    }
                 }
-            }else if (exp.ejecutar(ts) instanceof Single){
-                j=exp.ejecutar(ts);
-                cadena+=((Expresion)j).ejecutar(ts);
-            }else if (exp.ejecutar(ts) instanceof String){
-                cadena+=exp.ejecutar(ts);
+                cadena=cadena2;
+            }else if (o instanceof Single){
+                j=o;
+                cadena=((Expresion)j).ejecutar(ts).toString();
+            }else if (o instanceof String){
+                cadena=o.toString();
             }else{
                 System.out.println("Parametro incorrecto");
             }
-            System.out.println(cadena.length());
-            //VentanaPrincipal.consola += cadena.length();
+            //System.out.println(cadena.length());
             return cadena.length();
         }else{
             System.out.println("Parametro incorrecto");

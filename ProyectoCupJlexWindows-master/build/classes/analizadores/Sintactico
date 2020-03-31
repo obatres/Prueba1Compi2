@@ -180,10 +180,7 @@ instruccion ::=
     {:
         RESULT = new Lenght((Expresion)a);
     :}
-    |STRINGLENGHT PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new StringLenght((Expresion) a);
-    :}
+
     
 ;   
 
@@ -388,7 +385,8 @@ expresion  ::=
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
-    |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER              {:  RESULT = new LlamadaFuncionExp(b, a);:}
+    |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER             {: RESULT = new LlamadaFuncionExp(b, a);:}
+    |   STRINGLENGHT PARIZQ expresion:a PARDER                   {: RESULT = new StringLenght((Expresion) a); :}
     |   expresioncomp:a INTERROGACION expresion:b DOSP expresion:c {:
                                                                  RESULT=new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c); 
                                                                     :}
