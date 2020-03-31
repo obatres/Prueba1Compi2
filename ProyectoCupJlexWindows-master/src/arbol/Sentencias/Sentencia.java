@@ -7,6 +7,8 @@ package arbol.Sentencias;
 
 import arbol.DeclaracionVariable;
 import arbol.Expresion;
+import arbol.Funciones.DefinicionDeFuncion;
+import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
 import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
@@ -53,6 +55,9 @@ public class Sentencia extends Instruccion{
                     // </editor-fold>
                 }
                 // </editor-fold>
+            }else if(Sentencia instanceof Funcion){
+                DefinicionDeFuncion d = new DefinicionDeFuncion((Funcion) Sentencia);
+                return d.ejecutar(ts);
             }else{
                 return null;                
             }

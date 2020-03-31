@@ -10,76 +10,65 @@ import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Retorno.Retorno;
 import arbol.Simbolo;
-import arbol.Single;
 import arbol.TablaDeSimbolos;
 import arbol.Tipo;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-
 /**
  *
  * @author obatres_
  */
-public class LlamadaFuncion extends Instruccion{
+public class LlamadaFuncionExp extends Expresion{
 
     private ArrayList<Expresion> ParametrosLlamada;
     private String identificadorLlamada;
-    
-    
+
     LinkedList<Funcion> TablaFunciones = proyectocupjlexwindows.ProyectoCupJlexWindows.tf;
-    
-    
+
     ArrayList<Parametro> ParametrosDeclaracion;
+    
     LinkedList<Nodo> InstruccionesDeclaracion;
-    public LlamadaFuncion(ArrayList<Expresion> ParametrosLlamada, String identificadorLlamada) {
+    
+    Tipo tipoRetorno;
+    public LlamadaFuncionExp(ArrayList<Expresion> ParametrosLlamada, String identificadorLlamada) {
         this.ParametrosLlamada = ParametrosLlamada;
         this.identificadorLlamada = identificadorLlamada;
     }
-
-    public LlamadaFuncion(String identificadorLlamada) {
+    
+    public LlamadaFuncionExp(String identificadorLlamada) {
         this.identificadorLlamada = identificadorLlamada;   
     }
     
-    
-    
-    
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        
         ArrayList<Object> Vector;
         if (proyectocupjlexwindows.ProyectoCupJlexWindows.tf.Existe(identificadorLlamada)){
+            // <editor-fold desc="LA FUNCION SI SE DECLARO">> 
             TablaDeSimbolos tablalocal = new TablaDeSimbolos();
             tablalocal.addAll(ts);
             ParametrosDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getParametros(identificadorLlamada);
             InstruccionesDeclaracion=proyectocupjlexwindows.ProyectoCupJlexWindows.tf.getInstrucciones(identificadorLlamada);
             if(ParametrosLlamada==null&&ParametrosDeclaracion==null){
-                //LLAMADA SIN PARAMETROS
+                //<editor-fold desc="LLAMADA SIN PARAMETROS">> 
                 
                 // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
                 for (Nodo n : InstruccionesDeclaracion) {
-                    if( n instanceof Instruccion){
-                        // <editor-fold desc="INSTRUCCION">>    
+                    
+                    if(n instanceof Instruccion){
+                        ((Instruccion) n).ejecutar(tablalocal);
+                    }else if (n instanceof Expresion){
                         if(n instanceof Retorno){
-                            // <editor-fold desc="RETORNO">> 
-                            if (((Retorno) n).ejecutar(tablalocal)==(Object)0){
-                                // <editor-fold desc="SIN VALOR">> 
-                                return null;
-                                // </editor-fold>
-                            }else {
-                                // <editor-fold desc="CON VALOR">> 
-                                return ((Retorno) n).ejecutar(tablalocal);
-                                // </editor-fold>
-                            }
-                            // </editor-fold>
-                        }else{
-                           ((Instruccion) n).ejecutar(tablalocal);                            
-                        }
-                        // </editor-fold>
+                            tipoRetorno = new Tipo (((Retorno) n).GetTipo(tablalocal).tp);
+                            return ((Expresion) n).ejecutar(tablalocal);    
+                        }   
                     }
                 }
                 
                 // </editor-fold>
-
+                
+                // </editor-fold>
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
                 // <editor-fold desc="LLAMADA CON PARAMETROS">> 
                 for (int i = 0; i < ParametrosLlamada.size(); i++) {
@@ -100,39 +89,68 @@ public class LlamadaFuncion extends Instruccion{
                         // </editor-fold>
                     }
                 }
-                // </editor-fold>
+               
                 
                 // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
+                
+                
                 for (Nodo n : InstruccionesDeclaracion) {
-                    if( n instanceof Instruccion){
+                    
+                    if(n instanceof Instruccion){
+                        ((Instruccion) n).ejecutar(tablalocal);
+                    }else if (n instanceof Expresion){
                         if(n instanceof Retorno){
-                            if(((Retorno) n).ejecutar(tablalocal)==(Object)0){
-                                // <editor-fold desc="SIN VALOR">> 
-                                return null;
-                                // </editor-fold>     
-                            }else{
-                                // <editor-fold desc="CON VALOR">> 
-                                return ((Retorno) n).ejecutar(tablalocal);
-                                // </editor-fold>                                
-                            }
-                        }else{
-                            ((Instruccion) n).ejecutar(tablalocal);    
-                        }
+                            tipoRetorno = new Tipo (((Retorno) n).GetTipo(tablalocal).tp);
+                            return ((Expresion) n).ejecutar(tablalocal);    
+                        }   
                     }
+
+                    // <editor-fold desc="CODIGO ANTERIOR">>
+//                    if( n instanceof Instruccion){
+//                            ((Instruccion) n).ejecutar(tablalocal);    
+//                    }else if(n instanceof Expresion){
+//                            if(((Retorno) n).ejecutar(tablalocal)==(Object)0){
+//                                // <editor-fold desc="SIN VALOR">>
+//                                return "null";
+//                                // </editor-fold>     
+//                            }else{
+//                                // <editor-fold desc="CON VALOR">> 
+//                                //System.out.println(((Retorno) n).ejecutar(tablalocal));
+//                                return ((Retorno) n).ejecutar(tablalocal);
+//                                // </editor-fold>                                
+//                            }
+//                    }
+                    // </editor-fold>  
                 }
+                
+                
+                
+                
                 // </editor-fold>
+                
+                 // </editor-fold>
             }else{
                 System.out.println("cantidad de parametros no coincide");
             }
+            
+        // </editor-fold>
         }else{
+            // <editor-fold desc="LA FUNCION NO SE DECLARO">> 
             System.out.println("Esta funcion "+identificadorLlamada+" no esta definida"); 
+                        // </editor-fold>
         }
-        return null;
+        return null;        
+    }
+
+    @Override
+    public Tipo GetTipo(TablaDeSimbolos ts) {
+                  
+        return tipoRetorno;
     }
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return 0;
+        return cont;
     }
     
 }

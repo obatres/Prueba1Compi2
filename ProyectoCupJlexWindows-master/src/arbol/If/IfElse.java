@@ -38,7 +38,7 @@ public class IfElse extends Instruccion{
             tablalocal.addAll(ts);
             for(Nodo in: ListaDeInstrucciones){
                 if (in instanceof Instruccion){
-                    ((Instruccion) in).ejecutar(ts);
+                    ((Instruccion) in).ejecutar(tablalocal);
                 }
             }
         }else if((Boolean)Operacion2.ejecutar(ts)){
@@ -47,7 +47,7 @@ public class IfElse extends Instruccion{
                 tablalocal.addAll(ts);
                 for(Nodo in: ListaDeInstruccionesElse){
                     if(in instanceof Instruccion){
-                        ((Instruccion)in).ejecutar(ts);
+                        ((Instruccion)in).ejecutar(tablalocal);
                     }
                 }
             }

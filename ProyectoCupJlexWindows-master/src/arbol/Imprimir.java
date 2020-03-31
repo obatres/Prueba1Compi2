@@ -47,10 +47,13 @@ public class Imprimir extends Instruccion{
             sal  += "\n"; 
             VentanaPrincipal.consola +=sal; 
                     
-        }else{
+        }else if(contenido.ejecutar(ts)!=null){
             //System.out.println("no se puede imprimir el valor, es desconocido");
+            System.out.println(contenido.ejecutar(ts));
             System.out.println(contenido.ejecutar(ts).toString());
             VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
+        }else{
+            System.out.println("nulo");
         }
 
         return null;

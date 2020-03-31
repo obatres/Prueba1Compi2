@@ -23,6 +23,9 @@ import arbol.Funciones.Parametro;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
+import arbol.Sentencias.DefFunc;
+import arbol.Sentencias.DefFuncP;
+import arbol.Funciones.LlamadaFuncionExp;
 import arbol.Funciones.FuncionesDefinidas.TypeOf;
 import arbol.Funciones.FuncionesDefinidas.Lenght;
 import arbol.Funciones.FuncionesDefinidas.StringLenght;
@@ -101,6 +104,7 @@ non terminal Nodo expresioncomp;
 non terminal LinkedList<NodoCase> listacase;
 non terminal NodoCase CASES;
 non terminal ArrayList <Object>  ListaExp;
+non terminal ArrayList <Expresion>  ListaExp2;
 non terminal Parametro Parametros ;
 non terminal ArrayList <Parametro> ListaParametros;
 non terminal ArrayList <Expresion> ParametrosLlamada;
@@ -187,6 +191,10 @@ Sentencia::= IDENTIFICADOR:a SentIgual:b{: if(b instanceof Def){
                                                 RESULT = new Asigna(a,((Def)b).getExp());
                                             }else if(b instanceof Llamada){
                                                 RESULT = new LlamadaAMetodo(a,(Llamada)b);
+                                            }else if(b instanceof DefFunc){
+                                                RESULT = new Funcion(a,((DefFunc) b).getInstruccionesFuncion());
+                                            }else if(b instanceof DefFuncP){
+                                                RESULT = new Funcion(a,((DefFuncP) b).getParametrosFuncion(),((DefFuncP) b).getInstruccionesFuncion());
                                             }else{
                                                 RESULT=b;
                                             }
@@ -206,23 +214,25 @@ Llamada::=PARIZQ ParametrosLlamada:a PARDER {: RESULT = new Llamada(a); :}
 
 SentDef::=  expresion:a {: RESULT = new Def((Expresion)a);:} 
             
-            |Funcion ;
+            |Funcion:a {: RESULT = a; :} ;
 
 
-Funcion::= FUNCTION:a PARIZQ:b SentFunc {: System.out.println(a+" "+b);:}
-            | PARIZQ:a SentFunc {:System.out.println(a);:};
+Funcion::= FUNCTION PARIZQ SentFunc:a {: RESULT = a; :}
+          |PARIZQ SentFunc:a {: RESULT = a;:};
 
 
 
-SentFunc::= PARDER:a LLAVEIZQ:b instrucciones LLAVEDER:c {: System.out.println(a+" "+b+" "+c); :}
+SentFunc::= PARDER LLAVEIZQ instrucciones:a LLAVEDER {: RESULT = new DefFunc((LinkedList<Nodo>)a); :}
             
-            |ListaParametros:b PARDER SentParam                                     
+            |ListaParametros:a PARDER SentParam:b   {:  RESULT =  new DefFuncP (a,(LinkedList<Nodo>)b);    :}                         
             
-            |PARDER DEFFUN LLAVEIZQ instrucciones:c LLAVEDER;
+            |SentParam:a {: RESULT = new DefFunc((LinkedList<Nodo>)a); :};
 
 
-SentParam::= LLAVEIZQ instrucciones:c LLAVEDER 
-            |DEFFUN LLAVEIZQ instrucciones:c LLAVEDER ;
+
+SentParam::= LLAVEIZQ instrucciones:c LLAVEDER {: RESULT = c; :}
+            |DEFFUN LLAVEIZQ instrucciones:c LLAVEDER  {: RESULT = c; :}
+            |PARDER DEFFUN LLAVEIZQ instrucciones:a LLAVEDER {: RESULT = a; :};
 
 
 ListaExp ::= ListaExp:a COMA expresion:b 
@@ -238,14 +248,35 @@ ListaExp ::= ListaExp:a COMA expresion:b
             :}
 ;
 
-Parametros::=  IDENTIFICADOR:a
+ListaExp2 ::= ListaExp2:a COMA expresion:b 
+            {:
+                RESULT= a;
+                RESULT.add((Expresion)b);
+            :}
 
-            |Sentencia;
+            | expresion:a
+            {:
+                RESULT = new ArrayList<>();
+                RESULT.add((Expresion)a);
+            :}
+;
+
+Parametros::=  IDENTIFICADOR:a {: RESULT = new Parametro(a); :}
+
+            |Sentencia:a {: if(a instanceof Asigna){ RESULT = new Parametro(((Asigna) a).getExp(),((Asigna) a).getIdentificador());  }
+                            :};
 
 
-ListaParametros::= ListaParametros:a COMA Parametros:b         
-
-                   | Parametros:a;
+ListaParametros::= ListaParametros:a COMA Parametros:b 
+                                {:
+                                RESULT = a;
+                                RESULT.add((Parametro) b);
+                                :}
+                   | Parametros:a 
+                                {:
+                                RESULT = new ArrayList<Parametro>();
+                                RESULT.add((Parametro)a);    
+                                :};
 
 
 ParametrosLlamada::=    ParametrosLlamada:a COMA expresion:b
@@ -357,7 +388,7 @@ expresion  ::=
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
-    |   IDENTIFICADOR PARIZQ ParametrosLlamada PARDER 
+    |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER              {:  RESULT = new LlamadaFuncionExp(b, a);:}
     |   expresioncomp:a INTERROGACION expresion:b DOSP expresion:c {:
                                                                  RESULT=new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c); 
                                                                     :}
