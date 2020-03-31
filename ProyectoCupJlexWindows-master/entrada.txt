@@ -1,6 +1,6 @@
 
 
-getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
+#*getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
     Vector = c(carnet, inicial, nombre, apellido, seccion, nota);
     return Vector;
 }
@@ -9,9 +9,10 @@ getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota)
 
 
 V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
+J=c(V); *#
+O=c(4.5,5)
 
-J=c(V);
-P=lenght(J)
+P=round(O) 
 print(P);
 
 #*jota = 
