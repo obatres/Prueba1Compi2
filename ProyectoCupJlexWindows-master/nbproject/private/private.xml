@@ -5,20 +5,18 @@
             <url>src/analizadores/Sintactico</url>
             <bookmark id="1">
                 <name/>
-                <line>152</line>
+                <line>157</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/FuncionesDefinidas/Remove.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Sintactico</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/LlamadaFuncion.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Sintactico.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/FuncionesDefinidas/toLowerCase.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/FuncionesDefinidas/Trunk.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/FuncionesDefinidas/toUperCase.java</file>
-            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/Funciones/FuncionesDefinidas/Round.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/proyectocupjlexwindows/ProyectoCupJlexWindows.java</file>
+            <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/arbol/DeclaracionVariable.java</file>
             <file>file:/C:/Users/obatres_/Desktop/Prueba1Compi2/ProyectoCupJlexWindows-master/src/analizadores/Lexico</file>
         </group>
     </open-files>

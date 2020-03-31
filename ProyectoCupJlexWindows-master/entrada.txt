@@ -1,7 +1,17 @@
-a=1;
 
-getVectorEstudiante = function() {
-    return(654);
+
+getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
+    Vector = c(carnet, inicial, nombre, apellido, seccion, nota);
+    return Vector;
 }
 
-getVectorEstudiante();
+
+
+
+V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
+
+J=c(5,V);
+
+print(J);
+
+#*jota = 

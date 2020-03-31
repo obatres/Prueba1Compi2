@@ -14,7 +14,7 @@ import arbol.Tipo;
  *
  * @author obatres_
  */
-public class Retorno extends Instruccion{
+public class Retorno extends Expresion{
     
     private Expresion exp;
 
@@ -34,7 +34,6 @@ public class Retorno extends Instruccion{
         }else{
             return 0;
         }
-
     }
 
     @Override
@@ -43,6 +42,7 @@ public class Retorno extends Instruccion{
     }
 
 
+    @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {
         if(exp!=null){
             return exp.GetTipo(ts);

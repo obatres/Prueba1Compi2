@@ -25,13 +25,18 @@ public class toLowerCase extends Expresion{
 
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+
         if(exp.GetTipo(ts).isString()){
             if(exp.ejecutar(ts) instanceof ArrayList){
                 cadena=((Expresion)((ArrayList)exp.ejecutar(ts)).get(0)).ejecutar(ts).toString();
             }else if(exp.ejecutar(ts) instanceof Single){
                 cadena=((Expresion)exp.ejecutar(ts)).ejecutar(ts).toString();
+            }else if(exp.ejecutar(ts) instanceof String){
+                cadena=exp.ejecutar(ts).toString();
+            }else{
+                //TODO error
             }
-            System.out.println(cadena.toLowerCase());
+            //System.out.println(cadena.toLowerCase());
             return cadena.toLowerCase();
         }else{
             System.out.println("tipo de parametro invalido");
