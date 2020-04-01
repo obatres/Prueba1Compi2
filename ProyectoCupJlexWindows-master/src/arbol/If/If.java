@@ -5,10 +5,12 @@
  */
 package arbol.If;
 
+import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Operacion;
 import arbol.Retorno.Retorno;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
@@ -48,12 +50,12 @@ public  class If extends Instruccion{
             tablalocal.addAll(ts);
             for(Nodo in: ListaDeInstrucciones){
                 if (in instanceof Instruccion){
-                    if(in instanceof Retorno){
-                        return ((Retorno) in).ejecutar(tablalocal);
-                    }else{
-                       ((Instruccion) in).ejecutar(tablalocal); 
-                    }
-                    
+                    ((Instruccion) in).ejecutar(tablalocal);                   
+                }else if(in instanceof Expresion){
+                    ((Expresion) in).GetTipo(tablalocal);
+                    return ((Expresion) in).ejecutar(tablalocal);
+                }else if(in instanceof Break){
+                    return null;
                 }
             }
         }else{
@@ -62,11 +64,12 @@ public  class If extends Instruccion{
                 tablalocal.addAll(ts);
                 for(Nodo in: ListaDeInstruccionesElse){
                     if(in instanceof Instruccion){
-                        if(in instanceof Retorno){
-                            return ((Retorno) in).ejecutar(tablalocal);
-                        }else{
-                            ((Instruccion)in).ejecutar(tablalocal);   
-                        }
+                        ((Instruccion) in).ejecutar(tablalocal);
+                    }else if(in instanceof Expresion){
+                        ((Expresion) in).GetTipo(tablalocal);
+                        return ((Expresion) in).ejecutar(tablalocal);
+                    }else if(in instanceof Break){
+                        return null;
                     }
                 }
             }

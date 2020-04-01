@@ -33,12 +33,18 @@ public class Remove extends Expresion
     public Object ejecutar(TablaDeSimbolos ts) {
         
         if(exp1.GetTipo(ts).isString()&& exp2.GetTipo(ts).isString()){
+            
             if(exp1.ejecutar(ts) instanceof ArrayList){
                 if(((ArrayList)exp1.ejecutar(ts)).size()==1){
                     cadena1= ((Expresion)((ArrayList)exp1.ejecutar(ts)).get(0)).ejecutar(ts).toString();
                 }
             }else if (exp1.ejecutar(ts) instanceof Single){
                 cadena1=((Expresion)exp1.ejecutar(ts)).ejecutar(ts).toString();
+            }else if(exp1.ejecutar(ts) instanceof String){
+                cadena1=exp1.ejecutar(ts).toString();
+            }else{
+                cadena1="null";
+                        //ERROR
             }
             
             if(exp2.ejecutar(ts) instanceof ArrayList){
@@ -47,8 +53,11 @@ public class Remove extends Expresion
                 }                
             }else if (exp2.ejecutar(ts) instanceof Single){
                 cadena2=((Expresion)exp2.ejecutar(ts)).ejecutar(ts).toString();
+            }else if(exp2.ejecutar(ts) instanceof String){
+                cadena2 = exp2.ejecutar(ts).toString();
+            }else{
+                cadena2="";
             }
-            
             cadena1=cadena1.replaceAll(cadena2,"");
             System.out.println(cadena1);
             return cadena1;

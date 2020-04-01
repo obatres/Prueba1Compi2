@@ -27,8 +27,9 @@ public class Imprimir extends Instruccion{
      */
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
-        if (contenido.ejecutar(ts) instanceof ArrayList){
-            Salida  = (ArrayList<Object>) contenido.ejecutar(ts);
+        Object o = contenido.ejecutar(ts);
+        if (o instanceof ArrayList){
+            Salida  = (ArrayList<Object>) o;
             System.out.print("[");
             sal  += "[";    
             for (Object t : Salida) {
@@ -47,11 +48,10 @@ public class Imprimir extends Instruccion{
             sal  += "\n"; 
             VentanaPrincipal.consola +=sal; 
                     
-        }else if(contenido.ejecutar(ts)!=null){
+        }else if(o!=null){
             //System.out.println("no se puede imprimir el valor, es desconocido");
-            System.out.println(contenido.ejecutar(ts));
-            System.out.println(contenido.ejecutar(ts).toString());
-            VentanaPrincipal.consola = contenido.ejecutar(ts).toString()+"\n";
+            System.out.println(o.toString());
+            VentanaPrincipal.consola = o.toString()+"\n";
         }else{
             System.out.println("nulo");
         }

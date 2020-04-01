@@ -34,6 +34,7 @@ public class toLowerCase extends Expresion{
             }else if(exp.ejecutar(ts) instanceof String){
                 cadena=exp.ejecutar(ts).toString();
             }else{
+                cadena="null";
                 //TODO error
             }
             //System.out.println(cadena.toLowerCase());

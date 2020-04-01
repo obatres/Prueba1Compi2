@@ -30,6 +30,10 @@ public class Trunk extends Expresion {
                 numero=Double.parseDouble((((Expresion)((ArrayList)exp.ejecutar(ts)).get(0)).ejecutar(ts)).toString());
             }else if(exp.ejecutar(ts) instanceof Single){
                 numero=Double.parseDouble(((Expresion)exp.ejecutar(ts)).ejecutar(ts).toString());
+            }else if(exp.ejecutar(ts) instanceof String){
+                numero=Double.parseDouble(exp.ejecutar(ts).toString());
+            }else{
+                numero=0.0;
             }
             System.out.println(Math.floor(numero));
             sal = (int) Math.floor(numero);

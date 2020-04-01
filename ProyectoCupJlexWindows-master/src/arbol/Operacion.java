@@ -517,7 +517,9 @@ public class Operacion extends Expresion{
                         // </editor-fold>
                     } 
                      // </editor-fold>   
-                } 
+                }else{
+                    System.out.println("error de tipo en segundo operador");
+                }
                 // </editor-fold>
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 // <editor-fold desc="IZQ DOUBLE">> 

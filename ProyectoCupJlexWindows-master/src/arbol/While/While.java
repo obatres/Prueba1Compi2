@@ -8,6 +8,7 @@ package arbol.While;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
@@ -35,6 +36,11 @@ public class While extends Instruccion{
             for (Nodo en : ListaDeInstrucciones) {
                 if(en instanceof Instruccion){
                     ((Instruccion) en).ejecutar(tablalocal);
+                }else if(en instanceof Expresion){
+                    ((Expresion) en).GetTipo(tablalocal);
+                    return ((Expresion) en).ejecutar(tablalocal);
+                }else if( en instanceof Break){
+                    return null;
                 }  
             } 
         }

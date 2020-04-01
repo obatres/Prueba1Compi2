@@ -45,11 +45,14 @@ public class SwitchCase extends Instruccion{
                 TablaDeSimbolos tablalocal = new TablaDeSimbolos();
                 tablalocal.addAll(ts);
                 for (Nodo in:nc.getInstruccionesDeCase()){
-                    if(in instanceof Instruccion){
-                        ((Instruccion) in).ejecutar(ts);
+                        if(in instanceof Instruccion){
+                            ((Instruccion) in).ejecutar(tablalocal);
                         }else if(in instanceof Break){   
                             System.out.println(((Break) in).getTipoInstruccion());
                             return null;
+                        }else if(in instanceof Expresion){
+                            ((Expresion) in).GetTipo(tablalocal);
+                            return ((Expresion) in).ejecutar(tablalocal);
                         } 
                     }
                 }
@@ -58,11 +61,14 @@ public class SwitchCase extends Instruccion{
                 tablalocal.addAll(ts);
                 for (Nodo in:nc.getInstruccionesDeCase()){
                     if(in instanceof Instruccion){
-                        ((Instruccion) in).ejecutar(ts);
-                        }else if(in instanceof Break){   
-                            System.out.println(((Break) in).getTipoInstruccion());
-                            return null;
-                        }  
+                        ((Instruccion) in).ejecutar(tablalocal);
+                    }else if(in instanceof Break){   
+                        System.out.println(((Break) in).getTipoInstruccion());
+                        return null;
+                    }else if (in instanceof Expresion){
+                        ((Expresion) in).GetTipo(tablalocal);
+                        return ((Expresion) in).ejecutar(tablalocal);
+                    }  
                 }
             }
 

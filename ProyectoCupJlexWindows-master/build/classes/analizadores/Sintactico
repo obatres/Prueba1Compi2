@@ -148,13 +148,13 @@ instrucciones ::=   instrucciones:a instruccion:b
 /**********************************************************************INSTRUCCIONES*/
 
 instruccion ::= 
-    PRINT PARIZQ expresion:a PARDER PTCOMA
-                                                {:
-                                                    RESULT  =  new Imprimir ((Expresion)a);
-                                                :}
-    | Sentencia:a PTCOMA {: RESULT = new Sentencia(a);:}
+    PRINT PARIZQ expresion:a PARDER PTCOMA  {:  RESULT  =  new Imprimir ((Expresion)a);   :}
 
-    | Sentencia:a {: RESULT = new Sentencia(a);:}
+    | PRINT PARIZQ expresion:a PARDER       {:  RESULT  =  new Imprimir ((Expresion)a); :}    
+                                    
+    | Sentencia:a PTCOMA                    {:  RESULT = new Sentencia(a);:}
+
+    | Sentencia:a                           {:  RESULT = new Sentencia(a);:}
 
     | Ciclos:a
     {:  
@@ -172,18 +172,8 @@ instruccion ::=
     {:
         RESULT = new Retorno();
     :}
-    |TYPEOF PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new TypeOf((Expresion)a);
-    :}
-    |LENGHT PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new Lenght((Expresion)a);
-    :}
-    |STRINGLENGHT PARIZQ expresion:a PARDER PTCOMA
-    {:
-        RESULT = new StringLenght((Expresion) a);
-    :}
+
+
     
 ;   
 
@@ -380,15 +370,16 @@ expresion  ::=
     |   NULL:a                                 {:RESULT=new Single(a,new Tipo(Tipo.tipo.STRING));:}
     //|   PARIZQ expresion:a PARDER              {:RESULT=a;:}
     |   DEF:a                                  {:RESULT= new Single(a,new Tipo(Tipo.tipo.DEF));:}
-    |   LENGHTPAR expresion:a PARDER                          {:RESULT = new Lenght((Expresion)a);:}
-    |   STRINGLENGHTPAR expresion:a PARDER                    {:RESULT = new StringLenght((Expresion) a); :}
     |   REMOVE PARIZQ expresion:a COMA expresion:b PARDER     {:RESULT = new Remove((Expresion)a, (Expresion)b);:} 
     |   TOLOWERCASE PARIZQ expresion:a PARDER                 {:RESULT = new toLowerCase((Expresion)a);:} 
     |   TOUPPERCASE PARIZQ expresion:a PARDER                 {: RESULT = new toUperCase((Expresion)a);:}
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
-    |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER              {:  RESULT = new LlamadaFuncionExp(b, a);:}
+    |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER             {: RESULT = new LlamadaFuncionExp(b, a);:}
+    |   STRINGLENGHT PARIZQ expresion:a PARDER                {: RESULT = new StringLenght((Expresion) a); :}
+    |   TYPEOF PARIZQ expresion:a PARDER                      {: RESULT = new TypeOf((Expresion)a);    :}
+    |   LENGHT PARIZQ expresion:a PARDER                      {: RESULT = new Lenght((Expresion)a);   :}
     |   expresioncomp:a INTERROGACION expresion:b DOSP expresion:c {:
                                                                  RESULT=new Operacion(Operacion.Tipo_operacion.TERNARIO,(Expresion)a, (Expresion)b,(Expresion)c); 
                                                                     :}

@@ -27,10 +27,20 @@ public class Round extends Expresion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         if(exp.GetTipo(ts).isDouble()){
+            System.out.println(exp.ejecutar(ts).getClass());
             if(exp.ejecutar(ts) instanceof ArrayList){
-                numero=Double.parseDouble((((Expresion)((ArrayList)exp.ejecutar(ts)).get(0)).ejecutar(ts)).toString());
+                if(((ArrayList)exp.ejecutar(ts)).get(0) instanceof String){
+                    numero = Double.parseDouble(((ArrayList)exp.ejecutar(ts)).get(0).toString());
+                }else{
+                    numero=Double.parseDouble((((Expresion)((ArrayList)exp.ejecutar(ts)).get(0)).ejecutar(ts)).toString());   
+                }
             }else if(exp.ejecutar(ts) instanceof Single){
                 numero=Double.parseDouble(((Expresion)exp.ejecutar(ts)).ejecutar(ts).toString());
+            }else if(exp.ejecutar(ts) instanceof String){
+                numero=Double.parseDouble(exp.ejecutar(ts).toString());
+            }else{
+                numero=0.0;
+                //ERROR
             }
             System.out.println(Math.round(numero));
             sal = (int) Math.round(numero);
