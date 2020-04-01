@@ -58,26 +58,13 @@ public class LlamadaFuncion extends Instruccion{
                 // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
                 for (Nodo n : InstruccionesDeclaracion) {
                     if( n instanceof Instruccion){
-                        // <editor-fold desc="INSTRUCCION">>    
-                        if(n instanceof Retorno){
+                        ((Instruccion) n).ejecutar(tablalocal);                         
+                    }else if(n instanceof Expresion){
                             // <editor-fold desc="RETORNO">> 
-                            if (((Retorno) n).ejecutar(tablalocal)==(Object)0){
-                                // <editor-fold desc="SIN VALOR">> 
-                                return null;
-                                // </editor-fold>
-                            }else {
-                                // <editor-fold desc="CON VALOR">> 
-                                return ((Retorno) n).ejecutar(tablalocal);
-                                // </editor-fold>
-                            }
-                            // </editor-fold>
-                        }else{
-                           ((Instruccion) n).ejecutar(tablalocal);                            
-                        }
-                        // </editor-fold>
+                            return ((Retorno) n).ejecutar(tablalocal);
+                            // </editor-fold>                                                
                     }
                 }
-                
                 // </editor-fold>
 
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
@@ -105,19 +92,11 @@ public class LlamadaFuncion extends Instruccion{
                 // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
                 for (Nodo n : InstruccionesDeclaracion) {
                     if( n instanceof Instruccion){
-                        if(n instanceof Retorno){
-                            if(((Retorno) n).ejecutar(tablalocal)==(Object)0){
-                                // <editor-fold desc="SIN VALOR">> 
-                                return null;
-                                // </editor-fold>     
-                            }else{
-                                // <editor-fold desc="CON VALOR">> 
-                                return ((Retorno) n).ejecutar(tablalocal);
-                                // </editor-fold>                                
-                            }
-                        }else{
-                            ((Instruccion) n).ejecutar(tablalocal);    
-                        }
+                        ((Instruccion) n).ejecutar(tablalocal);                         
+                    }else if(n instanceof Expresion){
+                            // <editor-fold desc="RETORNO">> 
+                            return ((Retorno) n).ejecutar(tablalocal);
+                            // </editor-fold>                                                     
                     }
                 }
                 // </editor-fold>

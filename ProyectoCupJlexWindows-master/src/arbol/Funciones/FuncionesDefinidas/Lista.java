@@ -5,6 +5,7 @@
  */
 package arbol.Funciones.FuncionesDefinidas;
 
+import arbol.DeclaracionVariable;
 import arbol.Expresion;
 import arbol.Funciones.LlamadaFuncionExp;
 import arbol.Single;
@@ -31,54 +32,69 @@ public class Lista extends Expresion{
     public Object ejecutar(TablaDeSimbolos ts) {
 
         for (Object t :ListaExp) {
-            //System.out.println(t.getClass()+"  TIPO DE ELEMENTO EN LISTA");
             if(t instanceof Single){
                 // <editor-fold desc="SINGLE">> 
                 salidatotal.add(((Single) t).ejecutar(ts));
                 // </editor-fold>
             }else if(t instanceof id){
                 // <editor-fold desc="ID">> 
-                if(((id) t).ejecutar(ts)instanceof ArrayList){
-                    // <editor-fold desc="VIENE VECTOR">> 
-                    for (Object object : (ArrayList)((id) t).ejecutar(ts)) {
-                        salidatotal.add(object);
-                    }
-                    // </editor-fold>
-                }else if(((id) t).ejecutar(ts)instanceof String){
-                    // <editor-fold desc="VIENE STRING-SINGLE">> 
-                    salidatotal.add(((id) t).ejecutar(ts).toString());
-                    // </editor-fold>
-                }else if(((id) t).ejecutar(ts) instanceof Single){
-                    // <editor-fold desc="VIENE SINGLE">> 
-                    salidatotal.add(((Single) t).ejecutar(ts));
-                    // </editor-fold>
-                }else if(((id) t).ejecutar(ts) instanceof Lista){
-                    System.out.println("VIENE LISTAAAAA");
-                }
-                // </editor-fold>
-            }else if(t instanceof LlamadaFuncionExp){
-                // <editor-fold desc="LLAMADA A FUNCION">> 
-                if(((LlamadaFuncionExp) t).GetTipo(ts)==null){
-                    // <editor-fold desc="DEBERIA SER VECTOR">>
-                    if(((LlamadaFuncionExp) t).ejecutar(ts) instanceof ArrayList){
-                        // <editor-fold desc="VIENE ARRAY">> 
-                        for (Object object : (ArrayList)((LlamadaFuncionExp) t).ejecutar(ts)) {
-                            salidatotal.add(object);
-                        }
-                        // </editor-fold>
-                    }
+                if(((id) t).GetTipo(ts).isList()){
+                    // <editor-fold desc="VIENE LISTA">> 
+                    salidatotal.add(((id) t).ejecutar(ts));
                     // </editor-fold>
                 }else{
-                    
+                    if(((id) t).ejecutar(ts)instanceof ArrayList){
+                        // <editor-fold desc="VIENE VECTOR">> 
+                        /*for (Object object : (ArrayList)((id) t).ejecutar(ts)) {
+                            salidatotal.add(object);
+                        }*/
+                        salidatotal.add(((id) t).ejecutar(ts));
+                        // </editor-fold>
+                    }else if(((id) t).ejecutar(ts)instanceof String){
+                        // <editor-fold desc="VIENE STRING-SINGLE">> 
+                        salidatotal.add(((id) t).ejecutar(ts));
+                        // </editor-fold>
+                    }else if(((id) t).ejecutar(ts) instanceof Single){
+                        // <editor-fold desc="VIENE SINGLE">> 
+                        salidatotal.add(((Single) t).ejecutar(ts));
+                        // </editor-fold>
+                    }   
                 }
+                // </editor-fold>
+            }else if(t instanceof LlamadaFuncionExp){               
+                // <editor-fold desc="LLAMADA A FUNCION">> 
+                Object salidaLlamada = ((LlamadaFuncionExp) t).ejecutar(ts);
+
+                if(((LlamadaFuncionExp) t).GetTipo(ts).isList()){                
+                    salidatotal.add(salidaLlamada);
+                }else{
+                    if(salidaLlamada instanceof ArrayList){
+                        /*for (Object object : (ArrayList)salidaLlamada) {
+                            salidatotal.add(object);
+                        }*/
+                        salidatotal.add(salidaLlamada);
+                    }else if (salidaLlamada instanceof String){
+                        salidatotal.add(salidaLlamada);
+                    }else{
+                        //System.out.println(DeclaracionVariable.Vector);
+                    }
+                }
+
                 // </editor-fold>
             }else if(t instanceof C){
                 // <editor-fold desc="C">> 
-                //System.out.println(((C) t).ejecutar(ts)+"VALOR C");
+                ((C) t).ejecutar(ts);
+                /*for (Object object : DeclaracionVariable.Vector) {
+                    if(object instanceof Single){
+                        salidatotal.add(((Single)object).ejecutar(ts));
+                    }
+                }*/
+                salidatotal.add(DeclaracionVariable.Vector);
                 // </editor-fold>
             }else if(t instanceof Lista){
-                System.out.println(((Lista) t).ejecutar(ts).getClass()+" CLASE LISTA");
+                // <editor-fold desc="LISTA">> 
                 salidatotal.add(((Lista) t).ejecutar(ts));
+                // </editor-fold>
             }
                 
         }

@@ -72,7 +72,6 @@ public class LlamadaFuncionExp extends Expresion{
             }else if(ParametrosLlamada.size()==ParametrosDeclaracion.size()){
                 // <editor-fold desc="LLAMADA CON PARAMETROS">> 
                 for (int i = 0; i < ParametrosLlamada.size(); i++) {
-                    
                     if(ParametrosLlamada.get(i).GetTipo(tablalocal).tp.equals(Tipo.tipo.DEF)){
                         // <editor-fold desc="PARAMETROS DEFAULT">> 
                         Vector = new ArrayList<>();
@@ -89,7 +88,6 @@ public class LlamadaFuncionExp extends Expresion{
                         // </editor-fold>
                     }
                 }
-               
                 
                 // <editor-fold desc="EJECUCION DE INSTRUCCIONES">> 
                 
@@ -105,22 +103,7 @@ public class LlamadaFuncionExp extends Expresion{
                         }   
                     }
 
-                    // <editor-fold desc="CODIGO ANTERIOR">>
-//                    if( n instanceof Instruccion){
-//                            ((Instruccion) n).ejecutar(tablalocal);    
-//                    }else if(n instanceof Expresion){
-//                            if(((Retorno) n).ejecutar(tablalocal)==(Object)0){
-//                                // <editor-fold desc="SIN VALOR">>
-//                                return "null";
-//                                // </editor-fold>     
-//                            }else{
-//                                // <editor-fold desc="CON VALOR">> 
-//                                //System.out.println(((Retorno) n).ejecutar(tablalocal));
-//                                return ((Retorno) n).ejecutar(tablalocal);
-//                                // </editor-fold>                                
-//                            }
-//                    }
-                    // </editor-fold>  
+             
                 }
                 
                 
@@ -143,8 +126,7 @@ public class LlamadaFuncionExp extends Expresion{
     }
 
     @Override
-    public Tipo GetTipo(TablaDeSimbolos ts) {
-                  
+    public Tipo GetTipo(TablaDeSimbolos ts) {          
         return tipoRetorno;
     }
 

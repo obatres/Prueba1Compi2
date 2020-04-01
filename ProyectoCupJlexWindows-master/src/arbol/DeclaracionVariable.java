@@ -33,13 +33,14 @@ public class DeclaracionVariable extends Instruccion {
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         if(exp instanceof Lista){
+            Object Lis=exp.ejecutar(ts);
             // <editor-fold desc="LISTA">>
-            for (Object object : (ArrayList)exp.ejecutar(ts)) {
+            for (Object object : (ArrayList)Lis) {
                 Valor.add(object);
             }
             // </editor-fold>
         }else{
-            exp.ejecutar(ts);
+            Object salVec = exp.ejecutar(ts);
         
             if(exp instanceof C){
                 // <editor-fold desc="FUNCION C">> 
@@ -100,27 +101,23 @@ public class DeclaracionVariable extends Instruccion {
                 }
                 // </editor-fold>
             }else if(exp instanceof Single){
-                Valor.add(0, exp.ejecutar(ts));
+                Valor.add(0, salVec);
             }else if(exp instanceof LlamadaFuncionExp){
-                Valor.add(0,exp.ejecutar(ts));
-            }else if(exp instanceof Lista){
-                System.out.println("variable Lista");
-                System.out.println(exp.ejecutar(ts));
+                Valor.add(0,salVec);
             }else{
-                Valor.add(0, exp.ejecutar(ts));
+                Valor.add(0, salVec);
             }   
         }
 
-        
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
         }else{
-            System.out.println("VALOR A AGREGAR: "+Valor+" Tipo: "+exp.GetTipo(ts).tp);
+            
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }   
 
-        Vector.clear();              
+        Vector.clear(); 
         return null;
     }
 
