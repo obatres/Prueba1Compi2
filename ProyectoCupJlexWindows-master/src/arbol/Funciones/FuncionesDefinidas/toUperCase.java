@@ -37,6 +37,7 @@ public class toUperCase extends Expresion{
                 cadena=exp.ejecutar(ts).toString();
             }else{
                 cadena="null";
+                //ERROR
             }
             System.out.println(cadena.toUpperCase());
             return cadena.toUpperCase();
