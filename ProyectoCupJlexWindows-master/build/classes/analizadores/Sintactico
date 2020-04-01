@@ -148,13 +148,13 @@ instrucciones ::=   instrucciones:a instruccion:b
 /**********************************************************************INSTRUCCIONES*/
 
 instruccion ::= 
-    PRINT PARIZQ expresion:a PARDER PTCOMA
-                                                {:
-                                                    RESULT  =  new Imprimir ((Expresion)a);
-                                                :}
-    | Sentencia:a PTCOMA {: RESULT = new Sentencia(a);:}
+    PRINT PARIZQ expresion:a PARDER PTCOMA  {:  RESULT  =  new Imprimir ((Expresion)a);   :}
 
-    | Sentencia:a {: RESULT = new Sentencia(a);:}
+    | PRINT PARIZQ expresion:a PARDER       {:  RESULT  =  new Imprimir ((Expresion)a); :}    
+                                    
+    | Sentencia:a PTCOMA                    {:  RESULT = new Sentencia(a);:}
+
+    | Sentencia:a                           {:  RESULT = new Sentencia(a);:}
 
     | Ciclos:a
     {:  
