@@ -27,6 +27,7 @@ public class Tipo {
         DOUBLE, // Variable de tipo Decimal ej: 2.2654
         OBJETO, // Variable de tipo objeto ej: carro, casa, canvas (segun sean declaradas las clases en el lenguaje)
         NULL, // Valor Null
+        LISTA, //Tipo lista
         NEW, // Instancia de un nuevo objeto ej: Carro c = new Carro
         CALL, // Llamada a un metodo o funcion ej: Motor(), Hola(sd)
         KEY, //Declaracion de una llave
@@ -114,6 +115,13 @@ public class Tipo {
     
     public boolean isDef(){
         if(tp==tipo.DEF){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isList(){
+        if(tp==tipo.LISTA){
             return true;
         }
         return false;

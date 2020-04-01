@@ -1,10 +1,11 @@
 getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
     Vector = c(carnet, inicial, nombre, apellido, seccion, nota);
-    return Vector;
+    V=List(Vector);
+    return V;
 }
 
 
-factorial = function(n){
+#*factorial = function(n){
 	if(n <= 0){
 		return 1;
 	}else{
@@ -12,14 +13,19 @@ factorial = function(n){
 		return n*f;
 	}
  
-}
+}*#
 
 
 V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
-J=c(V); 
+#J=c(5); 
 O=c("jugador")
-P=c("JUGADOR de futbol")
-P=touppercase(P) 
-print(P);
+P=c("JUGADOR de futbol","Brasil")
+#P=touppercase(P) 
+#print(P);
+L=List(O,P);
+#E=c("gola","fe");
+#Lista=List(E,545,54.654,P,J,V,L,getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100),List(46.64,654,54))
+
+Lista=List(L);
 
 #*jota = 
