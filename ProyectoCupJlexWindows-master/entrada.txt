@@ -11,8 +11,8 @@
 V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
 J=c(V); *#
 O=c("jugador")
-P=c("jugador de futbol")
-P=remove(P,O) 
+P=c("JUGADOR de futbol")
+P=touppercase(P) 
 print(P);
 
 #*jota = 

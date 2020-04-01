@@ -33,6 +33,10 @@ public class toUperCase extends Expresion{
                 cadena=((Expresion)((ArrayList)exp.ejecutar(ts)).get(0)).ejecutar(ts).toString();
             }else if(exp.ejecutar(ts) instanceof Single){
                 cadena=((Expresion)exp.ejecutar(ts)).ejecutar(ts).toString();
+            }else if(exp.ejecutar(ts) instanceof String){
+                cadena=exp.ejecutar(ts).toString();
+            }else{
+                cadena="null";
             }
             System.out.println(cadena.toUpperCase());
             return cadena.toUpperCase();
