@@ -132,6 +132,21 @@ public class LlamadaFuncionExp extends Expresion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"llamada a funcion\"]; \n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp1 = "nodo" + ++cont;
+        builder.append(nodoOp1).append(" [label=\""+ identificadorLlamada + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");
+        
+        String nodoOp2 = "nodo" + ++cont;
+        builder.append(nodoOp2).append(" [label=\""+ "contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");  
+        
+        for (Expresion expresion : ParametrosLlamada) {
+            cont=expresion.Dibujar(builder, nodoOp2, cont);
+        }
         return cont;
     }
     

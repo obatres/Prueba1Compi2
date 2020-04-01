@@ -1,5 +1,6 @@
-	xlab=c("xlab");
-	ylab=c("ylab");
+	xlab= 2+2
+	#5>2?3:5;
+	#*ylab=c("ylab");
 	main=c("main");
 	tipo=c("l");
 	#Barplot(numericos,xlab,ylab,main, labels);
@@ -9,4 +10,18 @@
 
 	#print(Vector)
 
-	Plot(Vector,tipo,xlab,ylab,main)
+
+	Plot(Vector,tipo,xlab,ylab,main)*#
+
+	print(xlab)
+
+	b=1;
+do {
+	b=b+1;
+	Print(b);
+		}while(b<=10);
+print(b);
+
+rojo =(a="adios",b="dos")=>{
+	Print(a+b+" salida de rojo");
+}*#

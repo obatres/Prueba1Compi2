@@ -88,7 +88,20 @@ public class C  extends Expresion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return cont;
+        
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"C\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+
+        for (Object object : ListaExp) {
+            cont=((Expresion)object).Dibujar(builder, nodoOp, cont);
+        }       
+        return cont; 
     }
     
 }

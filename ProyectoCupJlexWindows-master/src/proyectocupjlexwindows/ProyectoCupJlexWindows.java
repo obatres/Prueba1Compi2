@@ -87,13 +87,7 @@ public class ProyectoCupJlexWindows {
         builder.append(root).append(" [label=\"ARIT\"];\n");
         
         for (Nodo nodo : arbol) {
-                      
-            if (nodo instanceof Expresion){
-                cont = ((Expresion) nodo).Dibujar(builder, root, cont);
-            }else if(nodo instanceof Instruccion){
-                cont = ((Instruccion) nodo).Dibujar(builder, root, cont);
-            }
-            cont = nodo.Dibujar(builder, root, cont);
+                cont = nodo.Dibujar(builder, root, cont);
         }
         builder.append("}");
         

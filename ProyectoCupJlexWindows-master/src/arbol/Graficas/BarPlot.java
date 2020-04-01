@@ -98,7 +98,25 @@ public class BarPlot extends Instruccion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-    return 0;
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"C\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+        String nodoOp1 = "nodo" + ++cont;
+        builder.append(nodoOp1).append(" [label=\"" + "Vector" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+
+        for (Object object : (ArrayList)ParametrosBarPlot.get(0)) {
+            cont=((Expresion)object).Dibujar(builder, nodoOp1, cont);
+        }
+        for (int i = 1; i < ParametrosBarPlot.size(); i++) {
+            cont=((Expresion)ParametrosBarPlot.get(i)).Dibujar(builder, nodoOp, cont);
+        }
+        return cont; 
         }
     
 }

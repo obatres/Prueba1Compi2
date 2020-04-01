@@ -81,8 +81,8 @@ public class Imprimir extends Instruccion{
         String nodo = "nodo" + ++cont;
         builder.append(nodo).append(" [label=\"Imprimir\"];\n");
         builder.append(parent).append(" -> ").append(nodo).append(";\n");
-
-        cont = contenido.Dibujar(builder, nodo, cont);
+        //System.out.println(contenido.getClass()+"CLASE");
+        cont = ((id)contenido).Dibujar(builder, nodo, cont);
         return cont;
     }
 }

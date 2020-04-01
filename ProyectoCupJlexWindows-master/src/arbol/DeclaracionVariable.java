@@ -32,16 +32,14 @@ public class DeclaracionVariable extends Instruccion {
            
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        Object salVec = exp.ejecutar(ts);
         if(exp instanceof Lista){
-            Object Lis=exp.ejecutar(ts);
             // <editor-fold desc="LISTA">>
-            for (Object object : (ArrayList)Lis) {
+            for (Object object : (ArrayList)salVec) {
                 Valor.add(object);
             }
             // </editor-fold>
         }else{
-            Object salVec = exp.ejecutar(ts);
-        
             if(exp instanceof C){
                 // <editor-fold desc="FUNCION C">> 
                 if(exp.GetTipo(ts).isBoolean()){
@@ -123,7 +121,26 @@ public class DeclaracionVariable extends Instruccion {
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return cont;
+
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Asignacion\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + identificador + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+
+        String nodoVal = "nodo"+ ++cont;
+        builder.append(nodoVal).append(" [label=\"Valor\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoVal).append(";\n");           
+        
+        
+        cont = exp.Dibujar(builder, nodoVal, cont);            
+ 
+
+
+        return cont; 
     }
     
 }

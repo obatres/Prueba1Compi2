@@ -17,42 +17,61 @@ import java.util.ArrayList;
 public class DefinicionDeFuncion extends Instruccion{
 
     private Funcion f;
-
+    String id;
+    boolean bandera=false;
     public DefinicionDeFuncion(Funcion f) {
         this.f = f;
     }
+    ArrayList<String> Reservadas = new ArrayList<>();
     
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-//        TablaDeSimbolos tablalocal = new TablaDeSimbolos();
-//        tablalocal.addAll(ts);
-//        for (Simbolo s : tablalocal) {
-//            System.out.println(s.getId());
-//        }
-        if(!proyectocupjlexwindows.ProyectoCupJlexWindows.tf.Existe(f.getIdentificadorFuncion())){
-            proyectocupjlexwindows.ProyectoCupJlexWindows.tf.add(f);           
+        Reservadas.add("c");
+        Reservadas.add("list");
+        Reservadas.add("plot");
+        Reservadas.add("barplot");
+        Reservadas.add("print");
+        Reservadas.add("pie");
+        Reservadas.add("lenght");
+        Reservadas.add("Stringlenght");
+        Reservadas.add("remove");
+        Reservadas.add("trunk");
+        Reservadas.add("round");
+        Reservadas.add("typeof");
+        Reservadas.add("tolowercase");
+        Reservadas.add("touppercase");
+       
+        id=f.getIdentificadorFuncion();
+        
+        for (String Reservada : Reservadas) {
+            if(id.equalsIgnoreCase(Reservada)){
+                bandera=true;
+            }
+        }
+        if(bandera==false){
+            if(!proyectocupjlexwindows.ProyectoCupJlexWindows.tf.Existe(f.getIdentificadorFuncion())){
+                proyectocupjlexwindows.ProyectoCupJlexWindows.tf.add(f);           
+            }else{
+                System.out.println("Esta funcion ya esta definida");
+            }
         }else{
-            System.out.println("Esta funcion ya esta definida");
+            System.out.println("Esta es una funcion definidida del lenguaje y no se puede volver a definir");
         }
 
-//        ArrayList<Parametro> p;
-//        for (Funcion funcion : proyectocupjlexwindows.ProyectoCupJlexWindows.tf) {
-//            p=funcion.getParametrosFuncion();
-//            for (Parametro parametro : p) {
-//                System.out.println(parametro.getIdParametro());
-//                System.out.println(parametro.getValorParametro().ejecutar(ts));
-//            }
-//        }
-//        
-//        System.out.println("va a definir una funcion nueva");
- //      System.out.println(proyectocupjlexwindows.ProyectoCupJlexWindows.tf);
         return null;
     }
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return 0;
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Def funcion\"]; \n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp1 = "nodo" + ++cont;
+        builder.append(nodoOp1).append(" [label=\""+ f.getIdentificadorFuncion() + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");
+        return cont;
     }
     
 }

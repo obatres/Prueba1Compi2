@@ -74,6 +74,16 @@ public class Remove extends Expresion
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Lneght\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+        cont=exp1.Dibujar(builder, nodoOp, cont);
+        cont=exp2.Dibujar(builder, nodoOp, cont);
         return cont;
     }
     

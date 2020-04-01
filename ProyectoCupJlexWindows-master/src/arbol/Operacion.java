@@ -22,7 +22,6 @@ public class Operacion extends Expresion{
             cont = opderadorIzq.Dibujar(builder, nodo, cont);            
         }
 
-
         String nodoOp = "nodo" + ++cont;
         builder.append(nodoOp).append(" [label=\"" + tipo_operacion + "\"];\n");
         builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
@@ -30,9 +29,14 @@ public class Operacion extends Expresion{
         if(operadorDer!=null){
             cont = operadorDer.Dibujar(builder, nodo, cont);           
         }
+        
+        if(operadorTer!=null){
+            cont = operadorTer.Dibujar(builder, nodo, cont);
+        }
 
 
-        return cont;    }
+        return cont;   
+    }
 
     public static enum Tipo_operacion{
         SUMA,
