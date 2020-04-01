@@ -9,6 +9,7 @@ import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Operacion;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
@@ -43,6 +44,8 @@ public class IfElse extends Instruccion{
                 }else if(in instanceof Expresion){
                     ((Expresion) in).GetTipo(tablalocal);
                     return ((Expresion) in).ejecutar(tablalocal);
+                }else if (in instanceof Break){
+                    return null;
                 }
             }
         }else if((Boolean)Operacion2.ejecutar(ts)){
@@ -55,6 +58,8 @@ public class IfElse extends Instruccion{
                     }else if(in instanceof Expresion){
                         ((Expresion) in).GetTipo(tablalocal);
                         return ((Expresion) in).ejecutar(tablalocal);
+                    }else if(in instanceof Break){
+                        return null;
                     }
                 }
             }
