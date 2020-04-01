@@ -38,25 +38,21 @@ public class BarPlot extends Instruccion{
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-        //System.out.println(ParametrosBarPlot);
+
         if (ParametrosBarPlot.size()==5){
-            //System.out.println("Valores correctos");
-            //System.out.println(((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts));
+
             if(((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts) instanceof ArrayList){
                 if(((Expresion)ParametrosBarPlot.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.DOUBLE)||((Expresion)ParametrosBarPlot.get(0)).GetTipo(ts).tp.equals(Tipo.tipo.INT))
-                    //System.out.println("listado de numeros");
                     Numericos = (ArrayList) ((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts);
             }  else{
                 //Parametro incorrecto, se esperaba un listado de numeros
             }
             if(((Expresion)ParametrosBarPlot.get(1)).ejecutar(ts) instanceof String){
                 xlab = ((Expresion)ParametrosBarPlot.get(1)).ejecutar(ts).toString();
-                //System.out.println("xlab correcto");
             }else{
                 //SE ESPERABA UN LABEL PARA EL EJE X
             }
             if(((Expresion)ParametrosBarPlot.get(2)).ejecutar(ts) instanceof String){
-                //System.out.println("ylab correcto");
                 ylab=((Expresion)ParametrosBarPlot.get(2)).ejecutar(ts).toString();
             }else{
                 //SE ESPERABA UN LABEL PARA EL EJE Y
@@ -68,9 +64,7 @@ public class BarPlot extends Instruccion{
             }
             if(((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts) instanceof ArrayList){
                 if(((Expresion)ParametrosBarPlot.get(4)).GetTipo(ts).tp.equals(Tipo.tipo.STRING)){
-                    //System.out.println("Lista de labels");
                     Labels = (ArrayList) ((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts);
-                    //sSystem.out.println(Labels);
                 }
             }
         }else{
