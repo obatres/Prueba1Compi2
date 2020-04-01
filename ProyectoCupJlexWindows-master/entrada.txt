@@ -1,38 +1,12 @@
-getVectorEstudiante = function(carnet, inicial, nombre, apellido, seccion, nota) {
-   	Vector = c(carnet, inicial, nombre, apellido, seccion, nota);    
-    return Vector;
-}
+	xlab=c("xlab");
+	ylab=c("ylab");
+	main=c("main");
+	tipo=c("l");
+	#Barplot(numericos,xlab,ylab,main, labels);
+	numericos = c(11,15,20,25,65)
+	labels = c("Columna 1", "Columna 2","Columna 3")
+	Vector = List(List(12,2),List(5,5),List(55,51),List(35,35),List(85,25),List(15,25))
 
+	#print(Vector)
 
-initList = function(est){
-    L=List(est);
-    return L; 
-}
-
-addNode = function(l, est) {
-    lista = List(l, list(est));
-    return lista;
-}
-
-
-V= getVectorEstudiante("201503611", "P", "Pavel", "Vasquez", "B-", 0)
-
-#print(V)
-
-listaglobal = initList(V); 
-
-print(listaglobal)
-V=getVectorEstudiante("201610673", "Y","Yaiza", "Pineda", "B-", 100);
-listaglobal = addNode(listaglobal, V);
-V=getVectorEstudiante("201612272", "A","Andres", "Carvajal", "B+",100)
-listaglobal = addNode(listaglobal, V);
-V=getVectorEstudiante("201408486", "S","Sharolin", "Lacunza", "A",100)
-listaglobal = addNode(listaglobal, V);
-V=getVectorEstudiante("201612139", "A","Alejandra", "De Leon", "B-",97)
-listaglobal = addNode(listaglobal, V);
-
-print(listaglobal)
-
-
-
-#print(lista);
+	Plot(Vector,tipo,xlab,ylab,main)

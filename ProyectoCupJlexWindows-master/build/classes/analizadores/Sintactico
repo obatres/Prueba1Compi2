@@ -27,6 +27,7 @@ import arbol.Sentencias.DefFunc;
 import arbol.Sentencias.DefFuncP;
 import arbol.Funciones.LlamadaFuncionExp;
 import arbol.Funciones.FuncionesDefinidas.TypeOf;
+import arbol.Graficas.Plot;
 import arbol.Funciones.FuncionesDefinidas.Lenght;
 import arbol.Funciones.FuncionesDefinidas.StringLenght;
 import arbol.Funciones.FuncionesDefinidas.Remove;
@@ -94,7 +95,7 @@ terminal String IGUAL;
 terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String COMA, CC;
 terminal String LIST;
-terminal String NULL, BARPLOT,PIE;
+terminal String NULL, BARPLOT,PIE,PLOT;
 terminal String TYPEOF,LENGHT, STRINGLENGHT, LENGHTPAR, STRINGLENGHTPAR, REMOVE;
 terminal String TOLOWERCASE, TOUPPERCASE, TRUNK, ROUND;
 
@@ -286,13 +287,17 @@ ParametrosLlamada::=    ParametrosLlamada:a COMA expresion:b
                     ;
 
 Graficas::= 
-        BARPLOT PARIZQ ListaExp:a PARDER PTCOMA
+        BARPLOT PARIZQ ListaExp:a PARDER 
             {:
                 RESULT= new BarPlot(a);
             :}
-        | PIE PARIZQ ListaExp:a PARDER PTCOMA  
+        | PIE PARIZQ ListaExp:a PARDER   
             {:
                 RESULT= new PiePlot(a);
+            :}
+        | PLOT PARIZQ ListaExp:a PARDER 
+            {:
+                RESULT= new Plot(a);
             :};
 
 Ciclos::=IF PARIZQ expresioncomp:a PARDER LLAVEIZQ instrucciones:b LLAVEDER  
