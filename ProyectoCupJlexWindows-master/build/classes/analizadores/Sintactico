@@ -37,6 +37,7 @@ import arbol.Funciones.FuncionesDefinidas.Round;
 import arbol.Funciones.FuncionesDefinidas.C;
 import arbol.Sentencias.Sentencia;
 import arbol.Graficas.BarPlot;
+import arbol.Funciones.FuncionesDefinidas.Lista;
 import arbol.Graficas.PiePlot;
 import arbol.Sentencias.Llamada;
 import arbol.Sentencias.LlamadaAMetodo;
@@ -92,6 +93,7 @@ terminal String IDENTIFICADOR;
 terminal String IGUAL;
 terminal String PRINT, FUNCTION,DEFFUN,DEF;
 terminal String COMA, CC;
+terminal String LIST;
 terminal String NULL, BARPLOT,PIE;
 terminal String TYPEOF,LENGHT, STRINGLENGHT, LENGHTPAR, STRINGLENGHTPAR, REMOVE;
 terminal String TOLOWERCASE, TOUPPERCASE, TRUNK, ROUND;
@@ -172,6 +174,8 @@ instruccion ::=
     {:
         RESULT = new Retorno();
     :}
+    |error:a PTCOMA {: System.out.println("error");:}
+
 
 
     
@@ -376,6 +380,8 @@ expresion  ::=
     |   TRUNK PARIZQ expresion:a PARDER                       {: RESULT = new Trunk((Expresion)a);:}
     |   ROUND PARIZQ expresion:a PARDER                       {: RESULT = new Round((Expresion)a);:}
     |   CC PARIZQ ListaExp:a PARDER                           {: RESULT = new C (a);:}
+    |   LIST PARIZQ ListaExp:a PARDER                         {: // System.out.println(a);
+                                                                RESULT = new Lista (a); :}
     |   IDENTIFICADOR:a PARIZQ ListaExp2:b PARDER             {: RESULT = new LlamadaFuncionExp(b, a);:}
     |   STRINGLENGHT PARIZQ expresion:a PARDER                {: RESULT = new StringLenght((Expresion) a); :}
     |   TYPEOF PARIZQ expresion:a PARDER                      {: RESULT = new TypeOf((Expresion)a);    :}

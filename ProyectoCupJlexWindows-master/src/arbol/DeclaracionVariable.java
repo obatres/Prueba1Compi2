@@ -6,6 +6,7 @@
 package arbol;
 
 import arbol.Funciones.FuncionesDefinidas.C;
+import arbol.Funciones.FuncionesDefinidas.Lista;
 import arbol.Funciones.LlamadaFuncionExp;
 import arbol.Sentencias.Llamada;
 import java.util.ArrayList;
@@ -31,76 +32,92 @@ public class DeclaracionVariable extends Instruccion {
            
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
-        
-        exp.ejecutar(ts);
-        
-        if(exp instanceof C){
-            // <editor-fold desc="FUNCION C">> 
-            if(exp.GetTipo(ts).isBoolean()){
-                for (Object o : Vector) {
-                    Valor.add(((Expresion)o).ejecutar(ts));
-                }
-            }else if(exp.GetTipo(ts).isInt()){
-                for (Object o : Vector) {
-                    if(((Expresion)o).GetTipo(ts).isBoolean()){
-                        if(((Expresion)o).ejecutar(ts).equals("true")){
-                            Valor.add("1");
-                        }else if(((Expresion)o).ejecutar(ts).equals("false")){
-                            Valor.add("0");
-                        }
-                    }else{
-                        Valor.add(((Expresion)o).ejecutar(ts));
-                    }
-                }
-            }else if(exp.GetTipo(ts).isDouble()){
-                for (Object o : Vector) {
-                    if(((Expresion)o).GetTipo(ts).isBoolean()){
-                        if(((Expresion)o).ejecutar(ts).equals("true")){
-                            Valor.add("1.0");
-                        }else if(((Expresion)o).ejecutar(ts).equals("false")){
-                            Valor.add("0.0");
-                        }
-                    }else if (((Expresion)o).GetTipo(ts).isInt()){
-                        Valor.add(Double.parseDouble(((Expresion)o).ejecutar(ts).toString()));
-                    }else{
-                        Valor.add(((Expresion)o).ejecutar(ts));
-                    }
-                }                    
-            }else if(exp.GetTipo(ts).isString()){
-                for (Object o : Vector) {
-                    if(((Expresion)o).GetTipo(ts).isBoolean()){
-                        if(((Expresion)o).ejecutar(ts).equals("true")){
-                            Valor.add("true");
-                        }else if(((Expresion)o).ejecutar(ts).equals("false")){
-                            Valor.add("false");
-                        }
-                    }else if(((Expresion)o).GetTipo(ts).isInt()){
-                        Valor.add(((Expresion)o).ejecutar(ts).toString());
-                    }else if(((Expresion)o).GetTipo(ts).isDouble()){
-                        Valor.add(((Expresion)o).ejecutar(ts).toString());
-                    }else if(((Expresion)o).GetTipo(ts).isString()){
-                        Valor.add(((Expresion)o).ejecutar(ts));
-                    }
-                }                     
+        if(exp instanceof Lista){
+            Object Lis=exp.ejecutar(ts);
+            // <editor-fold desc="LISTA">>
+            for (Object object : (ArrayList)Lis) {
+                Valor.add(object);
             }
             // </editor-fold>
-        }else if(exp instanceof Single){
-            Valor.add(0, exp.ejecutar(ts));
-        }else if(exp instanceof LlamadaFuncionExp){
-            Valor.add(0,exp.ejecutar(ts));
         }else{
-            Valor.add(0, exp.ejecutar(ts));
-        }
+            Object salVec = exp.ejecutar(ts);
         
+            if(exp instanceof C){
+                // <editor-fold desc="FUNCION C">> 
+                if(exp.GetTipo(ts).isBoolean()){
+                    // <editor-fold desc="VECTOR BOOLEANO">> 
+                    for (Object o : Vector) {
+                        Valor.add(((Expresion)o).ejecutar(ts));
+                    }
+                    // </editor-fold>
+                }else if(exp.GetTipo(ts).isInt()){
+                    // <editor-fold desc="VECTOR INT">> 
+                    for (Object o : Vector) {
+                        if(((Expresion)o).GetTipo(ts).isBoolean()){
+                            if(((Expresion)o).ejecutar(ts).equals("true")){
+                                Valor.add("1");
+                            }else if(((Expresion)o).ejecutar(ts).equals("false")){
+                                Valor.add("0");
+                            }
+                        }else{
+                            Valor.add(((Expresion)o).ejecutar(ts));
+                        }
+                    }
+                    // </editor-fold>
+                }else if(exp.GetTipo(ts).isDouble()){
+                    // <editor-fold desc="VECTOR DOUBLE">> 
+                    for (Object o : Vector) {
+                        if(((Expresion)o).GetTipo(ts).isBoolean()){
+                            if(((Expresion)o).ejecutar(ts).equals("true")){
+                                Valor.add("1.0");
+                            }else if(((Expresion)o).ejecutar(ts).equals("false")){
+                                Valor.add("0.0");
+                            }
+                        }else if (((Expresion)o).GetTipo(ts).isInt()){
+                            Valor.add(Double.parseDouble(((Expresion)o).ejecutar(ts).toString()));
+                        }else{
+                            Valor.add(((Expresion)o).ejecutar(ts));
+                        }
+                    }   
+                    // </editor-fold>
+                }else if(exp.GetTipo(ts).isString()){
+                    // <editor-fold desc="VECTOR STRING">> 
+                    for (Object o : Vector) {
+                        if(((Expresion)o).GetTipo(ts).isBoolean()){
+                            if(((Expresion)o).ejecutar(ts).equals("true")){
+                                Valor.add("true");
+                            }else if(((Expresion)o).ejecutar(ts).equals("false")){
+                                Valor.add("false");
+                            }
+                        }else if(((Expresion)o).GetTipo(ts).isInt()){
+                            Valor.add(((Expresion)o).ejecutar(ts).toString());
+                        }else if(((Expresion)o).GetTipo(ts).isDouble()){
+                            Valor.add(((Expresion)o).ejecutar(ts).toString());
+                        }else if(((Expresion)o).GetTipo(ts).isString()){
+                            Valor.add(((Expresion)o).ejecutar(ts));
+                        }
+                    } 
+                    // </editor-fold>
+                }
+                // </editor-fold>
+            }else if(exp instanceof Single){
+                Valor.add(0, salVec);
+            }else if(exp instanceof LlamadaFuncionExp){
+                Valor.add(0,salVec);
+            }else{
+                Valor.add(0, salVec);
+            }   
+        }
+
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
         }else{
-           
+            
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }   
 
-        Vector.clear();              
+        Vector.clear(); 
         return null;
     }
 

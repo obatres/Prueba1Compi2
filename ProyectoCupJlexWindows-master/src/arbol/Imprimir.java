@@ -28,7 +28,21 @@ public class Imprimir extends Instruccion{
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
         Object o = contenido.ejecutar(ts);
-        if (o instanceof ArrayList){
+        if(contenido.GetTipo(ts).isList()){
+            try {
+                for (Object t : (ArrayList)(((ArrayList)o).get(((ArrayList)o).size()-1))) {
+                    System.out.println(t);
+                    sal+=t.toString()+"\n";
+                }
+            } catch (Exception e) {
+                System.out.println(o);
+                sal+=o+"\n";
+            }
+            
+            VentanaPrincipal.consola +=sal; 
+        }else{
+            // <editor-fold desc="NO ES LISTA">> 
+            if (o instanceof ArrayList){
             Salida  = (ArrayList<Object>) o;
             System.out.print("[");
             sal  += "[";    
@@ -48,13 +62,16 @@ public class Imprimir extends Instruccion{
             sal  += "\n"; 
             VentanaPrincipal.consola +=sal; 
                     
-        }else if(o!=null){
-            //System.out.println("no se puede imprimir el valor, es desconocido");
-            System.out.println(o.toString());
-            VentanaPrincipal.consola = o.toString()+"\n";
-        }else{
-            System.out.println("nulo");
+            }else if(o!=null){
+                //System.out.println("no se puede imprimir el valor, es desconocido");
+                System.out.println(o.toString());
+                VentanaPrincipal.consola += o.toString()+"\n";
+            }else{
+                System.out.println("nulo");
+            }     
+            // </editor-fold>
         }
+
 
         return null;
     }

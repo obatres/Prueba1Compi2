@@ -45,7 +45,8 @@ public class C  extends Expresion{
                 if(((id) object).ejecutar(ts) instanceof ArrayList){
                     for (Object i : (ArrayList)((id) object).ejecutar(ts)) {
                         if(i instanceof ArrayList){
-                            
+                            //aqui va la lista
+                            System.out.println("creo que es lista");
                         }else{
                             DeclaracionVariable.Vector.add(new Single(i, ((id) object).GetTipo(ts)));   
                         }
