@@ -15,5 +15,4 @@ public abstract class Expresion extends Nodo {
     public abstract Object ejecutar(TablaDeSimbolos ts);   
     public abstract Tipo GetTipo(TablaDeSimbolos ts);
     
-    //public abstract int Dibujar(StringBuilder builder, String parent, int cont);
 }

@@ -5,6 +5,8 @@
  */
 package arbol.Funciones;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
@@ -53,10 +55,13 @@ public class DefinicionDeFuncion extends Instruccion{
             if(!proyectocupjlexwindows.ProyectoCupJlexWindows.tf.Existe(f.getIdentificadorFuncion())){
                 proyectocupjlexwindows.ProyectoCupJlexWindows.tf.add(f);           
             }else{
-                System.out.println("Esta funcion ya esta definida");
+                    ErrorARIT e=new ErrorARIT("Semantico", id, " Funcion ya definida", 0, 0);
+                    ListaErrores.Add(e); 
             }
         }else{
             System.out.println("Esta es una funcion definidida del lenguaje y no se puede volver a definir");
+                                ErrorARIT e=new ErrorARIT("Semantico", id, "error Esta es una funcion definidida del lenguaje y no se puede volver a definir", 0, 0);
+                    ListaErrores.Add(e); 
         }
 
         return null;

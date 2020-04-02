@@ -5,6 +5,10 @@
  */
 package arbol.SwitchCase;
 
+import InterfazGrafica.VentanaPrincipal;
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Expresion;
 import arbol.Instruccion;
@@ -53,9 +57,14 @@ public class SwitchCase extends Instruccion{
                         }else if(in instanceof Expresion){
                             ((Expresion) in).GetTipo(tablalocal);
                             return ((Expresion) in).ejecutar(tablalocal);
-                        } 
+                        } else{
+                    ErrorARIT e=new ErrorARIT("Semantico", in.toString(), "error de tipo de instruccion", 0, 0);
+                    ListaErrores.Add(e);
+                        }
                     }
+                                VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
                 }
+
             }else{
                 TablaDeSimbolos tablalocal = new TablaDeSimbolos();
                 tablalocal.addAll(ts);
@@ -68,8 +77,12 @@ public class SwitchCase extends Instruccion{
                     }else if (in instanceof Expresion){
                         ((Expresion) in).GetTipo(tablalocal);
                         return ((Expresion) in).ejecutar(tablalocal);
+                    }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", in.toString(), "error de tipo de instruccion", 0, 0);
+                    ListaErrores.Add(e);
                     }  
                 }
+                                VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
             }
 
         }

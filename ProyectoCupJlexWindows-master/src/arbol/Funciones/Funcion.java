@@ -16,7 +16,7 @@ import java.util.LinkedList;
  *
  * @author obatres_
  */
-public class Funcion{
+public class Funcion extends Nodo{
 
     /**
      * @return the identificadorFuncion
@@ -63,6 +63,35 @@ public class Funcion{
     public Funcion(String identificadorFuncion, LinkedList<Nodo> InstruccionesFuncion) {
         this.identificadorFuncion = identificadorFuncion;
         this.InstruccionesFuncion = InstruccionesFuncion;
+    }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Funcion\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        String nodo1 = "nodo" + ++cont;
+        builder.append(nodo1).append(" [label=\""+identificadorFuncion+"\"];\n");
+        builder.append(nodo).append(" -> ").append(nodo1).append(";\n");
+        if(ParametrosFuncion!=null){
+            String nodoP = "nodo" + ++cont;
+            builder.append(nodoP).append(" [label=\""+"Parametros"+"\"];\n");
+            builder.append(nodo).append(" -> ").append(nodoP).append(";\n");
+            for (Parametro parametro : ParametrosFuncion) {
+                cont=parametro.Dibujar(builder, nodoP, cont);
+            }            
+        }
+
+        
+        String nodoI = "nodo" + ++cont;
+        builder.append(nodoI).append(" [label=\""+"instrucciones"+"\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoI).append(";\n");
+        for (Nodo nodop : InstruccionesFuncion) {
+           cont=nodop.Dibujar(builder, nodoI, cont);
+        }
+
+        return cont;
     }
 
 }

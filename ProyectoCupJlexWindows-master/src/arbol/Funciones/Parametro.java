@@ -6,13 +6,14 @@
 package arbol.Funciones;
 
 import arbol.Expresion;
+import arbol.Nodo;
 import arbol.id;
 
 /**
  *
  * @author obatres_
  */
-public class Parametro {
+public class Parametro extends Nodo {
 
     /**
      * @return the ValorParametro
@@ -53,6 +54,30 @@ public class Parametro {
     public Parametro(String IdParametro) {
         this.IdParametro=IdParametro;
     }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Parametro\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        String nodo1 = "nodo" + ++cont;
+        builder.append(nodo1).append(" [label=\""+IdParametro+"\"];\n");
+        builder.append(nodo).append(" -> ").append(nodo1).append(";\n");
+        
+        if(ValorParametro!=null){
+        String nodoP = "nodo" + ++cont;
+        builder.append(nodoP).append(" [label=\""+"Valor"+"\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoP).append(";\n");
+        
+        
+          cont=ValorParametro.Dibujar(builder, nodoP, cont);          
+        }
+
+        return cont;
+
+    }
+    
     
     
 }

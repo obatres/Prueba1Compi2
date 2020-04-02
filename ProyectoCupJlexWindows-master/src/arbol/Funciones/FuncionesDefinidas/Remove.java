@@ -5,6 +5,8 @@
  */
 package arbol.Funciones.FuncionesDefinidas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -44,7 +46,8 @@ public class Remove extends Expresion
                 cadena1=exp1.ejecutar(ts).toString();
             }else{
                 cadena1="null";
-                        //ERROR
+                    ErrorARIT e=new ErrorARIT("Semantico", cadena1, " Valor no aceptado en length", 0, 0);
+                    ListaErrores.Add(e);  
             }
             
             if(exp2.ejecutar(ts) instanceof ArrayList){
@@ -56,13 +59,17 @@ public class Remove extends Expresion
             }else if(exp2.ejecutar(ts) instanceof String){
                 cadena2 = exp2.ejecutar(ts).toString();
             }else{
-                cadena2="";
+                cadena2="null";
+                    ErrorARIT e=new ErrorARIT("Semantico", cadena2, " Valor no aceptado en length", 0, 0);
+                    ListaErrores.Add(e);  
             }
             cadena1=cadena1.replaceAll(cadena2,"");
             System.out.println(cadena1);
             return cadena1;
         }else{
             System.out.println("los parametros no son String");
+                                ErrorARIT e=new ErrorARIT("Semantico", cadena1.toString() + " "+ cadena2.toString(), " Los parametros no son String", 0, 0);
+                    ListaErrores.Add(e);  
         }
         return null;
     }

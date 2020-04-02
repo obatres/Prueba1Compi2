@@ -6,6 +6,8 @@
 package arbol.Funciones.FuncionesDefinidas;
 
 import InterfazGrafica.VentanaPrincipal;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Simbolo;
 import arbol.Single;
@@ -49,11 +51,16 @@ public class StringLenght extends Expresion{
                 cadena=o.toString();
             }else{
                 System.out.println("Parametro incorrecto");
+                                    ErrorARIT e=new ErrorARIT("Semantico", cadena.toString(), " Parametro incorrecto", 0, 0);
+                    ListaErrores.Add(e); 
             }
             //System.out.println(cadena.length());
             return cadena.length();
         }else{
             System.out.println("Parametro incorrecto");
+                                                ErrorARIT e=new ErrorARIT("Semantico", cadena.toString(), " Parametro incorrecto", 0, 0);
+                    ListaErrores.Add(e);
+            
         }
         
         return null;

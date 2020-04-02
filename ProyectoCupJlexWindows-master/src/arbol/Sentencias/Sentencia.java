@@ -6,11 +6,14 @@
 package arbol.Sentencias;
 
 import arbol.DeclaracionVariable;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Funciones.DefinicionDeFuncion;
 import arbol.Funciones.Funcion;
 import arbol.Funciones.LlamadaFuncion;
 import arbol.Instruccion;
+import arbol.Nodo;
 import arbol.TablaDeSimbolos;
 
 /**
@@ -59,14 +62,25 @@ public class Sentencia extends Instruccion{
                 DefinicionDeFuncion d = new DefinicionDeFuncion((Funcion) Sentencia);
                 return d.ejecutar(ts);
             }else{
-                return null;                
+                    ErrorARIT e=new ErrorARIT("Semantico", Sentencia.toString(), "error de tipo de instruccion, no se reconoce como sentencia", 0, 0);
+                    ListaErrores.Add(e); 
+                return null; 
+ 
             }
 
     }
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return cont;
-    }
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Sentencia\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+        
+        cont=((Nodo)Sentencia).Dibujar(builder, nodoOp, cont);
+        return cont;    }
     
 }

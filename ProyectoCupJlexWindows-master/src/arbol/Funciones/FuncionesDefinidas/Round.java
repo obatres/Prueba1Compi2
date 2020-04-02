@@ -5,6 +5,8 @@
  */
 package arbol.Funciones.FuncionesDefinidas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -47,6 +49,8 @@ public class Round extends Expresion{
             return sal;
         }else{
             System.out.println("tipo de parametro invalido");
+                    ErrorARIT e=new ErrorARIT("Semantico", numero.toString(), " Los parametros no son numeros", 0, 0);
+                    ListaErrores.Add(e); 
         }
         return null; 
     }

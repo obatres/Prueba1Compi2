@@ -5,6 +5,8 @@
  */
 package arbol;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import java.util.ArrayList;
 
 /**
@@ -39,10 +41,6 @@ public class id extends Expresion{
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
         
-        //preguntar si existe el simbolo 
-        // bool existencia=ts.Exist(iden);
-        //if (existe) return ts.getValor(iden);
-        //Simbolo s = (Simbolo) ts.getValor(iden);
         if(ts.Existe(iden)){
             if (ts.getValor(iden) instanceof ArrayList){
                 Vector = (ArrayList<Object>) ts.getValor(iden);
@@ -53,7 +51,8 @@ public class id extends Expresion{
                 }
             }            
         }else{
-            return "no hay variable aun";
+                     ErrorARIT e=new ErrorARIT("Semantico", iden, "variable no declarada", 0, 0);
+                    ListaErrores.Add(e); 
         }
 
         //return ts.getValor(iden);

@@ -5,9 +5,13 @@
  */
 package arbol.DoWhile;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
+import arbol.Retorno.Retorno;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import java.util.LinkedList;
 
@@ -33,8 +37,16 @@ public class DoWhile extends Instruccion{
             tablalocal.addAll(ts);
             for (Nodo en : ListaDeInstrucciones) {
                 if(en instanceof Instruccion){
-                    ((Instruccion) en).ejecutar(ts);
-                }  
+                    ((Instruccion) en).ejecutar(tablalocal);
+                }else if(en instanceof Retorno){
+                    ((Retorno) en).ejecutar(tablalocal);
+                    return ((Retorno) en).ejecutar(tablalocal);
+                }else if (en instanceof Break){
+                    return null;
+                }  else{
+                    ErrorARIT e=new ErrorARIT("Semantico", en.toString(), "error de tipo de instruccion", 0, 0);
+                    ListaErrores.Add(e); 
+                }
             }             
         } while ((Boolean)exp.ejecutar(ts));
         return null;

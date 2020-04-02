@@ -6,6 +6,8 @@
 package arbol.Funciones.FuncionesDefinidas;
 
 import arbol.DeclaracionVariable;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Funciones.LlamadaFuncionExp;
 import arbol.Single;
@@ -95,6 +97,9 @@ public class Lista extends Expresion{
                 // <editor-fold desc="LISTA">> 
                 salidatotal.add(((Lista) t).ejecutar(ts));
                 // </editor-fold>
+            }else{
+                                    ErrorARIT e=new ErrorARIT("Semantico", t.toString(), " Valor no aceptado en List", 0, 0);
+                    ListaErrores.Add(e);  
             }
                 
         }

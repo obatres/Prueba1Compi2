@@ -6,12 +6,13 @@
 package arbol.Sentencias;
 
 import arbol.Expresion;
+import arbol.Nodo;
 
 /**
  *
  * @author obatres_
  */
-public class Def {
+public class Def extends Nodo{
 
     /**
      * @return the exp
@@ -23,6 +24,16 @@ public class Def {
 
     public Def(Expresion exp) {
         this.exp = exp;
+    }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Def\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        cont = exp.Dibujar(builder, nodo, cont);
+        return cont;
     }
     
     

@@ -5,6 +5,8 @@
  */
 package arbol.Funciones.FuncionesDefinidas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -40,8 +42,11 @@ public class Trunk extends Expresion {
             return sal;
         }else{
             System.out.println("tipo de parametro invalido");
+                    ErrorARIT e=new ErrorARIT("Semantico", exp.toString(), " tipo de parametro invalido", 0, 0);
+                    ListaErrores.Add(e);
         }
-        return null;     }
+        return null;    
+    }
 
     @Override
     public Tipo GetTipo(TablaDeSimbolos ts) {

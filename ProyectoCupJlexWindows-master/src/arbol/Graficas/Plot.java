@@ -5,6 +5,8 @@
  */
 package arbol.Graficas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
@@ -49,12 +51,16 @@ public class Plot extends Instruccion{
                 VLinea =(ArrayList)((Expresion)ParametrosBarPlot.get(0)).ejecutar(ts);
             }else{
                 System.out.println("se esperaba un conjunto de numeros");
+                                ErrorARIT e=new ErrorARIT("Semantico", "Plot", " se esperaba un conjunto de numeros", 0, 0);
+                    ListaErrores.Add(e);  
             }
             
             if(((Expresion)ParametrosBarPlot.get(1)).ejecutar(ts)instanceof String){
                 Type = ((Expresion)ParametrosBarPlot.get(1)).ejecutar(ts).toString();
             }else{
                 System.out.println("Se esperaba un String para el tipo, se usara por default O");
+                                                ErrorARIT e=new ErrorARIT("Semantico", "Plot", " Se esperaba un String para el tipo, se usara por default O", 0, 0);
+                    ListaErrores.Add(e);  
                 Type ="O";
             }
             
@@ -62,6 +68,8 @@ public class Plot extends Instruccion{
                 xlab = ((Expresion)ParametrosBarPlot.get(2)).ejecutar(ts).toString();
             }else{
                 System.out.println("Se esperaba un String para el xlab");
+                    ErrorARIT e=new ErrorARIT("Semantico", "Plot", " Se esperaba un String para el xlab", 0, 0);
+                    ListaErrores.Add(e);  
 
             }            
             
@@ -69,16 +77,21 @@ public class Plot extends Instruccion{
                 ylab = ((Expresion)ParametrosBarPlot.get(3)).ejecutar(ts).toString();
             }else{
                 System.out.println("Se esperaba un String para el ylab");
+                    ErrorARIT e=new ErrorARIT("Semantico", "Plot", " Se esperaba un String para el ylab", 0, 0);
+                    ListaErrores.Add(e);  
             }       
  
             if(((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts)instanceof String){
                 main = ((Expresion)ParametrosBarPlot.get(4)).ejecutar(ts).toString();
             }else{
                 System.out.println("Se esperaba un String para el main");
-
+                    ErrorARIT e=new ErrorARIT("Semantico", "Plot", " Se esperaba un String para el main", 0, 0);
+                    ListaErrores.Add(e);  
             }  
         }else{
             System.out.println("CANTIDAD INCORRECTA DE PARAMETROS");
+                                ErrorARIT e=new ErrorARIT("Semantico", "Plot", " NUMERO DE PARAMETROS INCORRECTOS PARA HACER LA GRAFICA", 0, 0);
+                    ListaErrores.Add(e);
         }
     XYDataset datasetXY = createDataset();
 
@@ -100,7 +113,18 @@ public class Plot extends Instruccion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return cont;
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"PLOT\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+
+        for (int i = 0; i < ParametrosBarPlot.size(); i++) {
+            cont=((Expresion)ParametrosBarPlot.get(i)).Dibujar(builder, nodoOp, cont);
+        }
+        return cont; 
     }
     
     

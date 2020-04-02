@@ -6,6 +6,8 @@
 package arbol.Funciones.FuncionesDefinidas;
 
 import arbol.DeclaracionVariable;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Operacion;
 import arbol.Single;
@@ -45,8 +47,8 @@ public class C  extends Expresion{
                 if(((id) object).ejecutar(ts) instanceof ArrayList){
                     for (Object i : (ArrayList)((id) object).ejecutar(ts)) {
                         if(i instanceof ArrayList){
-                            //aqui va la lista
-                            System.out.println("creo que es lista");
+                    ErrorARIT e=new ErrorARIT("Semantico", object.toString(), " Valor no aceptado en C", 0, 0);
+                    ListaErrores.Add(e);  
                         }else{
                             DeclaracionVariable.Vector.add(new Single(i, ((id) object).GetTipo(ts)));   
                         }

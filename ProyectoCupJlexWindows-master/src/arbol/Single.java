@@ -51,6 +51,7 @@ public class Single extends Expresion{
     
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        
         return this.Valor;
     }
 

@@ -20,7 +20,7 @@ public class ProyectoCupJlexWindows {
      */
             public static TabladeFunciones tf = new TabladeFunciones();
     public static void main(String[] args) {
-        interpretar("entrada.txt");
+        //interpretar("entrada.arit");
         VentanaPrincipal v = new VentanaPrincipal();
         v.setVisible(true);
     }

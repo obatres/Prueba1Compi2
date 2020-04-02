@@ -5,11 +5,16 @@
  */
 package arbol.Funciones;
 
+import InterfazGrafica.VentanaPrincipal;
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Retorno.Retorno;
 import arbol.Simbolo;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import arbol.Tipo;
 import java.util.ArrayList;
@@ -63,6 +68,11 @@ public class LlamadaFuncionExp extends Expresion{
                             tipoRetorno = new Tipo (((Retorno) n).GetTipo(tablalocal).tp);
                             return ((Expresion) n).ejecutar(tablalocal);    
                         }   
+                    }else if(n instanceof Break){
+                        return null;
+                    }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", n.toString(), " error en la instruccion", 0, 0);
+                    ListaErrores.Add(e);    
                     }
                 }
                 
@@ -101,6 +111,11 @@ public class LlamadaFuncionExp extends Expresion{
                             tipoRetorno = new Tipo (((Retorno) n).GetTipo(tablalocal).tp);
                             return ((Expresion) n).ejecutar(tablalocal);    
                         }   
+                    }else if(n instanceof Break){
+                        return null;
+                    }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", n.toString(), " error en la instruccion", 0, 0);
+                    ListaErrores.Add(e);  
                     }
 
              
@@ -114,12 +129,17 @@ public class LlamadaFuncionExp extends Expresion{
                  // </editor-fold>
             }else{
                 System.out.println("cantidad de parametros no coincide");
+                  ErrorARIT e=new ErrorARIT("Semantico", identificadorLlamada, " cantidad de parametros no coincide", 0, 0);
+                    ListaErrores.Add(e);   
+                
             }
-            
+                            VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
         // </editor-fold>
         }else{
             // <editor-fold desc="LA FUNCION NO SE DECLARO">> 
-            System.out.println("Esta funcion "+identificadorLlamada+" no esta definida"); 
+            System.out.println("Esta funcion "+identificadorLlamada+" no esta definida");
+                    ErrorARIT e=new ErrorARIT("Semantico", identificadorLlamada, " Esta funcion "+identificadorLlamada+" no esta definida", 0, 0);
+                    ListaErrores.Add(e);  
                         // </editor-fold>
         }
         return null;        
@@ -142,11 +162,13 @@ public class LlamadaFuncionExp extends Expresion{
         
         String nodoOp2 = "nodo" + ++cont;
         builder.append(nodoOp2).append(" [label=\""+ "contenido" + "\"];\n");
-        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");  
-        
-        for (Expresion expresion : ParametrosLlamada) {
+        builder.append(nodo).append(" -> ").append(nodoOp2).append(";\n");  
+        if(ParametrosLlamada!=null){
+         for (Expresion expresion : ParametrosLlamada) {
             cont=expresion.Dibujar(builder, nodoOp2, cont);
+        }           
         }
+
         return cont;
     }
     

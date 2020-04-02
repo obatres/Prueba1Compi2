@@ -4,7 +4,9 @@
  * Julio - 2018
  */
 package analizadores;
-import java_cup.runtime.Symbol; 
+import java_cup.runtime.Symbol;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores; 
 
 
 public class Lexico implements java_cup.runtime.Scanner {
@@ -647,6 +649,8 @@ public class Lexico implements java_cup.runtime.Scanner {
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "
     +yyline+", en la columna: "+yychar);
+        ErrorARIT e=new ErrorARIT("Lexico", yytext(), "Error sintactico", yyline, yychar);
+        ListaErrores.Add(e);
 }
 					case -21:
 						break;
@@ -838,6 +842,8 @@ public class Lexico implements java_cup.runtime.Scanner {
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "
     +yyline+", en la columna: "+yychar);
+        ErrorARIT e=new ErrorARIT("Lexico", yytext(), "Error sintactico", yyline, yychar);
+        ListaErrores.Add(e);
 }
 					case -68:
 						break;
@@ -857,6 +863,8 @@ public class Lexico implements java_cup.runtime.Scanner {
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "
     +yyline+", en la columna: "+yychar);
+        ErrorARIT e=new ErrorARIT("Lexico", yytext(), "Error sintactico", yyline, yychar);
+        ListaErrores.Add(e);
 }
 					case -72:
 						break;
@@ -868,6 +876,8 @@ public class Lexico implements java_cup.runtime.Scanner {
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "
     +yyline+", en la columna: "+yychar);
+        ErrorARIT e=new ErrorARIT("Lexico", yytext(), "Error sintactico", yyline, yychar);
+        ListaErrores.Add(e);
 }
 					case -74:
 						break;

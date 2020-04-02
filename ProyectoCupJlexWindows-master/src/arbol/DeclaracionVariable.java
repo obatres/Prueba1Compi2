@@ -5,6 +5,10 @@
  */
 package arbol;
 
+import InterfazGrafica.VentanaPrincipal;
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Funciones.FuncionesDefinidas.C;
 import arbol.Funciones.FuncionesDefinidas.Lista;
 import arbol.Funciones.LlamadaFuncionExp;
@@ -32,6 +36,7 @@ public class DeclaracionVariable extends Instruccion {
            
     @Override
     public Object ejecutar(TablaDeSimbolos ts) {
+        VentanaPrincipal.RTS.add(new ReporteTabla(ts, VentanaPrincipal.ambito++));
         Object salVec = exp.ejecutar(ts);
         if(exp instanceof Lista){
             // <editor-fold desc="LISTA">>
@@ -96,6 +101,9 @@ public class DeclaracionVariable extends Instruccion {
                         }
                     } 
                     // </editor-fold>
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", salVec.toString(), "error de tipo en el vector", exp.linea, exp.columna);
+                    ListaErrores.Add(e); 
                 }
                 // </editor-fold>
             }else if(exp instanceof Single){
@@ -110,12 +118,12 @@ public class DeclaracionVariable extends Instruccion {
         if(ts.Existe(identificador)){
             ts.setValor(identificador, Valor, exp.GetTipo(ts));            
         }else{
-            
             ts.add(new Simbolo(identificador,exp.GetTipo(ts)));
             ts.setValor(identificador, Valor, exp.GetTipo(ts));
         }   
 
         Vector.clear(); 
+        VentanaPrincipal.RTS.add(new ReporteTabla(ts, VentanaPrincipal.ambito));
         return null;
     }
 

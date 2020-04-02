@@ -5,21 +5,30 @@
  */
 package InterfazGrafica;
 
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Funciones.TabladeFunciones;
 import arbol.Instruccion;
 import arbol.Nodo;
+import arbol.Simbolo;
 import arbol.TablaDeSimbolos;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JTextPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -34,7 +43,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     
     public static String consola="";
+    public static String errores="";
+    public String cadenadeArbol="";
     public static TabladeFunciones tf = new TabladeFunciones();
+    public static ArrayList<ReporteTabla> RTS = new ArrayList<>();
+    public static int ambito=0;
     public VentanaPrincipal() {
         initComponents();
     }
@@ -50,6 +63,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu9 = new javax.swing.JMenu();
+        jMenu10 = new javax.swing.JMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         TextoDeEntrada = new javax.swing.JEditorPane();
@@ -58,15 +81,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TextoErrores = new javax.swing.JTextPane();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         AbrirArchivo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         EjecutaJfelxCup = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        EjecutaJfelxCup1 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        EjecutaJfelxCup2 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         jMenuItem1.setText("jMenuItem1");
+
+        jMenu4.setText("File");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("Edit");
+        jMenuBar2.add(jMenu5);
+
+        jMenuItem2.setText("jMenuItem2");
+
+        jMenu6.setText("File");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("Edit");
+        jMenuBar3.add(jMenu7);
+
+        jMenu9.setText("File");
+        jMenuBar4.add(jMenu9);
+
+        jMenu10.setText("Edit");
+        jMenuBar4.add(jMenu10);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +133,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel2.setText("Entrada:");
 
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel3.setText("ARIT IDE");
+
+        TextoErrores.setEditable(false);
+        TextoErrores.setBackground(new java.awt.Color(255, 255, 255));
+        TextoErrores.setSelectedTextColor(new java.awt.Color(51, 153, 0));
+        jScrollPane3.setViewportView(TextoErrores);
+
+        jLabel4.setText("Errores:");
 
         jMenu2.setText("Archivo");
 
@@ -109,6 +167,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
+        jMenu8.setText("Graficar");
+
+        EjecutaJfelxCup1.setText("Jflex/CUP");
+        EjecutaJfelxCup1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EjecutaJfelxCup1ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(EjecutaJfelxCup1);
+
+        jMenuBar1.add(jMenu8);
+
+        jMenu11.setText("TS");
+
+        EjecutaJfelxCup2.setText("VerTablaDeSimbolos");
+        EjecutaJfelxCup2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EjecutaJfelxCup2ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(EjecutaJfelxCup2);
+
+        jMenuBar1.add(jMenu11);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -117,32 +199,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(242, 242, 242)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(351, 351, 351))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(29, Short.MAX_VALUE)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,6 +251,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             System.out.println("Error fatal en compilación de entrada.");
             System.out.println("Causa: "+ex.getCause());
         } 
+        DibujarArbol(AST_arbolSintaxisAbstracta);
         ejecutarAST(AST_arbolSintaxisAbstracta);
         
     }
@@ -195,13 +286,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     System.out.println("Error al ejecutar un nivel en el arbol AST");  //reportar error
                 }
         this.TextoSalida.setText(consola+"\n");
+        
         }
     }
     
     private void AbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirArchivoActionPerformed
         JFileChooser jf= new JFileChooser();
         jf.setFileSelectionMode( JFileChooser.FILES_ONLY );
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto (*.txt)", "txt");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de Texto (*.arit)", "arit");
         jf.setFileFilter(filtro);
         int seleccion = jf.showOpenDialog(this);
         if(seleccion == JFileChooser.APPROVE_OPTION )
@@ -228,10 +320,125 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_AbrirArchivoActionPerformed
 
     private void EjecutaJfelxCupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaJfelxCupActionPerformed
+        proyectocupjlexwindows.ProyectoCupJlexWindows.tf.clear();
+        RTS.clear();
         this.TextoSalida.setText("");
         consola="";
+        errores="";
         interpretar();
+        ListaErrores.VerErrores();
+        this.TextoErrores.setText(errores+"\n");
     }//GEN-LAST:event_EjecutaJfelxCupActionPerformed
+
+    public  void DibujarArbol (LinkedList<Nodo> arbol){
+        StringBuilder builder = new StringBuilder();
+        int cont = 1;
+        String root = "nodo" + cont;
+        builder.append("digraph lab5 {\n");
+        builder.append(root).append(" [label=\"ARIT\"];\n");
+        
+        for (Nodo nodo : arbol) {
+                cont = nodo.Dibujar(builder, root, cont);
+        }
+        builder.append("}");
+        
+        //System.out.println(builder.toString());
+        cadenadeArbol=builder.toString();
+        
+    }
+
+    private void armar_Cuerpo_dot(String ruta_dot)
+    {
+        this.creararchivo(ruta_dot, cadenadeArbol);
+    }
+    public void GraficarArbol(){
+        String ruta_dot = System.getProperty("user.home") + File.separator +"SalidasDot"+File.separator+"ast.dot"; 
+        String ruta_png = System.getProperty("user.home") + File.separator +"SalidasDot"+File.separator+"ast.png"; 
+        this.armar_Cuerpo_dot(ruta_dot);
+        this.crearGrafo(ruta_dot, ruta_png);
+        this.autoAbrir(ruta_png); 
+    }
+       
+    private void autoAbrir(String ruta)
+    {
+        try
+        {
+            File archivo = new File(ruta);
+            if(archivo.exists())
+            {
+                Desktop.getDesktop().open(archivo);
+            }
+        }
+        catch (IOException ex) 
+        {
+        }
+    }
+    
+    private void crearGrafo(String ruta_dot, String ruta_png)
+    {
+        String tParam = "-Tpng";    
+        String tOParam = "-o";        
+        
+        String[] cmd = new String[5]; 
+        
+        cmd[0] = "dot.exe";
+        cmd[1] = tParam;    
+        cmd[2] = ruta_dot;
+        cmd[3] = tOParam;   
+        cmd[4] = ruta_png;
+        Runtime rt = Runtime.getRuntime();
+        
+        try 
+        {
+            //Hace la llamada al sistema y ejecuta la variable cmd
+            rt.exec( cmd );                                    
+        } 
+        catch (IOException ex) 
+        {
+        }
+    }
+    public synchronized void creararchivo(String pfichero,String pcontenido){   
+        FileWriter archivo = null;
+   
+        try{
+            archivo = new FileWriter(pfichero);} 
+        catch (IOException ex) 
+        {
+        }
+
+        File a = new File(pfichero);        
+        if (!a.exists()){return;}   
+        
+        try(PrintWriter printwriter = new PrintWriter(archivo)) 
+        {
+            printwriter.print(pcontenido);
+            printwriter.close();
+        }
+    }
+    private void EjecutaJfelxCup1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaJfelxCup1ActionPerformed
+        GraficarArbol();
+        
+    }//GEN-LAST:event_EjecutaJfelxCup1ActionPerformed
+
+    private void EjecutaJfelxCup2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutaJfelxCup2ActionPerformed
+        // TODO add your handling code here:
+        String t="";
+        for (ReporteTabla funcion :RTS) {
+            for (Simbolo simbolo : funcion.getTabla()) {
+                System.out.println("id: "+simbolo.getId()+" Valor: "+simbolo.getValor()+" Tipo:"+simbolo.getT()+" ambito:"+funcion.getAmbito());
+                t+="id: "+simbolo.getId()+" Valor: "+simbolo.getValor()+" Tipo:"+simbolo.getT().tp+" ambito:"+funcion.getAmbito()+"\n";
+            }
+            t+="\n";
+            System.out.println("\n");
+        }
+        JFrame j = new JFrame("TablaDeSimbolos");
+        JTextPane jp = new JTextPane();
+        
+        jp.setText(t);
+        j.add(jp);
+        j.setVisible(true);
+        
+    }//GEN-LAST:event_EjecutaJfelxCup2ActionPerformed
 
     
   
@@ -243,18 +450,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AbrirArchivo;
     private javax.swing.JMenuItem EjecutaJfelxCup;
+    private javax.swing.JMenuItem EjecutaJfelxCup1;
+    private javax.swing.JMenuItem EjecutaJfelxCup2;
     private javax.swing.JEditorPane TextoDeEntrada;
+    private javax.swing.JTextPane TextoErrores;
     private javax.swing.JTextPane TextoSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

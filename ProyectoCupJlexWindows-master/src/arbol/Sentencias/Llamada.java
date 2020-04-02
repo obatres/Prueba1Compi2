@@ -6,13 +6,14 @@
 package arbol.Sentencias;
 
 import arbol.Expresion;
+import arbol.Nodo;
 import java.util.ArrayList;
 
 /**
  *
  * @author obatres_
  */
-public class Llamada {
+public class Llamada extends Nodo{
 
     /**
      * @return the ParametrosLlamada
@@ -28,6 +29,21 @@ public class Llamada {
 
     public Llamada() {
         this.ParametrosLlamada = null;
+    }
+
+    @Override
+    public int Dibujar(StringBuilder builder, String parent, int cont) {
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"Llamada\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+        
+        if(ParametrosLlamada!=null){
+          for (Expresion expresion : ParametrosLlamada) {
+            cont=expresion.Dibujar(builder, nodo, cont);
+        }          
+        }
+
+        return cont;
     }
     
     

@@ -5,12 +5,17 @@
  */
 package arbol.Funciones;
 
+import InterfazGrafica.VentanaPrincipal;
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
 import arbol.Retorno.Retorno;
 import arbol.Simbolo;
 import arbol.Single;
+import arbol.SwitchCase.Break;
 import arbol.TablaDeSimbolos;
 import arbol.Tipo;
 import java.util.ArrayList;
@@ -25,7 +30,7 @@ public class LlamadaFuncion extends Instruccion{
 
     private ArrayList<Expresion> ParametrosLlamada;
     private String identificadorLlamada;
-    
+    Tipo tiporetorno;
     
     LinkedList<Funcion> TablaFunciones = proyectocupjlexwindows.ProyectoCupJlexWindows.tf;
     
@@ -58,8 +63,14 @@ public class LlamadaFuncion extends Instruccion{
                         ((Instruccion) n).ejecutar(tablalocal);                         
                     }else if(n instanceof Expresion){
                             // <editor-fold desc="RETORNO">> 
+                            tiporetorno = ((Expresion) n).GetTipo(tablalocal);
                             return ((Retorno) n).ejecutar(tablalocal);
                             // </editor-fold>                                                
+                    }else if(n instanceof Break){
+                        return null;
+                    }else{
+                                            ErrorARIT e=new ErrorARIT("Semantico", n.toString(), " error en la instruccion", 0, 0);
+                    ListaErrores.Add(e); 
                     }
                 }
                 // </editor-fold>
@@ -91,17 +102,28 @@ public class LlamadaFuncion extends Instruccion{
                     if( n instanceof Instruccion){
                         ((Instruccion) n).ejecutar(tablalocal);                         
                     }else if(n instanceof Expresion){
-                            // <editor-fold desc="RETORNO">> 
+                            // <editor-fold desc="RETORNO">>
+                            tiporetorno= ((Expresion) n).GetTipo(tablalocal);
                             return ((Retorno) n).ejecutar(tablalocal);
                             // </editor-fold>                                                     
+                    }else if(n instanceof Break){
+                        return null;
+                    }else{
+                       ErrorARIT e=new ErrorARIT("Semantico", n.toString(), " error en la instruccion", 0, 0);
+                    ListaErrores.Add(e); 
                     }
                 }
                 // </editor-fold>
             }else{
                 System.out.println("cantidad de parametros no coincide");
+                     ErrorARIT e=new ErrorARIT("Semantico", identificadorLlamada, " cantidad de parametros no coincide", 0, 0);
+                    ListaErrores.Add(e); 
             }
+                            VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
         }else{
             System.out.println("Esta funcion "+identificadorLlamada+" no esta definida"); 
+                                 ErrorARIT e=new ErrorARIT("Semantico", identificadorLlamada, " Esta funcion "+identificadorLlamada+" no esta definida", 0, 0);
+                    ListaErrores.Add(e); 
         }
         return null;
     }
@@ -117,12 +139,15 @@ public class LlamadaFuncion extends Instruccion{
         builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");
         
         String nodoOp2 = "nodo" + ++cont;
-        builder.append(nodoOp2).append(" [label=\""+ "contenido" + "\"];\n");
-        builder.append(nodo).append(" -> ").append(nodoOp1).append(";\n");  
+        builder.append(nodoOp2).append(" [label=\""+ "PArametros" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp2).append(";\n");  
         
-        for (Expresion expresion : ParametrosLlamada) {
+        if(ParametrosLlamada!=null){
+         for (Expresion expresion : ParametrosLlamada) {
             cont=expresion.Dibujar(builder, nodoOp2, cont);
+        }           
         }
+
         return cont;
     }
     

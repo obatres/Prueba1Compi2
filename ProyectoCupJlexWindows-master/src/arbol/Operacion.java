@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package arbol;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Tipo.tipo.*;
 import java.util.ArrayList;
 /**
@@ -417,14 +419,14 @@ public class Operacion extends Expresion{
                         // </editor-fold>
                     } 
                    // </editor-fold> 
-                }                     
+                } else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);        
+                }                    
                 // </editor-fold>                 
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 // <editor-fold desc="IZQUIERDO ES DOUBLE">> 
-                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
-                    
-                    
-                    
+                if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){                  
                     Double val1 = 0.0;
                     ArrayList<Object> vec1 = new ArrayList<>();
                     ArrayList<Object> vec2 = new ArrayList<>();
@@ -454,14 +456,14 @@ public class Operacion extends Expresion{
                             return val1-Double.parseDouble(operadorDer.ejecutar(ts).toString());                           
                         }                                         
                     } 
-                    
-                    
-                    
-                    
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }
                 // </editor-fold>
             }else{
-                //TODO reportar error de tipo
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
             }
          // </editor-fold> 
              
@@ -522,7 +524,8 @@ public class Operacion extends Expresion{
                     } 
                      // </editor-fold>   
                 }else{
-                    System.out.println("error de tipo en segundo operador");
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }
                 // </editor-fold>
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
@@ -547,7 +550,8 @@ public class Operacion extends Expresion{
                                     }                                     
                                     return vec3;                                    
                                 }else{                                   
-                                    System.out.println("error de tamaños");                                   
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tamaños en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                                   
                                 }
                                 // </editor-fold>
                             }else if(operadorDer.ejecutar(ts)instanceof String){   
@@ -558,7 +562,10 @@ public class Operacion extends Expresion{
                                 // <editor-fold desc="DER DOUBLE">> 
                                 return Double.parseDouble(vec1.get(0).toString()) *Double.parseDouble(operadorDer.ejecutar(ts).toString());   
                                 // </editor-fold>
-                            } 
+                            } else{
+                        ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);   
+                            }
                             // </editor-fold>
                     }else{  
                         // <editor-fold desc="IZQ SIN">> 
@@ -576,15 +583,22 @@ public class Operacion extends Expresion{
                             // <editor-fold desc="DER DOUBLE">> 
                             return val1*Double.parseDouble(operadorDer.ejecutar(ts).toString());
                             // </editor-fold>
-                        } 
+                        } else{
+                            ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tamaños en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);   
+                        }
                         // </editor-fold>
                     } 
                     
                   // </editor-fold>  
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }
                 // </editor-fold>
             }else{
-                //TODO reportar error de tipo
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
             }  
         
 // </editor-fold>             
@@ -612,7 +626,8 @@ public class Operacion extends Expresion{
                                     }                                     
                                     return vec3;                                    
                                 }else{                                   
-                                    System.out.println("error de tamaños");                                   
+ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tamaños en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                                   
                                 }
                                 // </editor-fold>
                             }else if(operadorDer.ejecutar(ts)instanceof String){  
@@ -623,6 +638,9 @@ public class Operacion extends Expresion{
                                 // <editor-fold desc="DER DOUBLE">> 
                                 return Double.parseDouble(vec1.get(0).toString()) /Double.parseDouble(operadorDer.ejecutar(ts).toString());
                                 // </editor-fold>                                
+                            }else{
+ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipos en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);   
                             }
                         // </editor-fold>
                     }else{ 
@@ -641,11 +659,16 @@ public class Operacion extends Expresion{
                             // <editor-fold desc="DER DOUBLE">> 
                             return val1/Double.parseDouble(operadorDer.ejecutar(ts).toString());  
                             // </editor-fold>
-                        } 
+                        } else{
+ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MULTIPLICACION, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                           }
                         // </editor-fold>
                     } 
                     // </editor-fold>
-                } 
+                } else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
+                }
                // </editor-fold> 
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 // <editor-fold desc="IZQ DOUBLE">> 
@@ -701,11 +724,15 @@ public class Operacion extends Expresion{
                         // </editor-fold>
                     } 
                 // </editor-fold>  
+                }else{
+
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }
                 // </editor-fold>
             }else{
-                //TODO reportar error de tipo
-            } 
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                  } 
             // </editor-fold> 
            
         }else if(tipo_operacion==Tipo_operacion.POTENCIA){
@@ -730,7 +757,8 @@ public class Operacion extends Expresion{
                                     }                                     
                                     return vec3;                                    
                                 }else{                                   
-                                    System.out.println("error de tamaños");                                   
+ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tamaños en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                                 
                                 }
                                 // </editor-fold>
                             }else if(operadorDer.ejecutar(ts)instanceof String){ 
@@ -741,7 +769,10 @@ public class Operacion extends Expresion{
                                 // <editor-fold desc="DER DOUBLE">> 
                                 return Math.pow(Double.parseDouble(vec1.get(0).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString())); 
                                 // </editor-fold>
-                            } 
+                            } else{
+                                ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);   
+                            }
                         // </editor-fold>
                     }else{                        
                         // <editor-fold desc="IZQ SIN">> 
@@ -759,11 +790,17 @@ public class Operacion extends Expresion{
                             // <editor-fold desc="DER DOUBLE">> 
                             return Math.pow(val1,Double.parseDouble(operadorDer.ejecutar(ts).toString())); 
                             // </editor-fold>
-                        } 
+                        } else{
+                            ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);   
+                        }
                         // </editor-fold>
                     }     
                     // </editor-fold>
-                }  
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
+                }
                 // </editor-fold>
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
                 // <editor-fold desc="IZQ DOUBLE">> 
@@ -786,7 +823,8 @@ public class Operacion extends Expresion{
                                     }                                     
                                     return vec3;                                    
                                 }else{                                   
-                                    System.out.println("error de tamaños");                                   
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tamaños en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                                   
                                 }
                                 // </editor-fold>
                             }else if(operadorDer.ejecutar(ts)instanceof String){  
@@ -797,6 +835,9 @@ public class Operacion extends Expresion{
                                 // <editor-fold desc="DER DOUBLE">>
                                 return Math.pow(Double.parseDouble(vec1.get(0).toString()),Double.parseDouble(operadorDer.ejecutar(ts).toString())); 
                                 // </editor-fold>
+                            }else{
+                                                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);
                             }  
                         // </editor-fold>
                     }else{   
@@ -815,16 +856,22 @@ public class Operacion extends Expresion{
                             // <editor-fold desc="DER DOUBLE">> 
                             return Math.pow(val1,Double.parseDouble(operadorDer.ejecutar(ts).toString())); 
                             // </editor-fold>
+                        }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);
                         }  
                         // </editor-fold>
                     }                    
 
                     // </editor-fold>
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }
                 // </editor-fold>
             }else{
-                //TODO reportar error de tipo
-            }
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la POTENCIA, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                  }
             // </editor-fold> 
              
         }else if(tipo_operacion==Tipo_operacion.MODULO){
@@ -861,7 +908,10 @@ public class Operacion extends Expresion{
                                 // <editor-fold desc="DER DOUBLE">>
                                 return Double.parseDouble(vec1.get(0).toString()) %Double.parseDouble(operadorDer.ejecutar(ts).toString());  
                                 // </editor-fold>
-                            }   
+                            } else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
+                            }  
                         // </editor-fold>    
                     }else{      
                         // <editor-fold desc="IZQ SIN">> 
@@ -879,12 +929,15 @@ public class Operacion extends Expresion{
                             // <editor-fold desc="DER DOUBLE">> 
                             return val1%Double.parseDouble(operadorDer.ejecutar(ts).toString()); 
                             // </editor-fold>
-                        } 
+                        } else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la resta, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                              }
                         // </editor-fold>
                     }   
                     // </editor-fold>  
                 }else{
-                    //TODO error 
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MODULO, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                 }  
                 // </editor-fold>
             }else if(opderadorIzq.GetTipo(ts).isDouble()){
@@ -908,7 +961,8 @@ public class Operacion extends Expresion{
                                 }                                     
                                 return vec3;                                    
                             }else{                                   
-                                System.out.println("error de tamaños");                                   
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tama en la MODULO, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);      
                             }
                             // </editor-fold>
                         }else if(operadorDer.ejecutar(ts)instanceof String){
@@ -942,11 +996,13 @@ public class Operacion extends Expresion{
                     }  
                     // </editor-fold>   
                 }else{
-                    //TODO error
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MODULO, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
                 // </editor-fold>
             }else{
-                //TODO reportar error de tipo
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la MODULO, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
             } 
             // </editor-fold> 
              
@@ -968,7 +1024,8 @@ public class Operacion extends Expresion{
                             return -val1;                                           
                     }   
             }else{
-                //TODO reportar error de tipo
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString(), "error de tipo en la UMENOS, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
             }
                // </editor-fold> 
              
@@ -989,6 +1046,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1.equals(val2);
+                }else{
+                                        ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la IGUALIGUAL, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
@@ -1004,6 +1064,9 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return (val1.toString().equals( val2.toString()));   
+            }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la IGUALIGUAL, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
             }
             // </editor-fold>
                  
@@ -1024,6 +1087,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return !val1.equals(val2);
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la DESIGUAL, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
@@ -1039,6 +1105,9 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return !(val1.toString().equals( val2.toString()));                
+            }else{
+                ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la DESIGUAL, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(e); 
             }         
             // </editor-fold> 
         }else if(tipo_operacion==Tipo_operacion.MAYOR){
@@ -1048,7 +1117,7 @@ public class Operacion extends Expresion{
                     Double val1;
                     Double val2;
                     if(opderadorIzq.ejecutar(ts) instanceof ArrayList){
-                        val1=(Double) ((ArrayList)opderadorIzq.ejecutar(ts)).get(0);
+                        val1=Double.parseDouble(((ArrayList)opderadorIzq.ejecutar(ts)).get(0).toString());
                     }else{
                         System.out.println(opderadorIzq.ejecutar(ts).getClass());
                         val1= Double.parseDouble(opderadorIzq.ejecutar(ts).toString());                     
@@ -1059,6 +1128,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1>val2;
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MAYOR, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
@@ -1074,10 +1146,13 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return val1.length()>val2.length();
+            }else{
+                ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la MAYOR, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(e); 
             }      
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.MENOR){
-            // <editor-fold desc="UMENOS">> 
+            // <editor-fold desc="MENOR">> 
             if(opderadorIzq.GetTipo(ts).isInt()||opderadorIzq.GetTipo(ts).isDouble()){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){ 
                     Double val1;
@@ -1093,6 +1168,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1<val2;
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MENOR, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
@@ -1108,6 +1186,9 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return val1.length()<val2.length();               
+            }else{
+                ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la MENOR, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(e); 
             }   
              // </editor-fold> 
         }else if(tipo_operacion==Tipo_operacion.MAYORIGUAL){
@@ -1127,6 +1208,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1>=val2;
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MAYORIGUAL, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
@@ -1142,6 +1226,9 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return val1.length()>=val2.length();   
+            }else{
+                ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la MAYORIGUAL, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(e); 
             }   
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.MENORIGUAL){
@@ -1161,7 +1248,9 @@ public class Operacion extends Expresion{
                         val2= Double.parseDouble(operadorDer.ejecutar(ts).toString());                    
                     }                    
                     return val1<=val2;
-                }
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la MENORIGUAL, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e);                 }
             }else if(opderadorIzq.GetTipo(ts).isString()&&operadorDer.GetTipo(ts).isString()){
                     String val1;
                     String val2;
@@ -1176,14 +1265,17 @@ public class Operacion extends Expresion{
                         val2= operadorDer.ejecutar(ts).toString();                    
                     }                    
                     return val1.length()<=val2.length();   
-            }  
+            }  else{
+                ErrorARIT e=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipo en la MENORIGUAL, se esperaba un String", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(e);             }
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.AND){
             // <editor-fold desc="AND">> 
             try {
                 return opderadorIzq.ejecutar(ts).equals(operadorDer.ejecutar(ts));               
             } catch (Exception e) {
-                //TODO Reportar error de tipos
+                ErrorARIT er=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipos en AND ", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(er); 
             }
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.OR){
@@ -1191,7 +1283,8 @@ public class Operacion extends Expresion{
             try {
                 return (boolean)opderadorIzq.ejecutar(ts)||(boolean)operadorDer.ejecutar(ts);
             } catch (Exception e) {
-                //TODO Reportar error de tipos
+                ErrorARIT er=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipos en OR ", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(er); 
             }
             // </editor-fold>
         }else if(tipo_operacion == Tipo_operacion.NOT){
@@ -1199,6 +1292,8 @@ public class Operacion extends Expresion{
             try {
                 return !(boolean) opderadorIzq.ejecutar(ts);
             } catch (Exception e) {
+                                ErrorARIT er=new ErrorARIT("Semantico", opderadorIzq.ejecutar(ts).toString()+" y "+operadorDer.ejecutar(ts).toString(), "error de tipos en NOT ", operadorDer.linea, operadorDer.columna);
+                ListaErrores.Add(er); 
             }
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.TERNARIO){
@@ -1229,8 +1324,11 @@ public class Operacion extends Expresion{
                         return (opderadorIzq.ejecutar(ts).toString());                        
                     }
                     
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorDer.ejecutar(ts).toString(), "error de tipo en la IGUALIGUAL, se esperaba un numero", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
                 }
-            }else {
+            }else if(operadorTer.ejecutar(ts).equals(false)){
                 if(operadorDer.GetTipo(ts).isInt()||operadorDer.GetTipo(ts).isDouble()){
                     
                     
@@ -1255,12 +1353,18 @@ public class Operacion extends Expresion{
                         return (operadorDer.ejecutar(ts).toString());                        
                     }
                 }               
+            }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", operadorTer.ejecutar(ts).toString(), "error de tipo en TERNARIO", operadorDer.linea, operadorDer.columna);
+                    ListaErrores.Add(e); 
             }
             // </editor-fold>
         }else if(tipo_operacion==Tipo_operacion.IDENTIFICADOR){
             return ts.getValor(valor.toString());
         }else if(tipo_operacion==Tipo_operacion.NUMERO){
               return this.valor;  
+        }else{
+        ErrorARIT e=new ErrorARIT("Semantico", tipo_operacion.toString(), "error de tipo en la OPERACION", operadorDer.linea, operadorDer.columna);
+        ListaErrores.Add(e); 
         }
         return null;
     }

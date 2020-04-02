@@ -5,7 +5,9 @@
  */
 
 package analizadores;
-import java_cup.runtime.Symbol; 
+import java_cup.runtime.Symbol;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores; 
 
 %% 
 %class Lexico
@@ -107,4 +109,6 @@ ID=[A-Za-z|"."]+["_"0-9A-Za-z"."]*
 . {
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "
     +yyline+", en la columna: "+yychar);
+        ErrorARIT e=new ErrorARIT("Lexico", yytext(), "Error sintactico", yyline, yychar);
+        ListaErrores.Add(e);
 }

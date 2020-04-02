@@ -44,6 +44,8 @@ import arbol.Sentencias.Llamada;
 import arbol.Sentencias.LlamadaAMetodo;
 import arbol.Retorno.Retorno;
 import java.util.ArrayList;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Declaracion;
 import arbol.DeclaracionVariable;
 
@@ -60,6 +62,8 @@ parser code
     public void syntax_error(Symbol s){ 
         System.out.println("Error Sintáctico en la Línea " + (s.left) +
         " Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+        ErrorARIT e=new ErrorARIT("Sintactico", (String) s.value, "Error sintactico", s.left, s.right);
+        ListaErrores.Add(e); 
     } 
 
     /**
@@ -67,9 +71,9 @@ parser code
      * en el que ya no es posible una recuperación de errores.
      **/ 
     public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
-        System.out.println("Error síntactico irrecuperable en la Línea " + 
-        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
-        " no reconocido."); 
+        System.out.println("Error síntactico irrecuperable en la Línea " + (s.left)+ " Columna "+s.right+". Componente " + s.value + " no reconocido.");
+        ErrorARIT e=new ErrorARIT("Sintactico", (String) s.value, "Error sintactico", s.left, s.right);
+        ListaErrores.Add(e);  
     }  
     public LinkedList<Nodo> getAST() {
         return AST;

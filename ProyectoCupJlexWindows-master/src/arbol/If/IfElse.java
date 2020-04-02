@@ -5,6 +5,10 @@
  */
 package arbol.If;
 
+import InterfazGrafica.VentanaPrincipal;
+import TabladeSimbolos.ReporteTabla;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.Nodo;
@@ -46,8 +50,12 @@ public class IfElse extends Instruccion{
                     return ((Expresion) in).ejecutar(tablalocal);
                 }else if (in instanceof Break){
                     return null;
+                }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", in.toString(), "error de tipo de instruccion", 0, 0);
+                    ListaErrores.Add(e);  
                 }
             }
+            VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
         }else if((Boolean)Operacion2.ejecutar(ts)){
             if(ListaDeInstruccionesElse!=null){
                 TablaDeSimbolos tablalocal = new TablaDeSimbolos();
@@ -60,8 +68,12 @@ public class IfElse extends Instruccion{
                         return ((Expresion) in).ejecutar(tablalocal);
                     }else if(in instanceof Break){
                         return null;
+                    }else{
+                    ErrorARIT e=new ErrorARIT("Semantico", in.toString(), "error de tipo de instruccion", 0, 0);
+                    ListaErrores.Add(e);  
                     }
                 }
+                VentanaPrincipal.RTS.add(new ReporteTabla(tablalocal, VentanaPrincipal.ambito++));
             }
         }
         return null;

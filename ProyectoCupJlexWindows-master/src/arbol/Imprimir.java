@@ -5,6 +5,8 @@
  */
 package arbol;
  import InterfazGrafica.VentanaPrincipal;
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import java.util.ArrayList;
 /**
  *
@@ -27,6 +29,7 @@ public class Imprimir extends Instruccion{
      */
     @Override
     public Object ejecutar( TablaDeSimbolos ts ){
+        
         Object o = contenido.ejecutar(ts);
         if(contenido.GetTipo(ts).isList()){
             try {
@@ -68,6 +71,8 @@ public class Imprimir extends Instruccion{
                 VentanaPrincipal.consola += o.toString()+"\n";
             }else{
                 System.out.println("nulo");
+                    ErrorARIT e=new ErrorARIT("Semantico",contenido.toString() , "error en el contenidoa imprimir", contenido.linea, contenido.columna);
+                    ListaErrores.Add(e); 
             }     
             // </editor-fold>
         }
@@ -82,7 +87,8 @@ public class Imprimir extends Instruccion{
         builder.append(nodo).append(" [label=\"Imprimir\"];\n");
         builder.append(parent).append(" -> ").append(nodo).append(";\n");
         //System.out.println(contenido.getClass()+"CLASE");
-        cont = ((id)contenido).Dibujar(builder, nodo, cont);
+        
+        cont = ((Expresion)contenido).Dibujar(builder, nodo, cont);
         return cont;
     }
 }

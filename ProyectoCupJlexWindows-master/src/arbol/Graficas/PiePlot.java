@@ -5,6 +5,8 @@
  */
 package arbol.Graficas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Instruccion;
 import arbol.TablaDeSimbolos;
@@ -41,6 +43,8 @@ public class PiePlot extends Instruccion{
                                     //System.out.println(Numericos);
                 }else{
                     //Parametro incorrecto, se esperaba un listado de numeros
+                                ErrorARIT e=new ErrorARIT("Semantico", "PiePlot", " Parametro incorrecto, se esperaba un listado de numeros", 0, 0);
+                    ListaErrores.Add(e);             
                 }
             }
             if(((Expresion)ParametrosPie.get(1)).ejecutar(ts) instanceof ArrayList){
@@ -49,6 +53,8 @@ public class PiePlot extends Instruccion{
                     //System.out.println(Labels);
                 }else{
                     //Parametro incorrecto, se esperaba un listado de labels
+                                ErrorARIT e=new ErrorARIT("Semantico", "PiePlot", " Parametro incorrecto, se esperaba un listado de labels", 0, 0);
+                    ListaErrores.Add(e);  
                 }
             }
             if(((Expresion)ParametrosPie.get(2)).ejecutar(ts) instanceof String){
@@ -56,9 +62,13 @@ public class PiePlot extends Instruccion{
                 //System.out.println(main);
             }else{
                 //Parametro incorrecto, se esperaba una cadena
+                                ErrorARIT e=new ErrorARIT("Semantico", "PiePlot", " Parametro incorrecto, se esperaba una cadena", 0, 0);
+                    ListaErrores.Add(e); 
             }
         }else{
             //CANTIDAD DE PARAMETROS INCORRECTOS
+                                ErrorARIT e=new ErrorARIT("Semantico", "PiePlot", " NUMERO DE PARAMETROS INCORRECTOS PARA HACER LA GRAFICA", 0, 0);
+                    ListaErrores.Add(e);
         }
         
         DefaultPieDataset data = new DefaultPieDataset();
@@ -69,6 +79,8 @@ public class PiePlot extends Instruccion{
             }            
         }else if(Numericos.size()>Labels.size()){
             //REPORTAR ERROR DE TAMAÑO DE VECTORES
+                                ErrorARIT e=new ErrorARIT("Semantico", "PiePlot", " ERROR DE TAMAÑO DE VECTORES", 0, 0);
+                    ListaErrores.Add(e);
             for (int i = 0; i < Labels.size(); i++) {
                 data.setValue((Labels.get(i)).toString(),Double.parseDouble(Numericos.get(i).toString()));   
             }
@@ -90,7 +102,18 @@ public class PiePlot extends Instruccion{
 
     @Override
     public int Dibujar(StringBuilder builder, String parent, int cont) {
-        return 0;
+        String nodo = "nodo" + ++cont;
+        builder.append(nodo).append(" [label=\"PiePlot\"];\n");
+        builder.append(parent).append(" -> ").append(nodo).append(";\n");
+
+        String nodoOp = "nodo" + ++cont;
+        builder.append(nodoOp).append(" [label=\"" + "Contenido" + "\"];\n");
+        builder.append(nodo).append(" -> ").append(nodoOp).append(";\n");
+
+        for (int i = 0; i < ParametrosPie.size(); i++) {
+            cont=((Expresion)ParametrosPie.get(i)).Dibujar(builder, nodoOp, cont);
+        }
+        return cont; 
     }
     
     

@@ -5,6 +5,8 @@
  */
 package arbol.Funciones.FuncionesDefinidas;
 
+import arbol.Errores.ErroSemantico.ErrorARIT;
+import arbol.Errores.ErroSemantico.ListaErrores;
 import arbol.Expresion;
 import arbol.Single;
 import arbol.TablaDeSimbolos;
@@ -35,12 +37,16 @@ public class toLowerCase extends Expresion{
                 cadena=exp.ejecutar(ts).toString();
             }else{
                 cadena="null";
-                //TODO error
+                                    ErrorARIT e=new ErrorARIT("Semantico", exp.toString(), " tipo de parametro invalido, se usara NULL", 0, 0);
+                    ListaErrores.Add(e);
             }
             //System.out.println(cadena.toLowerCase());
             return cadena.toLowerCase();
         }else{
             System.out.println("tipo de parametro invalido");
+                                                ErrorARIT e=new ErrorARIT("Semantico", exp.toString(), " tipo de parametro invalido, se usara NULL", 0, 0);
+                    ListaErrores.Add(e);
+            
         }
         return null;
     }
